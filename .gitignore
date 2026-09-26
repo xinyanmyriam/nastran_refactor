@@ -1,0 +1,22 @@
+﻿__pycache__/
+*.pyc
+*.aux
+*.log
+*.out
+*.abs
+*.bbl
+*.blg
+*.spl
+*.DS_Store
+
+# Compiled artifacts
+*.exe
+*.o
+*.obj
+*.lib
+*.a
+*.dll
+*.so
+*.mod
+bin/
+demoout/

@@ -1,0 +1,44 @@
+{
+  "ledger_type": "cross_machine_resume_protocol_amendment",
+  "created_at": "2026-09-18T13:04:13.191654",
+  "campaign": "jss_qwen37plus_direct_n10_frozen_v1",
+  "reason": "Resume on a new machine as documented in paper_jss/README_实验进度与交接.md section 4. Two protocol fields could not match the origin environment.",
+  "field_1_runtime_environment": {
+    "old": {
+      "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "Windows-11-10.0.22631-SP0",
+      "os_name": "nt"
+    },
+    "new": {
+      "python": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+      "platform": "Windows-11-10.0.22000-SP0",
+      "os_name": "nt"
+    }
+  },
+  "field_2_frozen_sha256": {
+    "files_unchanged": 37,
+    "files_changed": {
+      "tool_augmented_agent.py": {
+        "old_sha256": "96007eb4ee6c18f2a0013ffd84042e39cd47bfc74eb70b7748faa5d9d1641a61",
+        "new_sha256": "cd40bf226d9d4cbbf43f1a822bc7ed23f097d2383124cdb59fa1cf94477deb94"
+      }
+    },
+    "justification": {
+      "file": "tool_augmented_agent.py",
+      "change": "post-freeze divide-by-zero fix for the Full-Agent path",
+      "working_copy_mtime": "2026-09-16T20:44:57.119776",
+      "campaign_created_at": "2026-09-16T15:50:53.320749",
+      "reachability": "tool_augmented_agent is imported lazily inside run_experiments_v3.py generate_code() at line 1552 on the base_method==\"agent\" branch only; rq3_direct_r5 has base_method==\"direct\" and returns at line 1546, so the changed module is never imported or executed in this campaign.",
+      "original_bytes_recovery": "git HEAD stores an empty placeholder for this file; no editor Local History copy exists; exact pre-fix bytes unavailable."
+    }
+  },
+  "amendment_scope": "Only protocol.runtime_environment and protocol.frozen_sha256[\"tool_augmented_agent.py\"] were updated. All other protocol fields (model, benchmarks, methods, repeats, seed, method_configs, selection, redacted_model_config) and all 37 other frozen file hashes are unchanged.",
+  "preserved_evidence": "Original runtime_environment and original frozen hashes remain immutable in runs/*/artifacts/rq3_protocol.json of the 52 existing valid runs, and in progress.premigration_20260918.json.",
+  "observed_python_packages": {
+    "venv_python": "E:\\ma_sim_paper\\nastran_refactor\\.venv\\Scripts\\python.exe",
+    "openai": "3.15.0",
+    "numpy": "2.1.1",
+    "scipy": "1.17.1"
+  },
+  "valid_results_at_migration": 52
+}

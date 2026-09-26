@@ -1,0 +1,57 @@
+ SROD1 Test Driver - Rod Stress Recovery
+ ========================================
+ 
+ Rod parameters:
+   Length L = 2.0 m
+   Area   A = 0.01 m^2
+   J        = 5.0e-6 m^4
+   C (J/c)  = 0.005 m
+   E        = 2.1e11 Pa
+   NU       = 0.3
+ 
+ Calling SROD1...
+ 
+ SROD1 Output - Stress Recovery Coefficients:
+ ---------------------------------------------
+  SAT = [-0.1050000E+12,  0.0000000E+00,  0.0000000E+00]
+  SBT = [ 0.1050000E+12, -0.0000000E+00, -0.0000000E+00]
+  SAR = [-0.2019231E+06,  0.0000000E+00,  0.0000000E+00]
+  SBR = [ 0.2019231E+06, -0.0000000E+00, -0.0000000E+00]
+ 
+  ST      = -0.2520000E+07
+  SDELTA  = -0.1050000E+12
+  AREA    =  0.1000000E-01
+  FJOVRC  =  0.2000000E+03
+  TSUBC0  =  0.2000000E+02
+ 
+ Element ID:          100
+ SIL nodes:             1           2
+ 
+ ================================================
+ Applying to test displacements:
+ 
+ Test 1: Pure axial extension
+   u_a = (0, 0, 0)
+   u_b = (0.001, 0, 0)
+ 
+  Computed axial stress  =  0.1050000E+09 Pa
+  Expected axial stress  =  0.1050000E+09 Pa
+  Axial force            =  0.1050000E+07 N
+   >> PASS: Axial stress matches.
+ 
+ Test 2: Pure torsion (rod along x-axis)
+   theta_a = (0.01, 0, 0)  [rot about x at A]
+   theta_b = (0.02, 0, 0)  [rot about x at B]
+ 
+  Computed torsion result =  0.2019231E+04
+  Expected G*J/L*dtheta  =  0.2019231E+04
+   >> PASS: Torsion matches.
+ 
+ ================================================
+ Additional verification:
+   E/L (EOVERL) should be:   1.05000002E+11
+  SROD1 computed EOVERL =  0.1050000E+12
+   Rod length should be:   2.00000000    
+  SROD1 computed XL    =   2.000000
+ 
+ Computation completed successfully.

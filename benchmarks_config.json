@@ -1,0 +1,368 @@
+{
+  "version": "3.0",
+  "description": "Unified benchmark configuration for 13 NASTRAN-95 refactoring experiments",
+  "nastran_source_base": "nastran/NASTRAN-95/mis",
+  "benchmarks": [
+    {
+      "id": "B1",
+      "name": "CROD",
+      "category": "A1_rod",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/krod.f"
+      ],
+      "known_callees": [
+        "GMMATD"
+      ],
+      "total_lines": 308,
+      "matrix_size": 6,
+      "verification_type": "matrix_symmetry",
+      "reference_output_path": "source_fortran/test_drivers/b1_krod/reference_matrix.json",
+      "reference_method": "file",
+      "test_driver_path": null,
+      "description": "Rod element (axial + torsion), 2 nodes, 3 DOF/node, 6x6 stiffness matrix",
+      "difficulty": "low",
+      "_oracle_note": "Reference produced by compiling and running the original NASTRAN-95 kernel via the standalone driver in source_fortran/test_drivers/b1_krod/. Replaced an analytical Python formula on 2026-08-21.",
+      "num_nodes": 2,
+      "dof_per_node": 6,
+      "compared_dof": 6,
+      "compared_dof_note": "only the translational DOF of both nodes are compared (rows/cols 1-3 of each node); the torsional GJ/L block is present in the reference but excluded by the comparison",
+      "heat_branch_active": false
+    },
+    {
+      "id": "B2",
+      "name": "CBAR",
+      "category": "A2_beam",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/kbar.f"
+      ],
+      "known_callees": [
+        "GMMATD",
+        "TRANSD"
+      ],
+      "total_lines": 621,
+      "matrix_size": 12,
+      "verification_type": "matrix_symmetry",
+      "reference_output_path": "source_fortran/test_drivers/b2_kbar/reference_matrix.json",
+      "reference_method": "file",
+      "test_driver_path": null,
+      "description": "Beam element (bending + torsion + axial), 2 nodes, 6 DOF/node, 12x12 stiffness matrix",
+      "difficulty": "high",
+      "_oracle_note": "Reference produced by compiling and running the original NASTRAN-95 kernel via the standalone driver in source_fortran/test_drivers/b2_kbar/. Replaced an analytical Python formula on 2026-08-21.",
+      "num_nodes": 2,
+      "dof_per_node": 6,
+      "compared_dof": 12,
+      "heat_branch_active": false
+    },
+    {
+      "id": "B3",
+      "name": "CTRIA3",
+      "category": "A3_membrane",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/ktrmem.f"
+      ],
+      "known_callees": [
+        "GMMATD"
+      ],
+      "total_lines": 406,
+      "matrix_size": 6,
+      "verification_type": "matrix_symmetry",
+      "reference_output_path": "source_fortran/test_drivers/b3_ktrmem/reference_matrix.json",
+      "reference_method": "file",
+      "test_driver_path": null,
+      "description": "Triangular membrane (CST), 3 nodes, 2 DOF/node, 6x6 stiffness matrix",
+      "difficulty": "medium",
+      "_oracle_note": "Reference produced by compiling and running the original NASTRAN-95 kernel via the standalone driver in source_fortran/test_drivers/b3_ktrmem/. Replaced an analytical Python formula on 2026-08-21.",
+      "num_nodes": 3,
+      "dof_per_node": 2,
+      "compared_dof": 6,
+      "compared_dof_note": "in-plane membrane block; the out-of-plane DOF that SMA1B writes are dropped",
+      "heat_branch_active": false
+    },
+    {
+      "id": "B4",
+      "name": "CQUAD4",
+      "category": "A3_membrane",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/kqdmem.f"
+      ],
+      "known_callees": [
+        "GMMATD",
+        "KTRMEM"
+      ],
+      "total_lines": 288,
+      "matrix_size": 8,
+      "verification_type": "matrix_symmetry",
+      "reference_output_path": "source_fortran/test_drivers/b4_ktriqd/reference_matrix.json",
+      "reference_method": "file",
+      "test_driver_path": null,
+      "description": "Quad membrane, 4 nodes, 2 DOF/node, 8x8 stiffness matrix",
+      "difficulty": "medium",
+      "_oracle_note": "Reference produced by compiling and running the original NASTRAN-95 kernel via the standalone driver in source_fortran/test_drivers/b4_ktriqd/. Replaced an analytical Python formula on 2026-08-21.",
+      "_prompt_note": "ktriqd.f replaced by ktrmem.f on 2026-08-21: kqdmem.f calls KTRMEM, not KTRIQD. Description no longer asserts a decomposition; the old text said '2-triangle' while the kernel uses four overlapping corner triangles at half thickness, which instructed the model to produce the answer the oracle rejects.",
+      "num_nodes": 4,
+      "dof_per_node": 2,
+      "compared_dof": 8,
+      "compared_dof_note": "in-plane membrane block; the out-of-plane DOF that SMA1B writes are dropped",
+      "heat_branch_active": false,
+      "_callee_source_note": "Callee source OMITTED, matching B1/B2/B3 which are not given GMMATD either. ktrmem.f is numerically the textbook CST (verified 4.65e-08 against it), so it adds 406 lines of redundant content while diluting the assembly conventions in kqdmem.f that actually decide correctness: the four-triangle DATA M map, ECPT(8)/2.0, and the JNOT per-pivot skip."
+    },
+    {
+      "id": "B5",
+      "name": "KTRPLT",
+      "category": "A4_plate_bending",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/ktrplt.f",
+        "nastran/NASTRAN-95/mis/ktrbsc.f"
+      ],
+      "known_callees": [
+        "GMMATD",
+        "GMMATS",
+        "KTRBSC",
+        "TRANSD"
+      ],
+      "total_lines": 1223,
+      "matrix_size": 9,
+      "verification_type": "matrix_symmetry",
+      "reference_output_path": "source_fortran/test_drivers/b5_ktrplt/reference_output.txt",
+      "reference_method": "file",
+      "test_driver_path": "source_fortran/test_drivers/b5_ktrplt",
+      "description": "Triangular plate bending element, 3 nodes, 3 DOF/node, 9x9 stiffness matrix",
+      "difficulty": "high",
+      "num_nodes": 3,
+      "dof_per_node": 3,
+      "compared_dof": 9,
+      "heat_branch_active": false
+    },
+    {
+      "id": "B6",
+      "name": "KQDPLT",
+      "category": "A4_plate_bending",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/kqdplt.f",
+        "nastran/NASTRAN-95/mis/ktrbsc.f"
+      ],
+      "known_callees": [
+        "GMMATD",
+        "GMMATS",
+        "KTRBSC",
+        "KTRPLT",
+        "TRANSD"
+      ],
+      "total_lines": 999,
+      "matrix_size": 12,
+      "verification_type": "matrix_symmetry",
+      "reference_output_path": "source_fortran/test_drivers/b6_kqdplt/reference_output.txt",
+      "reference_method": "file",
+      "test_driver_path": "source_fortran/test_drivers/b6_kqdplt",
+      "description": "Quadrilateral plate bending element, 4 nodes, 3 DOF/node, 12x12 stiffness matrix",
+      "difficulty": "high"
+    },
+    {
+      "id": "B7",
+      "name": "KTETRA",
+      "category": "A5_solid_3d",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/ktetra.f"
+      ],
+      "known_callees": [
+        "GMMATD",
+        "TRANSD"
+      ],
+      "total_lines": 384,
+      "matrix_size": 12,
+      "verification_type": "matrix_symmetry",
+      "reference_output_path": "source_fortran/test_drivers/reference_output.txt",
+      "reference_method": "file",
+      "test_driver_path": "source_fortran/test_drivers",
+      "description": "Tetrahedral solid element, 4 nodes, 3 DOF/node, 12x12 stiffness matrix",
+      "difficulty": "medium",
+      "num_nodes": 4,
+      "dof_per_node": 3,
+      "compared_dof": 12,
+      "heat_branch_active": false
+    },
+    {
+      "id": "B8",
+      "name": "KSOLID",
+      "category": "A5_solid_3d",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/ksolid.f",
+        "nastran/NASTRAN-95/mis/ktetra.f"
+      ],
+      "known_callees": [
+        "GMMATD",
+        "KTETRA",
+        "TRANSD"
+      ],
+      "total_lines": 620,
+      "matrix_size": 18,
+      "verification_type": "matrix_symmetry",
+      "reference_output_path": "source_fortran/test_drivers/b8_ksolid/reference_matrix_wedge.json",
+      "reference_method": "file",
+      "test_driver_path": "source_fortran/test_drivers/b8_ksolid",
+      "description": "Wedge/pentahedral solid element, 6 nodes, 3 DOF/node, 18x18 stiffness matrix",
+      "difficulty": "high",
+      "contract_note": "Full 18x18 wedge matrix (6 nodes x 3 DOF). The reference previously covered only the leading 9x9 block, which scored correct output as a dimension mismatch.",
+      "num_nodes": 6,
+      "dof_per_node": 3,
+      "compared_dof": 18,
+      "heat_branch_active": false
+    },
+    {
+      "id": "B9",
+      "name": "KELBOW",
+      "category": "A6_special",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/kelbow.f"
+      ],
+      "known_callees": [
+        "GMMATD",
+        "GMMATS",
+        "TRANSD"
+      ],
+      "total_lines": 525,
+      "matrix_size": 12,
+      "verification_type": "matrix_symmetry",
+      "reference_output_path": "source_fortran/test_drivers/b9_kelbow/reference_matrix.json",
+      "reference_method": "file",
+      "test_driver_path": "source_fortran/test_drivers/b9_kelbow",
+      "description": "Curved pipe/elbow element, 2 nodes, 6 DOF/node, 12x12 stiffness matrix",
+      "difficulty": "high"
+    },
+    {
+      "id": "B10",
+      "name": "INVERD",
+      "category": "B1_solver",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/inverd.f"
+      ],
+      "known_callees": [],
+      "total_lines": 124,
+      "matrix_size": null,
+      "verification_type": "vector_compare",
+      "reference_output_path": "source_fortran/test_drivers/b9_inverd/reference_values.json",
+      "reference_method": "file",
+      "test_driver_path": "source_fortran/test_drivers/b9_inverd",
+      "description": "In-core banded equation solver (LDL^T decomposition), verify solution vector",
+      "difficulty": "low"
+    },
+    {
+      "id": "B11",
+      "name": "QRITER",
+      "category": "B2_eigenvalue",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/qriter.f"
+      ],
+      "known_callees": [],
+      "total_lines": 261,
+      "matrix_size": null,
+      "verification_type": "eigenvalue_compare",
+      "reference_output_path": "source_fortran/test_drivers/b10_qriter/reference_eigenvalues.json",
+      "reference_method": "file",
+      "test_driver_path": "source_fortran/test_drivers/b10_qriter",
+      "description": "QR iteration for eigenvalues of tridiagonal matrix",
+      "difficulty": "medium"
+    },
+    {
+      "id": "B12",
+      "name": "TRD1C",
+      "category": "B3_transient",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/trd1c.f",
+        "nastran/NASTRAN-95/mis/step.f",
+        "nastran/NASTRAN-95/mis/form1.f",
+        "nastran/NASTRAN-95/mis/form2.f"
+      ],
+      "known_callees": [
+        "STEP",
+        "FORM1",
+        "FORM2"
+      ],
+      "total_lines": 773,
+      "matrix_size": null,
+      "verification_type": "timeseries_compare",
+      "reference_output_path": "source_fortran/test_drivers/b12_trd1c_native/reference_timeseries.json",
+      "reference_method": "file",
+      "test_driver_path": "source_fortran/test_drivers/b12_trd1c_native",
+      "description": "Transient response by direct integration (central difference), timeseries output",
+      "difficulty": "high",
+      "output_contract": {
+        "n_samples": 11,
+        "n_dof": 3,
+        "sample_stride": 10,
+        "total_steps": 100,
+        "dt": 0.01,
+        "include_time_column": false,
+        "layout": "one row per sampled step, 3 displacement values per row, no time or step column"
+      },
+      "contract_note": "Implicit-convention benchmark. The legacy formulation discards the applied load at t=0 and substitutes an effective load K*u0 (form1.f, ISTART<0), then averages the load over three consecutive time levels (trd1c.f label 100). The first step therefore advances by dt^2/3, not the textbook dt^2/2. Measured residuals: legacy convention 1.3e-4, textbook start-up 1.96e-3, literal form1.f 8.33e-3. Tolerance 1e-3 admits only the first. The convention is intentionally NOT disclosed in the prompt.",
+      "failure_category": "implicit_convention"
+    },
+    {
+      "id": "B13",
+      "name": "SROD1",
+      "category": "C1_stress_recovery",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/srod1.f"
+      ],
+      "known_callees": [],
+      "total_lines": 118,
+      "matrix_size": null,
+      "verification_type": "scalar_compare",
+      "reference_output_path": "source_fortran/test_drivers/b12_srod1/reference_values.json",
+      "reference_method": "file",
+      "test_driver_path": "source_fortran/test_drivers/b12_srod1",
+      "description": "Rod element stress recovery from displacement, scalar stress/force output",
+      "difficulty": "low"
+    },
+    {
+      "id": "B5a",
+      "name": "KTRBSC",
+      "category": "plate_bending",
+      "source_files": [
+        "nastran/NASTRAN-95/mis/ktrbsc.f"
+      ],
+      "known_callees": [
+        "GMMATD",
+        "GMMATS",
+        "INVERD"
+      ],
+      "total_lines": 657,
+      "matrix_size": 9,
+      "num_nodes": 3,
+      "dof_per_node": 3,
+      "compared_dof": 9,
+      "heat_branch_active": false,
+      "verification_type": "matrix_symmetry",
+      "reference_method": "file",
+      "reference_output_path": "source_fortran/test_drivers/ktrbsc_reference.json",
+      "description": "Triangular plate bending sub-module (basic stiffness), 3 nodes, 3 DOF/node, 9x9 stiffness matrix",
+      "difficulty": "hard",
+      "_note": "Sub-module of B5 KTRPLT. Tests KTRBSC in isolation. If agent passes this, the verified code is used as a building block for the full B5 assembly (KTRPLT)."
+    }
+  ],
+  "models": [
+    "deepseek-v4-flash",
+    "deepseek-v4-pro",
+    "qwen3",
+    "kimi-k2.5",
+    "claude-sonnet-4",
+    "gpt-5"
+  ],
+  "methods": [
+    "direct",
+    "multiagent",
+    "multiagent_v2",
+    "multiagent_kb",
+    "physics_first"
+  ],
+  "default_repeat": 3,
+  "max_repair_iterations": 3,
+  "tolerance": {
+    "matrix_symmetry": 0.0001,
+    "vector_compare": 0.0001,
+    "eigenvalue_compare": 1e-06,
+    "timeseries_compare": 0.001,
+    "scalar_compare": 0.0001
+  }
+}

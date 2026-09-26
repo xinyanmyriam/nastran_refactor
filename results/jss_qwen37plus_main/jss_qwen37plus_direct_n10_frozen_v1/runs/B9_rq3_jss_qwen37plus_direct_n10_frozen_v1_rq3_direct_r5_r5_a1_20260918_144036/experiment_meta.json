@@ -1,0 +1,22 @@
+{
+  "experiment_id": "B9_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_144036",
+  "start_time": "2026-09-18T14:40:36.094736",
+  "end_time": "2026-09-18T14:54:09.700261",
+  "total_elapsed_seconds": 813.61,
+  "status": "failed",
+  "summary": "B9 rq3_direct_r5 r5: FAIL valid=True",
+  "llm_calls": 6,
+  "errors_count": 0,
+  "stage_timings": {
+    "B9_rq3_direct_r5_r5": {
+      "start": 1789713636.1148574,
+      "start_iso": "2026-09-18T14:40:36.114857",
+      "end": 1789714449.6992655,
+      "end_iso": "2026-09-18T14:54:09.699265",
+      "elapsed_seconds": 813.58,
+      "success": false
+    }
+  },
+  "quality_gates": {},
+  "errors": []
+}

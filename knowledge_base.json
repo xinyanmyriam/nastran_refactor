@@ -1,0 +1,592 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-08-18 22:29:13",
+  "total_insights": 20,
+  "insights": [
+    {
+      "id": "seed_gmmatd_rowmajor",
+      "source_benchmark": "B5",
+      "source_subroutine": "KTRPLT",
+      "category": "storage_convention",
+      "description": "GMMATD stores output matrix by ROWS, not Fortran-default column-major",
+      "applies_to_subroutines": [
+        "GMMATD",
+        "GMMATS"
+      ],
+      "applies_to_categories": [
+        "A4_plate_bending",
+        "A5_solid_3d",
+        "A6_special"
+      ],
+      "keywords": [
+        "gmmatd",
+        "row",
+        "storage",
+        "matrix",
+        "transpose"
+      ],
+      "convention": "GMMATD output is stored row-by-row. When interpreting as a 2D matrix, read consecutive elements as filling rows, not columns. This effectively means the result appears transposed compared to standard Fortran column-major layout.",
+      "code_pattern": "",
+      "failure_mode": "Matrix appears transposed → stiffness matrix is wrong → numerical mismatch",
+      "confidence": 1.0,
+      "timestamp": 1786880820.018295,
+      "model": "level3_human_ai",
+      "method": "level3"
+    },
+    {
+      "id": "seed_ktrbsc_condensation",
+      "source_benchmark": "B5",
+      "source_subroutine": "KTRPLT",
+      "category": "algorithm",
+      "description": "KTRPLT uses FMMS-55 sub-triangle condensation via KTRBSC, not standard DKT",
+      "applies_to_subroutines": [
+        "KTRBSC",
+        "KTRPLT",
+        "KQDPLT"
+      ],
+      "applies_to_categories": [
+        "A4_plate_bending"
+      ],
+      "keywords": [
+        "plate",
+        "bending",
+        "triangle",
+        "condensation",
+        "ktrbsc"
+      ],
+      "convention": "Plate bending uses 3 sub-triangles (KTRBSC computes each), then condenses internal DOFs to get the final 9x9 or 12x12 matrix. Do NOT use standard DKT or Mindlin plate formulation.",
+      "code_pattern": "// CORRECT structure (see seed_ktrplt_pivot_assembly for full detail):\n//   for each pivot grid point (KTRPLT is called once per pivot):\n//     for each of 3 sub-triangles against the centroid:\n//       K_sub = KTRBSC(iopt=2)      // 6x6 basic bending + Hinv + S\n//       accumulate T^T*K_sub*T into KSUM, and HQ*Hinv*S into G\n//     eliminate the centroid with PROD = G_4^{-1} * G_pivot\n//   NOT a 15x15 expansion, and NOT K_ee - K_ei*K_ii^-1*K_ie",
+      "failure_mode": "Using textbook DKT/Mindlin gives a completely different matrix (0% match). Using a plain Guyan/static condensation on an expanded K instead of the G-matrix compatibility conditions gives rel_diff 0.43-0.89.",
+      "confidence": 1.0,
+      "timestamp": 1786880820.0183067,
+      "model": "level3_human_ai",
+      "method": "level3"
+    },
+    {
+      "id": "seed_fortran_colmajor_implicit_transpose",
+      "source_benchmark": "B9",
+      "source_subroutine": "KELBOW",
+      "category": "transform",
+      "description": "Passing Fortran 2D array to GMMATD causes implicit transpose due to column-major storage",
+      "applies_to_subroutines": [
+        "GMMATD",
+        "GMMATS"
+      ],
+      "applies_to_categories": [
+        "A4_plate_bending",
+        "A5_solid_3d",
+        "A6_special"
+      ],
+      "keywords": [
+        "transpose",
+        "column",
+        "row",
+        "gmmatd",
+        "transform"
+      ],
+      "convention": "When Fortran passes a 2D array A(M,N) to GMMATD which reads it as a 1D array stored by rows, the effective matrix seen by GMMATD is A^T. This implicit transpose must be accounted for in C++ translation.",
+      "code_pattern": "",
+      "failure_mode": "Missing implicit transpose → coordinate transform wrong → wrong stiffness",
+      "confidence": 1.0,
+      "timestamp": 1786880820.0183105,
+      "model": "level3_human_ai",
+      "method": "level3"
+    },
+    {
+      "id": "seed_ksolid_ktetra_decomposition",
+      "source_benchmark": "B8",
+      "source_subroutine": "KSOLID",
+      "category": "algorithm",
+      "description": "KSOLID decomposes wedge/hex into tetrahedra using KTETRA with averaging weights",
+      "applies_to_subroutines": [
+        "KTETRA",
+        "KSOLID"
+      ],
+      "applies_to_categories": [
+        "A5_solid_3d"
+      ],
+      "keywords": [
+        "solid",
+        "tetra",
+        "wedge",
+        "element",
+        "stiffness"
+      ],
+      "convention": "KSOLID does not use isoparametric hex formulation. Instead it decomposes the element into tetrahedra (3 for wedge, 5 for hex), computes each via KTETRA, and averages with specific weights.",
+      "code_pattern": "",
+      "failure_mode": "Using isoparametric formulation gives different result",
+      "confidence": 1.0,
+      "timestamp": 1786880820.0183132,
+      "model": "level3_human_ai",
+      "method": "level3"
+    },
+    {
+      "id": "seed_inverd_gauss_jordan",
+      "source_benchmark": "B10",
+      "source_subroutine": "INVERD",
+      "category": "algorithm",
+      "description": "INVERD is standard Gauss-Jordan elimination with partial pivoting - straightforward",
+      "applies_to_subroutines": [
+        "INVERD"
+      ],
+      "applies_to_categories": [
+        "A7_solver"
+      ],
+      "keywords": [
+        "matrix",
+        "gauss",
+        "solver",
+        "inverse"
+      ],
+      "convention": "INVERD implements standard Gauss-Jordan in-place inversion. No special conventions. Can use Eigen's .inverse() directly.",
+      "code_pattern": "",
+      "failure_mode": "",
+      "confidence": 1.0,
+      "timestamp": 1786880820.0183153,
+      "model": "level3_human_ai",
+      "method": "level3"
+    },
+    {
+      "id": "B2_deepseek-v4-flash_1786888334_pattern0",
+      "source_benchmark": "B2",
+      "source_subroutine": "CBAR",
+      "category": "algorithm",
+      "description": "Successful pattern from CBAR: Explicit transpose operation",
+      "applies_to_subroutines": [
+        "GMMATD",
+        "MAT",
+        "TRANSD",
+        "SMA1B",
+        "HMAT"
+      ],
+      "applies_to_categories": [
+        "A2_beam"
+      ],
+      "keywords": [
+        "transpose"
+      ],
+      "convention": "",
+      "code_pattern": "Matrix12d T = computeTransformationMatrix();\n        \n        // Global stiffness: K = T^T * Klocal * T\n        Matrix12d Kglobal = T.transpose() * Klocal * T;\n        \n        return Kglobal;\n    }\n};\n\n// Helper function to format matrix as JSON",
+      "failure_mode": "",
+      "confidence": 0.9,
+      "timestamp": 1786888334.66489,
+      "model": "deepseek-v4-flash",
+      "method": "multiagent_kb"
+    },
+    {
+      "id": "seed_ktetra_voigt_order",
+      "source_benchmark": "B7",
+      "source_subroutine": "KTETRA",
+      "category": "algorithm",
+      "description": "NASTRAN KTETRA uses non-standard Voigt notation order: {σxx, σyy, σzz, τyz, τxz, τxy}",
+      "applies_to_subroutines": [
+        "KTETRA",
+        "KSOLID",
+        "GMMATD"
+      ],
+      "applies_to_categories": [
+        "A5_solid_3d"
+      ],
+      "keywords": [
+        "tetra",
+        "solid",
+        "stiffness",
+        "element"
+      ],
+      "convention": "NASTRAN Voigt stress/strain order is {ε_xx, ε_yy, ε_zz, γ_yz, γ_xz, γ_xy} (shear order: yz, xz, xy). Many textbooks use {ε_xx, ε_yy, ε_zz, γ_xy, γ_yz, γ_xz}. The D (material) matrix and B (strain-displacement) matrix must both use the SAME ordering. If you use textbook ordering for D but NASTRAN ordering for B, or vice versa, you get ~9% error in the stiffness matrix.",
+      "code_pattern": "// NASTRAN Voigt order for 3D elasticity:\n// strain = {eps_xx, eps_yy, eps_zz, gamma_yz, gamma_xz, gamma_xy}\n// D matrix diagonal: D(1,1)=D(2,2)=D(3,3)=E*(1-nu)/((1+nu)*(1-2*nu))\n// D(4,4)=D(5,5)=D(6,6)=G (shear modulus)\n// Off-diagonal: D(1,2)=D(1,3)=D(2,3)=E*nu/((1+nu)*(1-2*nu))",
+      "failure_mode": "Using wrong Voigt order (e.g., xy,yz,xz instead of yz,xz,xy for shear terms) causes ~9% relative error in specific off-diagonal elements of the stiffness matrix",
+      "confidence": 1.0,
+      "timestamp": 1786928750.8468244,
+      "model": "domain_expert",
+      "method": "formula_injection"
+    },
+    {
+      "id": "seed_ktetra_b_matrix_formula",
+      "source_benchmark": "B7",
+      "source_subroutine": "KTETRA",
+      "category": "algorithm",
+      "description": "KTETRA B-matrix (strain-displacement) constructed from H-inverse rows with specific index mapping",
+      "applies_to_subroutines": [
+        "KTETRA",
+        "KSOLID",
+        "GMMATD"
+      ],
+      "applies_to_categories": [
+        "A5_solid_3d"
+      ],
+      "keywords": [
+        "tetra",
+        "solid",
+        "stiffness",
+        "jacobian",
+        "element"
+      ],
+      "convention": "The 4-node linear tetrahedron computes shape function derivatives via the H-matrix method:\n1. H is 4x4: H[i] = [1, x_i, y_i, z_i] for i=1..4\n2. Invert H to get H_inv\n3. For each node i, extract: b1=H_inv[row 2][col i], b2=H_inv[row 3][col i], b3=H_inv[row 4][col i]\n   (These are dN_i/dx, dN_i/dy, dN_i/dz)\n4. Build the 6x3 B_i matrix (one per node):\n   B_i = [[b1, 0,  0 ],    <- eps_xx = du/dx\n          [0,  b2, 0 ],    <- eps_yy = dv/dy\n          [0,  0,  b3],    <- eps_zz = dw/dz\n          [0,  b3, b2],    <- gamma_yz = dw/dy + dv/dz\n          [b3, 0,  b1],    <- gamma_xz = dw/dx + du/dz\n          [b2, b1, 0 ]]    <- gamma_xy = dv/dx + du/dy\n5. Stiffness: K[i][j] = V * B_i^T * D * B_j, where V = |det(H)|/6\n6. Full 12x12: assemble 4x4 blocks of 3x3 sub-matrices K[i][j]",
+      "code_pattern": "// H matrix (4x4)\nEigen::Matrix4d H;\nfor(int i=0; i<4; i++) H.row(i) << 1.0, x[i], y[i], z[i];\ndouble detH = H.determinant();\nEigen::Matrix4d Hinv = H.inverse();\ndouble V = std::abs(detH) / 6.0;\n\n// B matrices (6x3 per node)\nfor(int n=0; n<4; n++) {\n  double b1 = Hinv(1,n); // dN/dx\n  double b2 = Hinv(2,n); // dN/dy\n  double b3 = Hinv(3,n); // dN/dz\n  B[n] << b1, 0,  0,\n          0,  b2, 0,\n          0,  0,  b3,\n          0,  b3, b2,\n          b3, 0,  b1,\n          b2, b1, 0;\n}\n// K = sum over i,j: V * B[i].T * D * B[j]",
+      "failure_mode": "Getting H-inverse row/column indices wrong, or wrong B-matrix layout, causes specific elements to be swapped",
+      "confidence": 1.0,
+      "timestamp": 1786928750.8468244,
+      "model": "domain_expert",
+      "method": "formula_injection"
+    },
+    {
+      "id": "seed_ktetra_dof_assembly",
+      "source_benchmark": "B7",
+      "source_subroutine": "KTETRA",
+      "category": "indexing",
+      "description": "KTETRA 12x12 stiffness matrix DOF ordering: [N1_x,N1_y,N1_z, N2_x,N2_y,N2_z, N3_x,N3_y,N3_z, N4_x,N4_y,N4_z]",
+      "applies_to_subroutines": [
+        "KTETRA",
+        "KSOLID",
+        "GMMATD"
+      ],
+      "applies_to_categories": [
+        "A5_solid_3d"
+      ],
+      "keywords": [
+        "tetra",
+        "solid",
+        "stiffness",
+        "dof",
+        "node",
+        "element"
+      ],
+      "convention": "The 12x12 stiffness matrix is ordered by node then by DOF direction: DOF 0-2 = Node 1 (x,y,z), DOF 3-5 = Node 2 (x,y,z), DOF 6-8 = Node 3 (x,y,z), DOF 9-11 = Node 4 (x,y,z). Each 3x3 block K_global[3*i:3*i+3, 3*j:3*j+3] = V * B[i].transpose() * D * B[j]. The matrix must be symmetric: K[i][j] = K[j][i]^T.",
+      "code_pattern": "// Assembly\nEigen::Matrix<double,12,12> K = Eigen::Matrix<double,12,12>::Zero();\nfor(int i=0; i<4; i++) {\n  for(int j=0; j<4; j++) {\n    Eigen::Matrix3d Kij = V * (B[i].transpose() * D * B[j]);\n    K.block<3,3>(3*i, 3*j) = Kij;\n  }\n}",
+      "failure_mode": "Swapping node indices during assembly (e.g., putting node 2 block at node 3 position) causes 9% error pattern seen in control group experiments",
+      "confidence": 1.0,
+      "timestamp": 1786928750.8468244,
+      "model": "domain_expert",
+      "method": "formula_injection"
+    },
+    {
+      "id": "seed_kelbow_flexibility_method",
+      "source_benchmark": "B9",
+      "source_subroutine": "KELBOW",
+      "category": "algorithm",
+      "description": "KELBOW uses flexibility method: compute flexibility matrix F, then invert to get stiffness K = F^{-1}",
+      "applies_to_subroutines": [
+        "KELBOW",
+        "GMMATD",
+        "GMMATS"
+      ],
+      "applies_to_categories": [
+        "A6_special"
+      ],
+      "keywords": [
+        "element",
+        "stiffness",
+        "matrix"
+      ],
+      "convention": "The curved pipe/elbow element does NOT use direct stiffness method. Instead:\n1. Compute 6x6 flexibility matrix F by integrating strain energy along curved centerline\n2. Apply flexibility correction factors (KX, KY, KZ) for stress intensification\n3. Invert F to get 6x6 stiffness for one end relative to the other\n4. Transform to global 12x12 using equilibrium and coordinate rotation\nThe flexibility integral uses the curved arc length, bend radius, and cross-section properties.",
+      "code_pattern": "",
+      "failure_mode": "Using direct stiffness (like straight beam) gives completely wrong result for curved elements",
+      "confidence": 1.0,
+      "timestamp": 1786928750.8468244,
+      "model": "domain_expert",
+      "method": "formula_injection"
+    },
+    {
+      "id": "seed_kelbow_coordinate_system",
+      "source_benchmark": "B9",
+      "source_subroutine": "KELBOW",
+      "category": "transform",
+      "description": "KELBOW uses local curvilinear coordinate system aligned with pipe centerline; requires rotation to global",
+      "applies_to_subroutines": [
+        "KELBOW",
+        "TRANSD",
+        "GMMATD",
+        "GMMATS"
+      ],
+      "applies_to_categories": [
+        "A6_special"
+      ],
+      "keywords": [
+        "transform",
+        "rotation",
+        "element"
+      ],
+      "convention": "The elbow element local coordinates:\n- Local x-axis: along tangent to curved centerline at each end\n- Local y-axis: in the plane of the bend (radial direction)\n- Local z-axis: perpendicular to bend plane\nThe DOF order at each node is [Fx, Fy, Fz, Mx, My, Mz] in global coordinates.\nThe 12x12 global stiffness is assembled as:\n  K_global = [K_AA, K_AB; K_BA, K_BB]\nwhere K_AA is self-coupling of grid A, K_AB is coupling A-to-B, etc.\nK_BA = K_AB^T (symmetry) and the off-diagonal blocks differ from diagonal blocks due to equilibrium transformation along the curved arc.",
+      "code_pattern": "",
+      "failure_mode": "Wrong coordinate rotation or missing equilibrium transformation gives 100%+ error",
+      "confidence": 1.0,
+      "timestamp": 1786928750.8468244,
+      "model": "domain_expert",
+      "method": "formula_injection"
+    },
+    {
+      "id": "seed_kelbow_flexibility_integral",
+      "source_benchmark": "B9",
+      "source_subroutine": "KELBOW",
+      "category": "algorithm",
+      "description": "KELBOW flexibility matrix computed by numerical integration of strain energy over curved arc",
+      "applies_to_subroutines": [
+        "KELBOW",
+        "GMMATD",
+        "GMMATS"
+      ],
+      "applies_to_categories": [
+        "A6_special"
+      ],
+      "keywords": [
+        "element",
+        "stiffness",
+        "matrix"
+      ],
+      "convention": "The 6x6 flexibility matrix for a curved pipe segment from angle 0 to θ:\nF = integral_0^θ T(φ)^T * f_section * T(φ) * R dφ\nwhere:\n- T(φ) is the force-transfer matrix from integration point to reference end\n- f_section is the cross-section flexibility (diagonal: 1/EA, 1/GA_s1, 1/GA_s2, 1/GJ, 1/EI_1, 1/EI_2 with correction factors)\n- R is the bend radius\n- φ is the angular position along the arc\nThe force-transfer T(φ) for a curved beam includes both moment arms (R*sin, R*(1-cos)) and tangent rotation.\nKELBOW uses 4-point Gauss quadrature along the arc for this integral.\nAfter computing F, the stiffness is K = F^{-1}.",
+      "code_pattern": "// Gauss points for arc integration (4-point)\n// For each Gauss point at angle phi:\n//   1. Compute T(phi) - force transfer matrix\n//   2. Compute f_section - cross-section flexibility\n//   3. Accumulate: F += weight * T^T * f * T * R\n// Finally: K_local = F.inverse()\n// Transform to global: K_global = R^T * K_local * R",
+      "failure_mode": "Wrong force-transfer matrix T(phi) or wrong integration limits gives completely wrong flexibility → wrong stiffness",
+      "confidence": 1.0,
+      "timestamp": 1786928750.8468244,
+      "model": "domain_expert",
+      "method": "formula_injection"
+    },
+    {
+      "id": "seed_kelbow_pivot_assembly",
+      "source_benchmark": "B9",
+      "source_subroutine": "KELBOW",
+      "category": "algorithm",
+      "description": "KELBOW computes stiffness relative to pivot node, then uses equilibrium to get full 12x12",
+      "applies_to_subroutines": [
+        "KELBOW",
+        "GMMATD",
+        "GMMATS"
+      ],
+      "applies_to_categories": [
+        "A6_special"
+      ],
+      "keywords": [
+        "element",
+        "stiffness",
+        "matrix",
+        "node"
+      ],
+      "convention": "KELBOW is called TWICE - once with each node as pivot:\n- First call (NPVT=node_A): computes K_AA (6x6 self-coupling of grid A)\n- Second call (NPVT=node_B): computes K_BB (6x6 self-coupling of grid B)\nThe off-diagonal blocks are derived from equilibrium:\n  K_AB = -K_AA (for translational DOFs) adjusted for the curved geometry\n  The full 12x12 is: K_global = [[K_AA, K_AB], [K_AB^T, K_BB]]\nNote: K_AB != -K_AA exactly because of the curved geometry (unlike straight beams).\nThe matrix MUST be symmetric: K_global = K_global^T.",
+      "code_pattern": "",
+      "failure_mode": "Computing only one pivot and assuming K_AB = -K_AA (straight beam assumption) gives large errors for curved elements",
+      "confidence": 1.0,
+      "timestamp": 1786928750.8468244,
+      "model": "domain_expert",
+      "method": "formula_injection"
+    },
+    {
+      "id": "B7_deepseek-v4-flash_1786941027_pattern0",
+      "source_benchmark": "B7",
+      "source_subroutine": "KTETRA",
+      "category": "algorithm",
+      "description": "Successful pattern from KTETRA: Explicit transpose operation",
+      "applies_to_subroutines": [
+        "INVERD",
+        "MAT",
+        "MESAGE",
+        "GMMATD",
+        "SMA1B",
+        "WRITE",
+        "HMAT"
+      ],
+      "applies_to_categories": [
+        "A5_solid_3d"
+      ],
+      "keywords": [
+        "transpose"
+      ],
+      "convention": "",
+      "code_pattern": "// FIXED: Swap indices - use B[j]^T * D * B[i] instead of B[i]^T * D * B[j]\n            Matrix3d Kij = volume * (B[j].transpose() * D * B[i]);\n            K.block<3, 3>(3 * i, 3 * j) = Kij;\n        }\n    }\n    \n    // Ensure symmetry (numerical roundoff)",
+      "failure_mode": "",
+      "confidence": 0.8,
+      "timestamp": 1786941027.7546806,
+      "model": "deepseek-v4-flash",
+      "method": "multiagent_kb"
+    },
+    {
+      "id": "B4_deepseek-v4-flash_1786944267_pattern0",
+      "source_benchmark": "B4",
+      "source_subroutine": "CQUAD4",
+      "category": "algorithm",
+      "description": "Successful pattern from CQUAD4: Explicit transpose operation",
+      "applies_to_subroutines": [
+        "MESAGE",
+        "KTRMEM",
+        "SMA1B",
+        "KQDMEM",
+        "WRITE"
+      ],
+      "applies_to_categories": [
+        "A3_membrane"
+      ],
+      "keywords": [
+        "transpose"
+      ],
+      "convention": "",
+      "code_pattern": "// Compute stiffness: K = t * area * B^T * D * B\n        Matrix<double, 6, 6> K = t * area * (B.transpose() * D * B);\n        \n        return K;\n    }\n};\n\n// Quadrilateral membrane element (CQUAD4)\nclass Quad4Membrane {",
+      "failure_mode": "",
+      "confidence": 0.8,
+      "timestamp": 1786944267.9551606,
+      "model": "deepseek-v4-flash",
+      "method": "multiagent_kb"
+    },
+    {
+      "id": "B13_deepseek-v4-flash_1786944535_pattern0",
+      "source_benchmark": "B13",
+      "source_subroutine": "SROD1",
+      "category": "algorithm",
+      "description": "Successful pattern from SROD1: Explicit transpose operation",
+      "applies_to_subroutines": [
+        "MAT",
+        "TRANSS",
+        "GMMATS"
+      ],
+      "applies_to_categories": [
+        "C1_stress_recovery"
+      ],
+      "keywords": [
+        "transpose"
+      ],
+      "convention": "",
+      "code_pattern": "std::cout << \"G*J/L: \" << rod.get_g_over_l() << std::endl;\n    std::cout << \"Unit vector: \" << rod.get_x_n().transpose() << std::endl;\n    \n    // Manual calculation check\n    double E = 2.1e11;\n    double A = 0.01;\n    double L = 2.0;",
+      "failure_mode": "",
+      "confidence": 0.8,
+      "timestamp": 1786944535.9047787,
+      "model": "deepseek-v4-flash",
+      "method": "multiagent_kb"
+    },
+    {
+      "id": "B3_deepseek-v4-flash_1786948934_pattern0",
+      "source_benchmark": "B3",
+      "source_subroutine": "CTRIA3",
+      "category": "algorithm",
+      "description": "Successful pattern from CTRIA3: Explicit transpose operation",
+      "applies_to_subroutines": [
+        "MESAGE",
+        "MAT",
+        "GMMATD",
+        "TRANSD",
+        "SMA1B",
+        "HMAT"
+      ],
+      "applies_to_categories": [
+        "A3_membrane"
+      ],
+      "keywords": [
+        "transpose"
+      ],
+      "convention": "",
+      "code_pattern": "// Compute stiffness matrix: K = t * A * B^T * D * B\n    Matrix6d K = thickness * area * (B.transpose() * D * B);\n    \n    return K;\n}\n\nint main() {\n    // Test case parameters\n    Vector2d node1(0.0, 0.0);",
+      "failure_mode": "",
+      "confidence": 0.8,
+      "timestamp": 1786948934.397849,
+      "model": "deepseek-v4-flash",
+      "method": "multiagent_kb"
+    },
+    {
+      "id": "seed_ktrplt_pivot_assembly",
+      "category": "algorithm",
+      "description": "KTRPLT builds the 9x9 plate stiffness one pivot ROW at a time; the centroid DOF are removed with G-matrix compatibility, NOT Guyan reduction",
+      "convention": "KTRPLT is called once per grid point with NPVT = that point's SIL, and each call produces only the three 3x3 blocks K(npivot, j), j=1..3 — one row of the 9x9. Within a call the triangle is split into 3 sub-triangles against the centroid (node 4) via the fixed subscript map M = [1,2,4 | 2,3,4 | 3,1,4]. For each sub-triangle J: derive local (xsubb, xsubc, ysubc) from the R-matrix, call KTRBSC(iopt=2), rotate every 3x3 block as T^T * BLOCK * T with T = [[1,0,0],[0,U1,U2],[0,-U2,U1]], and accumulate into KSUM (offset 9*M[..]+18 for centroid coupling, 9*node-9 for the pivot and opposite-node blocks). In parallel accumulate the 2x6 HQ edge-compatibility rows into the G matrix; the row placement rotates with J (J=1 -> +1, J=2 -> +4, J=3 -> +7 with a 3-row wrap). Then condense the centroid using PROD = G_4^{-1} * G_npivot: K_j = KSUM_j - PROD^T*KSUM(j,4)^T - KSUM(npivot,4)*(G_4^{-1}*G_j) + (PROD^T*KSUM(4,4))*(G_4^{-1}*G_j). Finally transform with the 6x3 E-matrix: KOUT = E * K_j * E^T.",
+      "code_pattern": "int M[10] = {0, 1,2,4, 2,3,4, 3,1,4};   // sub-triangle node map, 4 = centroid\nfor (int J = 1; J <= 3; ++J) {\n    int KM = 3*J - 3;\n    ktrbsc_iopt2(xsubb, xsubc, ysubc, EYE, E, nu, A);\n    double T[9] = {1,0,0, 0,U1,U2, 0,-U2,U1};\n    // T^T * block * T -> KSUM[9*M[KM+I]+18] (centroid coupling)\n    // HQ(2x6) * Hinv * S -> G[9*M[KM+I]-9] (compatibility rows)\n}\ninverd(3, &G[28]);                                        // G_4^{-1}\ngmmatd(&G[28],3,3,0, &G[9*npivot-8],3,3,0, PROD);          // PROD = G_4^-1 G_pvt",
+      "failure_mode": "Modelling KTRPLT as 'assemble 3 sub-triangles into a 12x12, then Guyan-condense the centroid' produces rel_diff 0.43-0.89 (verified experimentally). Computing only one pivot and mirroring gives ~1/5 of the correct K(0,0). The centroid elimination needs the G-matrix edge-compatibility conditions, not K_ee - K_ei K_ii^-1 K_ie.",
+      "applies_to_subroutines": [
+        "KTRPLT",
+        "KQDPLT",
+        "KTRBSC",
+        "GMMATD",
+        "GMMATS",
+        "TRANSD"
+      ],
+      "applies_to_categories": [
+        "A4_plate_bending"
+      ],
+      "keywords": [
+        "plate",
+        "bending",
+        "triangle",
+        "ktrbsc",
+        "condensation",
+        "element",
+        "stiffness",
+        "matrix",
+        "node",
+        "dof",
+        "transform"
+      ],
+      "confidence": 1.0,
+      "source_benchmark": "B5",
+      "source_subroutine": "KTRPLT",
+      "method": "level3",
+      "model": "level3_human_ai",
+      "timestamp": 1787063196.5835078
+    },
+    {
+      "id": "seed_sma1b_transposed_read",
+      "category": "storage_convention",
+      "description": "SMA1B reads the row-major KOUT buffer written by GMMATD as column-major, so extracting the 3x3 bending sub-block requires swapped indices",
+      "convention": "GMMATD writes the final 6x6 KOUT block row-by-row, but SMA1B consumes that same memory using Fortran's column-major interpretation. When pulling out the bending part (DOF w, theta_x, theta_y = positions 3,4,5 of the 6-DOF block) from a row-major KOUT array, swap the indices: K_bending(i,j) = kout[(j+2)*6 + (i+2)], NOT kout[(i+2)*6 + (j+2)].",
+      "code_pattern": "for (int ii = 0; ii < 3; ++ii)\n    for (int jj = 0; jj < 3; ++jj)\n        K_row[ii][(J-1)*3+jj] = kout[(jj+2)*6 + (ii+2)];  // swapped on purpose",
+      "failure_mode": "Reading kout[(ii+2)*6+(jj+2)] leaves the diagonal correct but transposes every off-diagonal 3x3 block, so the assembled 9x9 is asymmetric and the coupling terms carry the wrong sign pattern.",
+      "applies_to_subroutines": [
+        "SMA1B",
+        "KTRPLT",
+        "KQDPLT",
+        "KTRBSC",
+        "GMMATD",
+        "GMMATS",
+        "TRANSD"
+      ],
+      "applies_to_categories": [
+        "A4_plate_bending"
+      ],
+      "keywords": [
+        "row",
+        "column",
+        "storage",
+        "transpose",
+        "gmmatd",
+        "matrix",
+        "bending",
+        "plate",
+        "stiffness",
+        "symmetric"
+      ],
+      "confidence": 1.0,
+      "source_benchmark": "B5",
+      "source_subroutine": "KTRPLT",
+      "method": "level3",
+      "model": "level3_human_ai",
+      "timestamp": 1787063196.583636
+    },
+    {
+      "id": "seed_kqdplt_offdiag_transpose",
+      "category": "algorithm",
+      "description": "KQDPLT off-diagonal KSUM blocks must be transposed before output: KSUM stores K(col_node, pivot) not K(pivot, col_node)",
+      "convention": "In KQDPLT, after the sub-triangle loop accumulates rotated 3x3 blocks into KSUM[36] (4 blocks of 3x3, one per quad node), the self-coupling block KSUM[pivot] is correct as-is, but every off-diagonal block KSUM[j] (j != pivot) stores K(j, pivot) rather than K(pivot, j). Therefore when extracting the final K_global(pivot*3+r, j*3+c), you must use KSUM_j TRANSPOSED for off-diagonal blocks. Equivalently: K_global[pivot_row, col_j] = KSUM_j^T for j != pivot, KSUM_j for j == pivot. This arises because KTRBSC's 9-block layout has block(I, col) = K(node_I, node_col) in the sub-triangle's local ordering, and when pivot is at position I, reading blocks along the pivot row gives K(pivot, col) from the sub-triangle perspective — but after the T-rotation and multi-triangle accumulation, the element-frame result ends up transposed for off-diagonal entries.",
+      "code_pattern": "// After accumulating KSUM from sub-triangles:\nfor (int j = 0; j < 4; j++) {\n    Matrix3d Kblock = extract_3x3(KSUM, 9*j);\n    if (j != pivot) Kblock.transposeInPlace();  // KEY FIX\n    K_global.block<3,3>(pivot*3, j*3) = Kblock;\n}",
+      "failure_mode": "Without transposing off-diagonal blocks: rel_diff = 0.507. The self-coupling block is perfect, but cross-coupling blocks show node-dependent sign flips (diag(1,1,-1), diag(-1,1,1), diag(1,-1,1) patterns for different nodes).",
+      "applies_to_subroutines": [
+        "KQDPLT",
+        "KTRBSC",
+        "GMMATD"
+      ],
+      "applies_to_categories": [
+        "A4_plate_bending"
+      ],
+      "keywords": [
+        "plate",
+        "bending",
+        "quad",
+        "transpose",
+        "matrix",
+        "stiffness",
+        "element",
+        "node",
+        "kqdplt"
+      ],
+      "confidence": 1.0,
+      "source_benchmark": "B6",
+      "source_subroutine": "KQDPLT",
+      "method": "level3",
+      "model": "level3_human_ai",
+      "timestamp": 1787155200.0
+    }
+  ]
+}

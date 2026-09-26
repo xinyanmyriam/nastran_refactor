@@ -1,0 +1,35 @@
+==============================================
+ B10 TEST DRIVER: QRITER
+ QR Iteration for Tridiagonal Eigenvalues
+ (from NASTRAN-95 MIS module)
+==============================================
+
+ Test: 5x5 spring-mass tridiagonal matrix
+ Diagonal = [2, 2, 2, 2, 2]
+ Off-diagonal = [-1, -1, -1, -1]
+
+ Calling QRITER...
+ QRITER returned successfully.
+
+ Results:
+ -----------------------------------------------
+    k          Computed        Analytical         Error Pass?
+ -----------------------------------------------
+   1      0.2679491924      0.2679491924     1.110E-16  PASS
+   2      1.0000000000      1.0000000000     4.441E-16  PASS
+   3      2.0000000000      2.0000000000     6.661E-16  PASS
+   4      3.0000000000      3.0000000000     8.882E-16  PASS
+   5      3.7320508076      3.7320508076     4.441E-16  PASS
+ -----------------------------------------------
+
+ Eigenvalues passed:  5 /  5
+ Maximum absolute error:    8.882E-16
+ Tolerance:    1.000E-06
+
+ LOC array (original positions):
+     5     4     3     2     1
+
+ Convergence: All eigenvalues converged.
+
+ *** B10 QRITER TEST: ALL PASSED ***
+==============================================

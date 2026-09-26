@@ -1,0 +1,22 @@
+{
+  "experiment_id": "B1_rq3_jss_full_agent_main_n10_frozen_v2_rq3_agent_full_r5_a1_20260916_224307",
+  "start_time": "2026-09-16T22:43:07.924198",
+  "end_time": "2026-09-16T22:46:10.435698",
+  "total_elapsed_seconds": 182.51,
+  "status": "failed",
+  "summary": "B1 rq3_agent_full r5: FAIL valid=True",
+  "llm_calls": 5,
+  "errors_count": 0,
+  "stage_timings": {
+    "B1_rq3_agent_full_r5": {
+      "start": 1789569787.9318352,
+      "start_iso": "2026-09-16T22:43:07.931836",
+      "end": 1789569970.4347107,
+      "end_iso": "2026-09-16T22:46:10.434714",
+      "elapsed_seconds": 182.5,
+      "success": false
+    }
+  },
+  "quality_gates": {},
+  "errors": []
+}

@@ -1,0 +1,112 @@
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <cmath>
+#include <Eigen/Dense>
+#include <sstream>
+#include <string>
+
+// Use double precision throughout
+using Real = double;
+using Vector = Eigen::VectorXd;
+using Matrix = Eigen::MatrixXd;
+
+int main() {
+    // Test case parameters
+    const int n = 3;  // 3-DOF system
+    const Real dt = 0.01;
+    const int nsteps = 100;
+
+    // Stiffness matrix K = [2,-1,0; -1,2,-1; 0,-1,2]
+    Matrix K(n, n);
+    K << 2.0, -1.0,  0.0,
+        -1.0,  2.0, -1.0,
+         0.0, -1.0,  2.0;
+
+    // Mass matrix M = I (identity)
+    Matrix M = Matrix::Identity(n, n);
+
+    // Damping matrix C = 0
+    Matrix C = Matrix::Zero(n, n);
+
+    // Initial conditions
+    Vector u0(n), v0(n);
+    u0 << 1.0, 0.0, 0.0;
+    v0 << 0.0, 0.0, 0.0;
+
+    // Precompute constants for central difference method
+    // Correct central difference: u_{n+1} = 2*u_n - u_{n-1} - dt^2 * M^{-1} * K * u_n
+    // Since M = I: u_{n+1} = 2*u_n - u_{n-1} - dt^2 * K * u_n
+    // So: u_{n+1} = (2*I - dt^2 * K) * u_n - u_{n-1}
+    
+    // Compute u1 using initial conditions
+    // u1 = u0 + dt*v0 + 0.5*dt^2*a0, where a0 = M^{-1}*(P0 - C*v0 - K*u0)
+    // Since C=0, P0=0, M=I: a0 = -K*u0
+    Vector u1 = u0 + dt * v0 + 0.5 * dt * dt * (-K * u0);
+
+    // Store displacement history
+    std::vector<Vector> displacements;
+    displacements.reserve(nsteps + 1);
+    displacements.push_back(u0);  // step 0 (t=0)
+
+    // Central difference integration
+    // u_{n+1} = (2*I - dt^2 * K) * u_n - u_{n-1}
+    Matrix A = 2.0 * Matrix::Identity(n, n) - dt * dt * K;
+    Matrix B = -Matrix::Identity(n, n);
+
+    Vector un_minus_1 = u0;
+    Vector un = u1;
+
+    // Perform time integration from time step 2 to nsteps (to get u2 through u100)
+    // We want u0, u10, u20, ..., u100 -> 11 points
+    for (int time_step = 2; time_step <= nsteps; ++time_step) {
+        Vector un_plus_1 = A * un + B * un_minus_1;
+        
+        // Update for next iteration
+        un_minus_1 = un;
+        un = un_plus_1;
+        
+        // Sample at time steps 10, 20, ..., 100 (which correspond to t=0.1, 0.2, ..., 1.0)
+        if (time_step % 10 == 0) {
+            displacements.push_back(un);
+        }
+    }
+
+    // Ensure we have exactly 11 entries (0,10,20,...,100)
+    // We should have: step 0, then steps 10,20,...,100 -> total 11
+    if (displacements.size() != 11) {
+        // Recompute to ensure correct sampling
+        displacements.clear();
+        displacements.push_back(u0);  // step 0
+        
+        un_minus_1 = u0;
+        un = u1;
+        
+        for (int time_step = 2; time_step <= nsteps; ++time_step) {
+            Vector un_plus_1 = A * un + B * un_minus_1;
+            un_minus_1 = un;
+            un = un_plus_1;
+            
+            if (time_step % 10 == 0) {
+                displacements.push_back(un);
+            }
+        }
+    }
+
+    // Output as JSON
+    std::cout << "{\"test\":\"TRD1C\",\"timeseries\":[";
+    
+    for (size_t i = 0; i < displacements.size(); ++i) {
+        if (i > 0) std::cout << ",";
+        std::cout << "[";
+        for (int j = 0; j < n; ++j) {
+            if (j > 0) std::cout << ",";
+            std::cout << std::scientific << std::setprecision(16) << displacements[i](j);
+        }
+        std::cout << "]";
+    }
+    
+    std::cout << "]}" << std::endl;
+
+    return 0;
+}

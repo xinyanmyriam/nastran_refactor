@@ -1,0 +1,402 @@
+{
+  "schema_version": "jss-holdout-inputs-p0-1",
+  "frozen_utc": "2026-09-21T08:58:15.061138+00:00",
+  "n_benchmarks": 13,
+  "n_variants_per_benchmark": 4,
+  "n_files": 52,
+  "design_note": "h1-h3 designed per JSS plan 8.4; contract-fixed, in-domain perturbations. Auto-checked invariants: positivity, SPD, quad convexity, wedge volume, B12 timeseries contract. NASTRAN-specific driver defaults/offsets are finalized and Fortran-verified in P1 parameterised drivers.",
+  "files": {
+    "B1": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B1_h0.json",
+        "sha256": "aec40ac49d09149d4b38869702e02c7f42f7769b6d0b7abdca68b31ebba894a7",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B1_h1.json",
+        "sha256": "ed591367458f904d3305afb1808620c24c390adec04515d3051f27b9c4181e70",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B1_h2.json",
+        "sha256": "d5c9d2be44ce774eb974b05d19426f08f4fd5116a561caf212be000153c2fdeb",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B1_h3.json",
+        "sha256": "3aa340fcf52e9924a88301f3bed6c7beb068a3a865aed5259ecb63caea0f4501",
+        "ok": true,
+        "issues": []
+      }
+    ],
+    "B2": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B2_h0.json",
+        "sha256": "146c91d7e4a1555415c1ba25369f25161c95abe08bcccc3adbec9ff985adf6be",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B2_h1.json",
+        "sha256": "a02c4fd8e1bd419bcc0ef7598377ea2cf9d33070b0cda135964dd01a304597e2",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B2_h2.json",
+        "sha256": "0c24c06ff73f3beedbfbdab6d11786f0196066bc85284b71db786abd1a834a49",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B2_h3.json",
+        "sha256": "6b77bbfc3f452a4a0637cc47c9399ae6f6697fd18c6f64922ebe597cf7a58cc1",
+        "ok": true,
+        "issues": []
+      }
+    ],
+    "B3": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B3_h0.json",
+        "sha256": "fc4635c4f9b22afcad471dc5df6d4edbc1bd224aff701ef23ea221327c98a576",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B3_h1.json",
+        "sha256": "6c66df3db2ff21edeb29e05c7a4c649feaaee8ca9afc8c237dd54cfccb47645d",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B3_h2.json",
+        "sha256": "6073f794b7d914d02d0ce59a856341581ca9fc8a0c76fddb54b13c2cbf183f6a",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B3_h3.json",
+        "sha256": "9851d11b1b794cef9f7d78fd1ba48a38342b649ecb86f22e915dbd3231b68538",
+        "ok": true,
+        "issues": []
+      }
+    ],
+    "B4": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B4_h0.json",
+        "sha256": "3b2c0a5cc9ad0b187d9d5d079acd56fc00c8fa407be3458035174c91b6f44105",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B4_h1.json",
+        "sha256": "6f333e949256da5143398d2c29162c3da63eadf0aea837ce34dbf46cd9b48ba2",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B4_h2.json",
+        "sha256": "8de4f42d8bc7d666eb9322caa19dc58249d8dbf0b039c72a7b2855f41c6ee332",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B4_h3.json",
+        "sha256": "2c3c8f93dff7551e8f75eca17f4387cd65b6d23dfa444df3b36a0264575205df",
+        "ok": true,
+        "issues": []
+      }
+    ],
+    "B5": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B5_h0.json",
+        "sha256": "9197adfb0f48deea5112b438a21c52ad12420d7a364664f8a0c53219df3df458",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B5_h1.json",
+        "sha256": "e7501ca97b71d2d01e30faf2f61723f162d93f920d8a6eccebdf1c65e8f9e1b6",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B5_h2.json",
+        "sha256": "5c3b52b6dfd1c16e0b514e58d6b806a6bddfc325cd0c6312be64448eb5ba8ebd",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B5_h3.json",
+        "sha256": "54eb50548556288321b0dcfb0a86c2751b3a3e1c1c1d19a3abed2ee00d95358a",
+        "ok": true,
+        "issues": []
+      }
+    ],
+    "B6": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B6_h0.json",
+        "sha256": "7fb85cb9a3aaad2efef39eb528696a97a755879861d74542b31f7b223f7e7ec0",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B6_h1.json",
+        "sha256": "a04d3e1b5dd92f694876f767616b5309e54d28e9a13ace6c5536cf4b05fedeba",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B6_h2.json",
+        "sha256": "fa7bd36f334a15b9b82b192963e68ae7fba75df7e282aca2c5382374550c237f",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B6_h3.json",
+        "sha256": "82e2e22fc1c8d159af063dd9b95f5e91a73a2a8edce4c3a2da59247fb1a72fd2",
+        "ok": true,
+        "issues": []
+      }
+    ],
+    "B7": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B7_h0.json",
+        "sha256": "0488b3744a20baac76dc53b395652840ce5446c94cd25ba1b7386c571bbd6cdd",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B7_h1.json",
+        "sha256": "bfcb6fd476bd3a75e8730201ec1aee0afc474a4fcd49d9f8d909c58d11f6eaca",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B7_h2.json",
+        "sha256": "21babdb81046c6a609497ef90f2096e2e719572192c0feb377a5b034bd43617b",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B7_h3.json",
+        "sha256": "3802cbb775fe8fc31fcda6cd39c2072d45bb7ffe21283fcad77234baec367254",
+        "ok": true,
+        "issues": []
+      }
+    ],
+    "B8": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B8_h0.json",
+        "sha256": "217c4931fe9e5e9aa27664cc6780c529ab9e58aebb57ac803e9a1b256c1f3a6b",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B8_h1.json",
+        "sha256": "f2d93a9e0d078b417157ce1027e26ab5f8246c072394b4ccb3c8f515174ab0cf",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B8_h2.json",
+        "sha256": "624b357c42650b220a1ce2352f462877e7f6454028e0f659c142ec381692812a",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B8_h3.json",
+        "sha256": "ca7a76d5c71d9ff5e4d0555a13178d00dc58e2b014228e58ad607ad55e300744",
+        "ok": true,
+        "issues": []
+      }
+    ],
+    "B9": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B9_h0.json",
+        "sha256": "9b3e6072d9ab6f540d7c77b9cba6c80234ecd96a235209739cba240bb8e54458",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B9_h1.json",
+        "sha256": "058e207a1eef766cc185c87fa46c92169d48376425ed032589201302b5188e37",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B9_h2.json",
+        "sha256": "fe89eb5731b4b6bde724102f27e469b58f78ecd93ec9919628ccf86acfc9e4e6",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B9_h3.json",
+        "sha256": "f4c3239cf024fd524f46b4334f01025d6a15d957866381f91d45253d80c83062",
+        "ok": true,
+        "issues": []
+      }
+    ],
+    "B10": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B10_h0.json",
+        "sha256": "16eec9877cab033292ae4606f35b29e3b83d9a056a3cb827b0ba45fd76e90397",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B10_h1.json",
+        "sha256": "844f605a0459839454a4e91f7a0b4db501322466d16b48236d146d582ea6e742",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B10_h2.json",
+        "sha256": "17607c2827dd657c1635f2058f42a4c8622c048ee1329aaf53917652bb48b799",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B10_h3.json",
+        "sha256": "4d4f0c4637c21871a56406f0abc2cd073f035e3bdf2542ffa6afbd7fea097ba2",
+        "ok": true,
+        "issues": []
+      }
+    ],
+    "B11": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B11_h0.json",
+        "sha256": "3c45678f1c7ce92fe9ba1b6b9487e8bb0a766ed8ebb00cb83a95eb744f2f3a9d",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B11_h1.json",
+        "sha256": "25a883a83785eb2ee9f7aee5dc8015454b8e44f0071eb8607b82115011345b82",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B11_h2.json",
+        "sha256": "f1dedfe92fe75076c856f777c4cd189e7b7b7eedba7ec960a20973e474b2bb23",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B11_h3.json",
+        "sha256": "b2d405d95a07240b5cf48b88e5af5a9fe6c8ac4b93fc0e6489902eba6043e660",
+        "ok": true,
+        "issues": []
+      }
+    ],
+    "B12": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B12_h0.json",
+        "sha256": "00a825ed650c299b332baea851ce02c8d26d5881c2982a710850a0bb039fbd41",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B12_h1.json",
+        "sha256": "96ca9833b64957f0f8b6b4a9328a8af8843fea975541f217598c4e2ef1af6799",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B12_h2.json",
+        "sha256": "875f0b21c387a5c08d1395d0e4cb92470a1890186d798d9fc63e9c84931556c6",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B12_h3.json",
+        "sha256": "b001bd3af610fe6d8077e9bca195b7326386200fc85f21f72e74221234727449",
+        "ok": true,
+        "issues": []
+      }
+    ],
+    "B13": [
+      {
+        "variant": "h0",
+        "path": "holdout_inputs/B13_h0.json",
+        "sha256": "77a1fe9d9607468b6bb4085f9030ee3a6cbc1683eda69be6758e2e75f22ded6e",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h1",
+        "path": "holdout_inputs/B13_h1.json",
+        "sha256": "673a08050259146cf20c9151f387ef1cadeebf3fbcd4d1564c1fd96c0b0f997f",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h2",
+        "path": "holdout_inputs/B13_h2.json",
+        "sha256": "ee209ffa98bc9ab033872e80b433855c0a6afa36c6720fafd60e0e584a9f7850",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "variant": "h3",
+        "path": "holdout_inputs/B13_h3.json",
+        "sha256": "baf6b36dc65beb7d80d4f428d511d1b99a8b7074afe8c9ad0b8d59af21357d75",
+        "ok": true,
+        "issues": []
+      }
+    ]
+  },
+  "invariant_violations": [],
+  "_manifest_sha256": "938b5feeca0f236f71e01c52ae31d849c9ff6aefcf2f8983122c6ca74cf84fbf"
+}

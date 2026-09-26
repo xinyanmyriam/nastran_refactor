@@ -1,0 +1,14 @@
+{
+  "call_id": "call_008",
+  "timestamp": "2026-09-17T06:27:31.205921",
+  "agent": "repair_B5_i4",
+  "elapsed_seconds": 10839.31,
+  "tokens_used": 0,
+  "system_prompt_length": 0,
+  "user_prompt_length": 0,
+  "response_length": 0,
+  "error": "API_TIMEOUT: All 4 attempts failed. Last error: Request timed out.",
+  "system_prompt": "",
+  "user_prompt": "",
+  "response": ""
+}

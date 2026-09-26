@@ -1,0 +1,197 @@
+{
+  "_schema_version": "jss-holdout-oracle-1",
+  "_benchmark": "B9",
+  "_variant": "h1",
+  "_generated_utc": "2026-09-21T10:31:36.604554+00:00",
+  "_method": "parameterised Fortran driver + unmodified NASTRAN kernel",
+  "_toolchain": {
+    "gfortran": "C:\\Users\\lxy\\w64devkit\\bin\\gfortran.exe",
+    "flags": [
+      "-ffixed-form",
+      "-std=legacy",
+      "-w",
+      "-fallow-argument-mismatch"
+    ]
+  },
+  "_kernel_sha256": {
+    "kelbow.f": "fa46a0519afc260d9f6017200c48d72ab9d846dfe34fedf23536a9d2db46db28",
+    "gmmatd.f": "c88ef91e774d9c50b35612f8a84f7b398c404a8d9ea539bcbae442e70466e6ed",
+    "inverd.f": "91b50c6a12f46831fbfbf8d50189dbc70d276602261c4f99943a7cafb262c1b5"
+  },
+  "_driver_source": {
+    "driver.f": "      PROGRAM HOLDB9\n      IMPLICIT NONE\n      REAL ECPT(100)\n      INTEGER NECPT(100)\n      EQUIVALENCE (NECPT(1), ECPT(1))\n      COMMON /SMA1ET/ ECPT\n      INTEGER IOPT4, K4GGSW, NPVT, LEFT, FROWIC, LROWIC\n      INTEGER NROWSC, TNROWS, JMAX, NLINKS, LINK(10)\n      INTEGER IDETCK, DODET, NOGO_CL\n      COMMON /SMA1CL/ IOPT4, K4GGSW, NPVT, LEFT, FROWIC,\n     1  LROWIC, NROWSC, TNROWS, JMAX, NLINKS, LINK, IDETCK,\n     2  DODET, NOGO_CL\n      LOGICAL HEAT\n      COMMON /SMA1HT/ HEAT\n      INTEGER MATIDC, MATFLG\n      REAL ELTEMP, STRESS, SINTH, COSTH\n      COMMON /MATIN / MATIDC, MATFLG, ELTEMP, STRESS,\n     1  SINTH, COSTH\n      REAL E, GG, NU, RHO, ALPHA, TSUBO, GSUBE\n      REAL SIGT, SIGC, SIGS\n      COMMON /MATOUT/ E, GG, NU, RHO, ALPHA, TSUBO, GSUBE,\n     1  SIGT, SIGC, SIGS\n      REAL FK\n      COMMON /HMTOUT/ FK\n      INTEGER IFCSTM, IFMPT, IFDIT, IDUM1, IFECPT, IGECPT\n      INTEGER IFGPCT, IGGPCT, IFGEI, IGGEI, IFKGG, IGKGG\n      INTEGER IF4GG, IG4GG, IFGPST, IGGPST, INRW, OUTRW\n      INTEGER CLSNRW, CLSRW, NEOR, EOR, MCBKGG(7), MCB4GG(7)\n      COMMON /SMA1IO/ IFCSTM, IFMPT, IFDIT, IDUM1, IFECPT,\n     1  IGECPT, IFGPCT, IGGPCT, IFGEI, IGGEI, IFKGG, IGKGG,\n     2  IF4GG, IG4GG, IFGPST, IGGPST, INRW, OUTRW,\n     3  CLSNRW, CLSRW, NEOR, EOR, MCBKGG, MCB4GG\n      INTEGER ICSTM, NCSTM, IGPCT, NGPCT, IPOINT, NPOINT\n      INTEGER I6X6K, N6X6K, I6X64, N6X64\n      COMMON /SMA1BK/ ICSTM, NCSTM, IGPCT, NGPCT, IPOINT,\n     1  NPOINT, I6X6K, N6X6K, I6X64, N6X64\n      DOUBLE PRECISION KE(144), KEP(144), DELA(6), DELB(6)\n      COMMON /SMA1DP/ KE, KEP, DELA, DELB\n      INTEGER SYSBUF, NOUT\n      COMMON /SYSTEM/ SYSBUF, NOUT\n      INTEGER MACH\n      COMMON /MACHIN/ MACH\n      DOUBLE PRECISION Z(1000)\n      COMMON /ZZZZZZ/ Z\n      DOUBLE PRECISION KFULL(12,12)\n      INTEGER I, J\n      MACH = 1\n      NOUT = 6\n      SYSBUF = 1\n      HEAT = .FALSE.\n      IOPT4 = 0\n      K4GGSW = 0\n      NOGO_CL = 0\n      IFCSTM=0; IFMPT=0; IFDIT=0; IDUM1=0; IFECPT=0\n      IGECPT=0; IFGPCT=0; IGGPCT=0; IFGEI=0; IGGEI=0\n      IFKGG=11; IGKGG=0; IF4GG=13; IG4GG=0\n      IFGPST=0; IGGPST=0; INRW=0; OUTRW=0\n      CLSNRW=0; CLSRW=0; NEOR=0; EOR=0\n      DO 5 I = 1, 7\n        MCBKGG(I) = 0\n        MCB4GG(I) = 0\n    5 CONTINUE\n      ICSTM=0; NCSTM=0; IGPCT=0; NGPCT=0; IPOINT=0\n      NPOINT=0; I6X6K=0; N6X6K=0; I6X64=0; N6X64=0\n      DO 10 I = 1, 1000\n        Z(I) = 0.0D0\n   10 CONTINUE\n      DO 20 I = 1, 12\n        DO 15 J = 1, 12\n          KFULL(I,J) = 0.0D0\n   15   CONTINUE\n   20 CONTINUE\n      CALL SETECP\n      NPVT = NECPT(2)\n      CALL KELBOW\n      NPVT = NECPT(3)\n      CALL KELBOW\n      CALL GET_KMATRIX_ELBOW(KFULL)\n      WRITE(6,'(A1)') 'S'\n      DO 200 I = 1, 12\n        WRITE(6,920) (KFULL(I,J), J = 1, 12)\n  200 CONTINUE\n  920 FORMAT (12(1X,E16.9))\n      STOP\n      END\n      SUBROUTINE SETECP\n      IMPLICIT NONE\n      REAL ECPT(100)\n      INTEGER NECPT(100)\n      EQUIVALENCE (NECPT(1), ECPT(1))\n      COMMON /SMA1ET/ ECPT\n      INTEGER I\n      DO 10 I = 1, 100\n        ECPT(I) = 0.0\n   10 CONTINUE\n      NECPT(1) = 101\n      NECPT(2) = 1\n      NECPT(3) = 2\n      ECPT(4) = 0\n      ECPT(5) = 1\n      ECPT(6) = 0\n      NECPT(7) = 0\n      NECPT(8) = 1\n      ECPT(9) = 0.002148849375\n      ECPT(10) = 3.500475632e-06\n      ECPT(11) = 3.500475632e-06\n      ECPT(12) = 7.000951264e-06\n      ECPT(23) = 0.9\n      ECPT(24) = 0.9\n      ECPT(25) = 1.0\n      ECPT(26) = 1.0\n      ECPT(27) = 1.0\n      ECPT(28) = 1.0\n      ECPT(29) = 1.5\n      ECPT(30) = 90\n      NECPT(31) = 0\n      ECPT(32) = 1.5\n      ECPT(33) = 0\n      ECPT(34) = 0\n      NECPT(35) = 0\n      ECPT(36) = 0\n      ECPT(37) = 0\n      ECPT(38) = 1.5\n      ECPT(39) = 20.0\n      RETURN\n      END",
+    "stubs.f": "      BLOCK DATA CAPTUREDATA\n      IMPLICIT NONE\n      DOUBLE PRECISION KSTORE(6,6,2,2)\n      INTEGER NCALLS, CPIVOT\n      COMMON /CAPTURE/ KSTORE, NCALLS, CPIVOT\n      DATA NCALLS /0/\n      DATA CPIVOT /0/\n      DATA KSTORE /144*0.0D0/\n      END\n      SUBROUTINE MAT (IELID)\n      IMPLICIT NONE\n      INTEGER IELID\n      INTEGER MATIDC, MATFLG\n      REAL ELTEMP, STRESS, SINTH, COSTH\n      COMMON /MATIN / MATIDC, MATFLG, ELTEMP, STRESS,\n     1  SINTH, COSTH\n      REAL E, GG, NU, RHO, ALPHA, TSUBO, GSUBE, SIGT,\n     1  SIGC, SIGS\n      COMMON /MATOUT/ E, GG, NU, RHO, ALPHA, TSUBO, GSUBE,\n     1  SIGT, SIGC, SIGS\n      E = 7.1e+10\n      NU = 0.33\n      GG = 2.669172932e+10\n      RHO = 7800.0\n      ALPHA = 12.0E-6\n      TSUBO = 20.0\n      GSUBE = 0.0\n      SIGT = 0.0\n      SIGC = 0.0\n      SIGS = 0.0\n      RETURN\n      END\n      SUBROUTINE SMA1B (KIJ, INDEX, ICODE, IFFILE,\n     1  FACTOR)\n      IMPLICIT NONE\n      DOUBLE PRECISION KIJ(6,6), FACTOR\n      INTEGER INDEX, ICODE, IFFILE\n      DOUBLE PRECISION KSTORE(6,6,2,2)\n      INTEGER NCALLS, CPIVOT\n      COMMON /CAPTURE/ KSTORE, NCALLS, CPIVOT\n      REAL ECPT(100)\n      INTEGER NECPT(100)\n      EQUIVALENCE (NECPT(1), ECPT(1))\n      COMMON /SMA1ET/ ECPT\n      INTEGER IOPT4, K4GGSW, NPVT, LEFT, FROWIC, LROWIC\n      INTEGER NROWSC, TNROWS, JMAX, NLINKS, LINK(10)\n      INTEGER IDETCK, DODET, NOGO\n      COMMON /SMA1CL/ IOPT4, K4GGSW, NPVT, LEFT, FROWIC,\n     1  LROWIC, NROWSC, TNROWS, JMAX, NLINKS, LINK, IDETCK,\n     2  DODET, NOGO\n      INTEGER I, J, IPVT, IBLK\n      IF (FACTOR .NE. 0.0D0) RETURN\n      IPVT = 0\n      IF (NPVT .EQ. NECPT(2)) IPVT = 1\n      IF (NPVT .EQ. NECPT(3)) IPVT = 2\n      IF (IPVT .EQ. 0) RETURN\n      IF (IPVT .NE. CPIVOT) THEN\n        CPIVOT = IPVT\n        NCALLS = 0\n      END IF\n      NCALLS = NCALLS + 1\n      IBLK = NCALLS\n      IF (IBLK .GT. 2) IBLK = 2\n      DO 50 I = 1, 6\n        DO 50 J = 1, 6\n          KSTORE(I, J, IPVT, IBLK) = KIJ(I, J)\n   50 CONTINUE\n      RETURN\n      END\n      SUBROUTINE GET_KMATRIX_ELBOW (KFULL)\n      IMPLICIT NONE\n      DOUBLE PRECISION KFULL(12,12)\n      DOUBLE PRECISION KSTORE(6,6,2,2)\n      INTEGER NCALLS, CPIVOT\n      COMMON /CAPTURE/ KSTORE, NCALLS, CPIVOT\n      INTEGER I, J\n      DO 100 I = 1, 6\n        DO 100 J = 1, 6\n          KFULL(I, J) = KSTORE(I, J, 1, 1)\n          KFULL(I, J+6) = KSTORE(I, J, 1, 2)\n          KFULL(I+6, J) = KSTORE(I, J, 2, 2)\n          KFULL(I+6, J+6) = KSTORE(I, J, 2, 1)\n  100 CONTINUE\n      RETURN\n      END\n      SUBROUTINE TRANSD (ICSID, T)\n      IMPLICIT NONE\n      INTEGER ICSID\n      DOUBLE PRECISION T(9)\n      T(1)=1.0D0; T(2)=0.0D0; T(3)=0.0D0\n      T(4)=0.0D0; T(5)=1.0D0; T(6)=0.0D0\n      T(7)=0.0D0; T(8)=0.0D0; T(9)=1.0D0\n      RETURN\n      END\n      SUBROUTINE MESAGE (ICODE, IMSG, IPARM)\n      IMPLICIT NONE\n      INTEGER ICODE, IMSG, IPARM\n      WRITE(6,900) ICODE, IMSG\n  900 FORMAT(' MESAGE called: code=', I6, ' msg=', I6)\n      RETURN\n      END\n      SUBROUTINE HMAT (IELID)\n      IMPLICIT NONE\n      INTEGER IELID\n      REAL FK\n      COMMON /HMTOUT/ FK\n      FK = 50.0\n      RETURN\n      END"
+  },
+  "_result": {
+    "matrix": [
+      [
+        1523001.06,
+        -1810121.84,
+        -1292276.56,
+        512679.386,
+        163148.674,
+        397319.736,
+        -1523001.06,
+        1810121.84,
+        1292276.56,
+        -512679.386,
+        -163148.674,
+        -397319.736
+      ],
+      [
+        -1810121.84,
+        2815276.48,
+        1810121.84,
+        -914335.839,
+        0.0,
+        -914335.839,
+        1810121.84,
+        -2815276.48,
+        -1810121.84,
+        914335.839,
+        0.0,
+        914335.839
+      ],
+      [
+        -1292276.56,
+        1810121.84,
+        1523001.06,
+        -397319.736,
+        163148.674,
+        -512679.386,
+        1292276.56,
+        -1810121.84,
+        -1523001.06,
+        397319.736,
+        -163148.674,
+        512679.386
+      ],
+      [
+        512679.386,
+        -914335.839,
+        -397319.736,
+        496608.488,
+        87392.4114,
+        347646.217,
+        -531170.073,
+        643466.971,
+        761897.18,
+        -122788.484,
+        157330.6,
+        -146865.688
+      ],
+      [
+        163148.674,
+        0.0,
+        163148.674,
+        87392.4114,
+        322013.378,
+        -87392.4114,
+        81571.6186,
+        0.0,
+        81571.6186,
+        34964.9749,
+        24077.2235,
+        -34964.9749
+      ],
+      [
+        397319.736,
+        -914335.839,
+        -512679.386,
+        347646.217,
+        -87392.4114,
+        496608.488,
+        -761897.18,
+        643466.971,
+        531170.073,
+        -146865.688,
+        -157330.6,
+        -122788.484
+      ],
+      [
+        -1523001.06,
+        1810121.84,
+        1292276.56,
+        -531170.073,
+        81571.6186,
+        -761897.18,
+        1523001.06,
+        -1810121.84,
+        -1292276.56,
+        531170.073,
+        -81571.6186,
+        761897.18
+      ],
+      [
+        1810121.84,
+        -2815276.48,
+        -1810121.84,
+        643466.971,
+        0.0,
+        643466.971,
+        -1810121.84,
+        2815276.48,
+        1810121.84,
+        -643466.971,
+        0.0,
+        -643466.971
+      ],
+      [
+        1292276.56,
+        -1810121.84,
+        -1523001.06,
+        761897.18,
+        81571.6186,
+        531170.073,
+        -1292276.56,
+        1810121.84,
+        1523001.06,
+        -761897.18,
+        -81571.6186,
+        -531170.073
+      ],
+      [
+        -512679.386,
+        914335.839,
+        397319.736,
+        -122788.484,
+        34964.9749,
+        -146865.688,
+        531170.073,
+        -643466.971,
+        -761897.18,
+        583134.466,
+        87392.453,
+        261121.01
+      ],
+      [
+        -163148.674,
+        0.0,
+        -163148.674,
+        157330.6,
+        24077.2235,
+        -157330.6,
+        -81571.6186,
+        0.0,
+        -81571.6186,
+        87392.453,
+        148962.31,
+        -87392.453
+      ],
+      [
+        -397319.736,
+        914335.839,
+        512679.386,
+        -146865.688,
+        -34964.9749,
+        -122788.484,
+        761897.18,
+        -643466.971,
+        -531170.073,
+        261121.01,
+        -87392.453,
+        583134.466
+      ]
+    ]
+  }
+}

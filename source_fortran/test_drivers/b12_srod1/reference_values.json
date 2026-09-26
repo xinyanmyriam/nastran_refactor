@@ -1,0 +1,16 @@
+{
+  "test": "SROD1",
+  "description": "Rod stress recovery: L=2.0, A=0.01, E=2.1e11, displacement=0.001",
+  "parameters": {
+    "L": 2.0,
+    "A": 0.01,
+    "E": 2.1e11,
+    "nu": 0.3,
+    "J": 5e-6,
+    "C_jovc": 0.005,
+    "displacement_axial": 0.001
+  },
+  "axial_stress": 105000000.0,
+  "axial_force": 1050000.0,
+  "torsional_stress": 0.0
+}

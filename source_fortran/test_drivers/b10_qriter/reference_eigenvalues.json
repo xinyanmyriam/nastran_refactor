@@ -1,0 +1,4 @@
+{
+  "description": "Eigenvalues of 5x5 spring-mass tridiagonal matrix (diag=[2,2,2,2,2], off=[-1,-1,-1,-1])",
+  "eigenvalues": [0.2679491924311228, 1.0, 2.0, 3.0, 3.732050807568877]
+}
