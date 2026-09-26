@@ -1,0 +1,28 @@
+{
+  "_schema_version": "jss-holdout-oracle-1",
+  "_benchmark": "B13",
+  "_variant": "h2",
+  "_generated_utc": "2026-09-21T10:31:03.998115+00:00",
+  "_method": "parameterised Fortran driver + unmodified NASTRAN kernel",
+  "_toolchain": {
+    "gfortran": "C:\\Users\\lxy\\w64devkit\\bin\\gfortran.exe",
+    "flags": [
+      "-ffixed-form",
+      "-std=legacy",
+      "-w",
+      "-fallow-argument-mismatch"
+    ]
+  },
+  "_kernel_sha256": {
+    "srod1.f": "fecefe76d349b122b8eaa4638b0d259cd1ad6eb113d68688ba85c6916592a00c"
+  },
+  "_driver_source": {
+    "driver.f": "      PROGRAM HOLDSROD1\n      IMPLICIT NONE\nC     /SDR2X5/ as srod1.f declares it\n      REAL ECPT(17), DUMMY1(83)\n      INTEGER IELID, ISILNO(2)\n      REAL SAT(3), SBT(3), SAR(3), SBR(3)\n      REAL ST, SDELTA, AREA, FJOVRC\n      REAL TSUBC0, SIGMAT, SIGMAC, SIGMAS\n      REAL SIGVEC(77), FORVEC(25)\n      COMMON /SDR2X5/ ECPT, DUMMY1, IELID, ISILNO,\n     1  SAT, SBT, SAR, SBR, ST, SDELTA, AREA, FJOVRC,\n     2  TSUBC0, SIGMAT, SIGMAC, SIGMAS, SIGVEC, FORVEC\n      REAL XN(6), TI(9)\n      REAL XL, EOVERL\n      INTEGER IBASE\n      COMMON /SDR2X6/ XN, TI, XL, EOVERL, IBASE\n      INTEGER IECPT(17)\n      EQUIVALENCE (IECPT(1), ECPT(1))\n      REAL AXS, AXF, TORS\n      INTEGER I\n      DO 10 I = 1, 17\n        ECPT(I) = 0.0\n   10 CONTINUE\n      IECPT(1)=100\n      IECPT(2)=1\n      IECPT(3)=2\n      IECPT(4)=1\n      ECPT(5)= 0.015\n      ECPT(6)= 6e-06\n      ECPT(7)= 0.001\n      ECPT(8)= 0.0\n      IECPT(9)=0\n      ECPT(10)= 0.0\n      ECPT(11)= 0.0\n      ECPT(12)= 0.0\n      IECPT(13)=0\n      ECPT(14)= 1.5\n      ECPT(15)= 0.0\n      ECPT(16)= 0.0\n      ECPT(17)= 0.0\n      CALL SROD1\n      AXS = SAT(1)*0+SAT(2)*0+SAT(3)*0+SBT(1)*0.0012+SBT(2)*0+SBT(3)*0\n      AXF = AXS * AREA\n      TORS = SAR(1)*0+SAR(2)*0+SAR(3)*0+SBR(1)*0+SBR(2)*0+SBR(3)*0\n      TORS = 0.0\n      WRITE(6,'(A1)') 'S'\n      WRITE(6,'(3(ES25.17,1X))') AXS, AXF, TORS\n      STOP\n      END",
+    "stubs.f": "      SUBROUTINE MAT (IELID)\n      IMPLICIT NONE\n      INTEGER IELID\n      INTEGER MATIDC, MATFLG\n      REAL ELTEMP, STRESS, SINTH, COSTH\n      COMMON /MATIN / MATIDC, MATFLG, ELTEMP, STRESS, SINTH, COSTH\n      REAL E, G, NU, RHO, ALPHA, TSUB0, GSUBE, SIGT, SIGC, SIGS\n      COMMON /MATOUT/ E, G, NU, RHO, ALPHA, TSUB0, GSUBE,\n     1  SIGT, SIGC, SIGS\n      E = 2.1e+11\n      NU = 0.3\n      G = 8.076923077e+10\n      RHO = 0.0\n      ALPHA = 0.0\n      TSUB0 = 0.0\n      GSUBE = 0.0\n      SIGT = 0.0\n      SIGC = 0.0\n      SIGS = 0.0\n      RETURN\n      END\n      SUBROUTINE TRANSS (ICSID, TI)\n      INTEGER ICSID\n      REAL TI(9)\n      TI(1)=1.0; TI(2)=0.0; TI(3)=0.0\n      TI(4)=0.0; TI(5)=1.0; TI(6)=0.0\n      TI(7)=0.0; TI(8)=0.0; TI(9)=1.0\n      RETURN\n      END\n      SUBROUTINE GMMATS (A, NROWA, NCOLA, ITRANSA,\n     1  B, NROWB, NCOLB, ITRANSB, C)\n      INTEGER NROWA, NCOLA, ITRANSA, NROWB, NCOLB, ITRANSB\n      REAL A(NROWA,NCOLA), B(NROWB,NCOLB), C(*)\n      INTEGER I, J, K, IDX\n      REAL SUM\n      IDX = 0\n      DO 100 J = 1, NCOLB\n        DO 90 I = 1, NROWA\n          SUM = 0.0\n          DO 80 K = 1, NCOLA\n            IF (ITRANSA .EQ. 0) THEN\n              IF (ITRANSB .EQ. 0) SUM = SUM + A(I,K)*B(K,J)\n              IF (ITRANSB .NE. 0) SUM = SUM + A(I,K)*B(J,K)\n            ELSE\n              IF (ITRANSB .EQ. 0) SUM = SUM + A(K,I)*B(K,J)\n              IF (ITRANSB .NE. 0) SUM = SUM + A(K,I)*B(J,K)\n            END IF\n   80      CONTINUE\n          IDX = IDX + 1\n          C(IDX) = SUM\n   90    CONTINUE\n  100 CONTINUE\n      RETURN\n      END"
+  },
+  "_result": {
+    "axial_stress": 168000016.0,
+    "axial_force": 2520000.25,
+    "torsional_stress": 0.0
+  }
+}

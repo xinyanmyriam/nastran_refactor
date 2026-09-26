@@ -1,0 +1,35 @@
+{
+  "nodes3d": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      1.5,
+      0,
+      0
+    ],
+    [
+      0,
+      1.5,
+      0
+    ]
+  ],
+  "E": 200000000000.0,
+  "nu": 0.3,
+  "t": 0.006,
+  "_benchmark": "B5",
+  "_variant": "h2",
+  "_schema": [
+    "nodes3d",
+    "E",
+    "nu",
+    "t"
+  ],
+  "_contract": "matrix 9x9",
+  "_checks": {
+    "ok": true,
+    "issues": []
+  }
+}

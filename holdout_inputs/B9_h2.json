@@ -1,0 +1,51 @@
+{
+  "gridA": [
+    1.0,
+    0,
+    0
+  ],
+  "gridB": [
+    0,
+    0,
+    1.0
+  ],
+  "ref_vec": [
+    0,
+    1,
+    0
+  ],
+  "R": 2.0,
+  "angle_deg": 60,
+  "E": 200000000000.0,
+  "nu": 0.3,
+  "G": 76923076923.07692,
+  "outer_radius": 0.07,
+  "wall_thickness": 0.004,
+  "A": null,
+  "I1": null,
+  "I2": null,
+  "J": null,
+  "_benchmark": "B9",
+  "_variant": "h2",
+  "_schema": [
+    "gridA",
+    "gridB",
+    "ref_vec",
+    "R",
+    "angle_deg",
+    "E",
+    "nu",
+    "G",
+    "outer_radius",
+    "wall_thickness",
+    "A",
+    "I1",
+    "I2",
+    "J"
+  ],
+  "_contract": "matrix 12x12",
+  "_checks": {
+    "ok": true,
+    "issues": []
+  }
+}

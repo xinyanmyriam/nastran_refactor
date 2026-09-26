@@ -1,0 +1,43 @@
+{
+  "nodeA": [
+    0,
+    0,
+    0
+  ],
+  "nodeB": [
+    3,
+    0,
+    0
+  ],
+  "L": 3.0,
+  "E": 200000000000.0,
+  "G": 76923000000.0,
+  "A": 0.015,
+  "Iy": 1.25e-05,
+  "Iz": 1.25e-05,
+  "J": 3.75e-05,
+  "ref_vec": [
+    0,
+    1,
+    0
+  ],
+  "_benchmark": "B2",
+  "_variant": "h2",
+  "_schema": [
+    "nodeA",
+    "nodeB",
+    "L",
+    "E",
+    "G",
+    "A",
+    "Iy",
+    "Iz",
+    "J",
+    "ref_vec"
+  ],
+  "_contract": "matrix 12x12",
+  "_checks": {
+    "ok": true,
+    "issues": []
+  }
+}

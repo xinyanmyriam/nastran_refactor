@@ -1,0 +1,109 @@
+{
+  "_schema_version": "jss-holdout-oracle-1",
+  "_benchmark": "B4",
+  "_variant": "h2",
+  "_generated_utc": "2026-09-21T10:31:19.395522+00:00",
+  "_method": "parameterised Fortran driver + unmodified NASTRAN kernel",
+  "_toolchain": {
+    "gfortran": "C:\\Users\\lxy\\w64devkit\\bin\\gfortran.exe",
+    "flags": [
+      "-ffixed-form",
+      "-std=legacy",
+      "-w",
+      "-fallow-argument-mismatch"
+    ]
+  },
+  "_kernel_sha256": {
+    "kqdmem.f": "78220c8b1124f181da75c1fc9a532bc8d4f2aa60f937dacd137da18f99c511f9",
+    "ktrmem.f": "40bca954a5c9fbb818f6bc28ff836dc4d8b4bbe39a29733df2bf44ca90df6507",
+    "gmmatd.f": "c88ef91e774d9c50b35612f8a84f7b398c404a8d9ea539bcbae442e70466e6ed"
+  },
+  "_driver_source": {
+    "driver.f": "      PROGRAM HOLDKQDMEM\n      IMPLICIT NONE\n      REAL CONSTS(5)\n      COMMON /CONDAS/ CONSTS\n      LOGICAL HEAT\n      COMMON /SMA1HT/ HEAT\n      REAL SECPT(100)\n      COMMON /SMA1ET/ SECPT\n      INTEGER DUM1(10), IFKGG, DUM2(1), IF4GG, DUM3(23)\n      COMMON /SMA1IO/ DUM1, IFKGG, DUM2, IF4GG, DUM3\n      INTEGER IOPT4, K4GGSW, NPVT, DUMCL(7), LINK(10)\n      INTEGER IDETCK, DODET, NOGO\n      COMMON /SMA1CL/ IOPT4, K4GGSW, NPVT, DUMCL, LINK,\n     1  IDETCK, DODET, NOGO\n      DOUBLE PRECISION DPBLK(600)\n      COMMON /SMA1DP/ DPBLK\n      INTEGER MATID, INFLAG\n      REAL ELTEMP, STRESS, SINTH, COSTH\n      COMMON /MATIN/ MATID, INFLAG, ELTEMP, STRESS, SINTH, COSTH\n      REAL G11, G12, G13, G22, G23, G33, RHO\n      REAL ALPHA1, ALPHA2, ALP12, TSUB0, GSUBE\n      REAL SIGTEN, SIGCOM, SIGSHE\n      COMMON /MATOUT/ G11, G12, G13, G22, G23, G33, RHO,\n     1  ALPHA1, ALPHA2, ALP12, TSUB0, GSUBE,\n     2  SIGTEN, SIGCOM, SIGSHE\n      REAL MATBUF(7)\n      COMMON /HMTOUT/ MATBUF\n      INTEGER SYSBUF, IOUT, NOGOS\n      COMMON /SYSTEM/ SYSBUF, IOUT, NOGOS\n      REAL BSKIP, VOLUME, SURFAC\n      COMMON /BLANK/ BSKIP, VOLUME, SURFAC\n      LOGICAL HYDRO\n      COMMON /HYDROE/ HYDRO\n      DOUBLE PRECISION KSTORE(12,12)\n      INTEGER NPVTG\n      COMMON /KCAP/ KSTORE, NPVTG\n      INTEGER I, J, IPVT\n      DOUBLE PRECISION KSMALL(8,8)\n      DO 5 I = 1, 12\n        DO 4 J = 1, 12\n          KSTORE(I,J) = 0.0D0\n    4   CONTINUE\n    5 CONTINUE\n      DO 6 I = 1, 600\n        DPBLK(I) = 0.0D0\n    6 CONTINUE\n      HEAT = .FALSE.\n      HYDRO = .FALSE.\n      NOGO = 0\n      NOGOS = 0\n      IOPT4 = 0\n      K4GGSW = 0\n      IFKGG = 1\n      IF4GG = 2\n      SYSBUF = 1024\n      IOUT = 6\n      INFLAG = 2\n      STRESS = 0.0\n      SINTH = 0.0\n      COSTH = 1.0\n      ELTEMP = 0.0\n      IDETCK = 0\n      DODET = 0\n      BSKIP = 0.0\n      VOLUME = 0.0\n      SURFAC = 0.0\n      CONSTS(1) = 0.0\n      CONSTS(2) = 0.0\n      CONSTS(3) = 0.0\n      CONSTS(4) = 3.1415926535897932 / 180.0\n      CONSTS(5) = 0.0\n      DO 7 I = 1, 7\n        MATBUF(I) = 0.0\n    7 CONTINUE\n      DO 100 IPVT = 1, 4\n        CALL SETECP\n        NPVT = 100 + IPVT\n        NPVTG = NPVT\n        CALL KQDMEM\n  100 CONTINUE\n      DO 320 I = 1, 4\n        DO 310 J = 1, 4\n          KSMALL(2*I-1,2*J-1) = KSTORE(3*I-2,3*J-2)\n          KSMALL(2*I-1,2*J)   = KSTORE(3*I-2,3*J-1)\n          KSMALL(2*I,  2*J-1) = KSTORE(3*I-1,3*J-2)\n          KSMALL(2*I,  2*J)   = KSTORE(3*I-1,3*J-1)\n  310   CONTINUE\n  320 CONTINUE\n      WRITE(6,'(A1)') 'S'\n      DO 400 I = 1, 8\n        WRITE(6,930) (KSMALL(I,J), J = 1, 8)\n  400 CONTINUE\n  930 FORMAT (8(1X,E16.9))\n      STOP\n      END\n      SUBROUTINE SETECP\n      IMPLICIT NONE\n      REAL SECPT(100)\n      INTEGER IECPT(100)\n      COMMON /SMA1ET/ SECPT\n      EQUIVALENCE (SECPT(1), IECPT(1))\n      INTEGER I\n      DO 10 I = 1, 100\n        SECPT(I) = 0.0\n   10 CONTINUE\n      IECPT(1) = 1001\n      IECPT(2) = 101\n      IECPT(3) = 102\n      IECPT(4) = 103\n      IECPT(5) = 104\n      SECPT(6) = 0.0\n      IECPT(7) = 1\n      SECPT(8) = 0.012\n      SECPT(9) = 0.0\n      IECPT(10) = 0\n      SECPT(11) = 0\n      SECPT(12) = 0\n      SECPT(13) = 0.0\n      IECPT(14) = 0\n      SECPT(15) = 2.5\n      SECPT(16) = 0\n      SECPT(17) = 0.0\n      IECPT(18) = 0\n      SECPT(19) = 2.5\n      SECPT(20) = 1.9\n      SECPT(21) = 0.0\n      IECPT(22) = 0\n      SECPT(23) = 0\n      SECPT(24) = 1.9\n      SECPT(25) = 0.0\n      SECPT(26) = 0.0\n      RETURN\n      END",
+    "stubs.f": "      SUBROUTINE MAT (IELID)\n      IMPLICIT NONE\n      INTEGER IELID\n      INTEGER MATID, INFLAG\n      REAL ELTEMP, STRESS, SINTH, COSTH\n      COMMON /MATIN/ MATID, INFLAG, ELTEMP, STRESS, SINTH, COSTH\n      REAL G11, G12, G13, G22, G23, G33, RHO\n      REAL ALPHA1, ALPHA2, ALP12, TSUB0, GSUBE\n      REAL SIGTEN, SIGCOM, SIGSHE\n      REAL G2X211, G2X212, G2X222\n      COMMON /MATOUT/ G11, G12, G13, G22, G23, G33, RHO,\n     1  ALPHA1, ALPHA2, ALP12, TSUB0, GSUBE,\n     2  SIGTEN, SIGCOM, SIGSHE, G2X211, G2X212, G2X222\n      REAL E, NU, FAC\n      E = 2e+11\n      NU = 0.3\n      FAC = E / (1.0 - NU*NU)\n      G11 = FAC\n      G12 = NU * FAC\n      G13 = 0.0\n      G22 = FAC\n      G23 = 0.0\n      G33 = FAC * (1.0 - NU) / 2.0\n      RHO = 0.0\n      ALPHA1 = 0.0\n      ALPHA2 = 0.0\n      ALP12 = 0.0\n      TSUB0 = 0.0\n      GSUBE = 0.0\n      SIGTEN = 0.0\n      SIGCOM = 0.0\n      SIGSHE = 0.0\n      G2X211 = 0.0\n      G2X212 = 0.0\n      G2X222 = 0.0\n      RETURN\n      END\n      SUBROUTINE SMA1B (KIJ, IGRID, ICODE, IFFILE, FACTOR)\n      IMPLICIT NONE\n      DOUBLE PRECISION KIJ(36), FACTOR\n      INTEGER IGRID, ICODE, IFFILE\n      DOUBLE PRECISION KSTORE(12,12)\n      INTEGER NPVTG\n      COMMON /KCAP/ KSTORE, NPVTG\n      INTEGER I, J, IR, IC, IROW, ICOL\n      IROW = NPVTG - 100\n      ICOL = IGRID - 100\n      IF (IROW .LT. 1 .OR. IROW .GT. 4) RETURN\n      IF (ICOL .LT. 1 .OR. ICOL .GT. 4) RETURN\n      DO 20 I = 1, 3\n        DO 10 J = 1, 3\n          IR = 3*(IROW-1) + I\n          IC = 3*(ICOL-1) + J\n          KSTORE(IR,IC) = KSTORE(IR,IC) + KIJ(6*(I-1) + J)\n   10   CONTINUE\n   20 CONTINUE\n      RETURN\n      END\n      SUBROUTINE TRANSD (ICSID, T)\n      IMPLICIT NONE\n      INTEGER ICSID\n      DOUBLE PRECISION T(9)\n      INTEGER I\n      DO 10 I = 1, 9\n        T(I) = 0.0D0\n   10 CONTINUE\n      T(1) = 1.0D0\n      T(5) = 1.0D0\n      T(9) = 1.0D0\n      RETURN\n      END\n      SUBROUTINE MESAGE (ICODE, IMSG, IPARM)\n      IMPLICIT NONE\n      INTEGER ICODE, IMSG\n      REAL IPARM\n      WRITE (6,900) ICODE, IMSG\n  900 FORMAT (' MESAGE called: code=', I6, ' msg=', I6)\n      RETURN\n      END\n      SUBROUTINE HMAT (NECPT)\n      IMPLICIT NONE\n      INTEGER NECPT(4)\n      REAL MATBUF(7)\n      COMMON /HMTOUT/ MATBUF\n      MATBUF(1) = 50.0\n      RETURN\n      END"
+  },
+  "_result": {
+    "matrix": [
+      [
+        1609485250.0,
+        428571443.0,
+        -1002197790.0,
+        -32967020.8,
+        0.0,
+        -428571443.0,
+        -607287460.0,
+        32967020.8
+      ],
+      [
+        428571443.0,
+        2085876260.0,
+        32967020.8,
+        -350769228.0,
+        -428571443.0,
+        0.0,
+        -32967020.8,
+        -1735107030.0
+      ],
+      [
+        -1002197790.0,
+        32967020.8,
+        1609485250.0,
+        -428571443.0,
+        -607287460.0,
+        -32967020.8,
+        0.0,
+        428571443.0
+      ],
+      [
+        -32967020.8,
+        -350769228.0,
+        -428571443.0,
+        2085876260.0,
+        32967020.8,
+        -1735107030.0,
+        428571443.0,
+        0.0
+      ],
+      [
+        0.0,
+        -428571443.0,
+        -607287460.0,
+        32967020.8,
+        1609485250.0,
+        428571443.0,
+        -1002197790.0,
+        -32967020.8
+      ],
+      [
+        -428571443.0,
+        0.0,
+        -32967020.8,
+        -1735107030.0,
+        428571443.0,
+        2085876260.0,
+        32967020.8,
+        -350769228.0
+      ],
+      [
+        -607287460.0,
+        -32967020.8,
+        0.0,
+        428571443.0,
+        -1002197790.0,
+        32967020.8,
+        1609485250.0,
+        -428571443.0
+      ],
+      [
+        32967020.8,
+        -1735107030.0,
+        428571443.0,
+        0.0,
+        -32967020.8,
+        -350769228.0,
+        -428571443.0,
+        2085876260.0
+      ]
+    ]
+  }
+}

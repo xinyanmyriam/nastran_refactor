@@ -1,0 +1,28 @@
+{
+  "n": 5,
+  "diag": [
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "offdiag": [
+    -1,
+    -1,
+    -1,
+    -1
+  ],
+  "_benchmark": "B11",
+  "_variant": "h0",
+  "_schema": [
+    "n",
+    "diag",
+    "offdiag"
+  ],
+  "_contract": "eigenvalue n=5",
+  "_checks": {
+    "ok": true,
+    "issues": []
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "L": 1.5,
+  "A": 0.015,
+  "E": 210000000000.0,
+  "nu": 0.3,
+  "J": 6e-06,
+  "C": 0.006,
+  "node_a": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "node_b": [
+    0.0012,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "apply_torsion": false,
+  "_benchmark": "B13",
+  "_variant": "h2",
+  "_schema": [
+    "L",
+    "A",
+    "E",
+    "nu",
+    "J",
+    "C",
+    "node_a",
+    "node_b",
+    "apply_torsion"
+  ],
+  "_contract": "scalar (axial_stress, axial_force, torsional_stress)",
+  "_checks": {
+    "ok": true,
+    "issues": []
+  }
+}

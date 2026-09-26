@@ -1,0 +1,33 @@
+{
+  "nodeA": [
+    0,
+    0,
+    0
+  ],
+  "nodeB": [
+    1.25,
+    0,
+    0
+  ],
+  "L": 1.25,
+  "E": 210000000000.0,
+  "A": 0.02,
+  "G": 81400000000.0,
+  "J": 1.2e-05,
+  "_benchmark": "B1",
+  "_variant": "h3",
+  "_schema": [
+    "nodeA",
+    "nodeB",
+    "L",
+    "E",
+    "A",
+    "G",
+    "J"
+  ],
+  "_contract": "matrix 12x12",
+  "_checks": {
+    "ok": true,
+    "issues": []
+  }
+}

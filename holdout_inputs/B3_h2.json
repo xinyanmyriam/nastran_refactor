@@ -1,0 +1,32 @@
+{
+  "nodes": [
+    [
+      0,
+      0
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      1.5,
+      2.25
+    ]
+  ],
+  "E": 210000000000.0,
+  "nu": 0.3,
+  "t": 0.006,
+  "_benchmark": "B3",
+  "_variant": "h2",
+  "_schema": [
+    "nodes",
+    "E",
+    "nu",
+    "t"
+  ],
+  "_contract": "matrix 6x6",
+  "_checks": {
+    "ok": true,
+    "issues": []
+  }
+}

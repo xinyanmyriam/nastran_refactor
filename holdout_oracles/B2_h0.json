@@ -1,0 +1,196 @@
+{
+  "_schema_version": "jss-holdout-oracle-1",
+  "_benchmark": "B2",
+  "_variant": "h0",
+  "_generated_utc": "2026-09-21T10:31:07.098650+00:00",
+  "_method": "parameterised Fortran driver + unmodified NASTRAN kernel",
+  "_toolchain": {
+    "gfortran": "C:\\Users\\lxy\\w64devkit\\bin\\gfortran.exe",
+    "flags": [
+      "-ffixed-form",
+      "-std=legacy",
+      "-w",
+      "-fallow-argument-mismatch"
+    ]
+  },
+  "_kernel_sha256": {
+    "kbar.f": "d2cb6ae979bf247bfbcc1382bc1002d8a6297b0d88dde4b4b30371f0395cc93e",
+    "gmmatd.f": "c88ef91e774d9c50b35612f8a84f7b398c404a8d9ea539bcbae442e70466e6ed"
+  },
+  "_driver_source": {
+    "driver.f": "      PROGRAM HOLDKBAR\n      IMPLICIT NONE\n      INTEGER ISYS\n      COMMON /SYSTEM/ ISYS\n      INTEGER IFCSTM, IFMPT, IFDIT, IDUM1, IFECPT, IGECPT\n      INTEGER IFGPCT, IGGPCT, IFGEI, IGGEI, IFKGG, IGKGG\n      INTEGER IF4GG, IG4GG, IFGPST, IGGPST, INRW, OUTRW\n      INTEGER CLSNRW, CLSRW, NEOR, EOR, MCBKGG(7), MCB4GG(7)\n      COMMON /SMA1IO/ IFCSTM, IFMPT, IFDIT, IDUM1, IFECPT,\n     1  IGECPT, IFGPCT, IGGPCT, IFGEI, IGGEI, IFKGG, IGKGG,\n     2  IF4GG, IG4GG, IFGPST, IGGPST, INRW, OUTRW,\n     3  CLSNRW, CLSRW, NEOR, EOR, MCBKGG, MCB4GG\n      INTEGER ICSTM, NCSTM, IGPCT, NGPCT, IPOINT, NPOINT\n      INTEGER I6X6K, N6X6K, I6X64, N6X64\n      COMMON /SMA1BK/ ICSTM, NCSTM, IGPCT, NGPCT, IPOINT,\n     1  NPOINT, I6X6K, N6X6K, I6X64, N6X64\n      INTEGER IOPT4, K4GGSW, NPVT, LEFT, FROWIC, LROWIC\n      INTEGER NROWSC, TNROWS, JMAX, NLINKS, LINK(10), IDETCK\n      INTEGER DODET, NOGO\n      COMMON /SMA1CL/ IOPT4, K4GGSW, NPVT, LEFT, FROWIC,\n     1  LROWIC, NROWSC, TNROWS, JMAX, NLINKS, LINK, IDETCK,\n     2  DODET, NOGO\n      LOGICAL HEAT\n      COMMON /SMA1HT/ HEAT\n      REAL SECPT(100)\n      COMMON /SMA1ET/ SECPT\n      INTEGER MATIDC, MATFLG\n      REAL ELTEMP, STRESS\n      COMMON /MATIN / MATIDC, MATFLG, ELTEMP, STRESS\n      REAL E, G, NU, RHO, ALPHA, TSUBO, GSUBE\n      REAL SIGT, SIGC, SIGS\n      COMMON /MATOUT/ E, G, NU, RHO, ALPHA, TSUBO, GSUBE,\n     1  SIGT, SIGC, SIGS\n      REAL FK\n      COMMON /HMTOUT/ FK\n      DOUBLE PRECISION KSTORE(12,12)\n      INTEGER NPVTG\n      COMMON /KCAP / KSTORE, NPVTG\n      INTEGER I, J, IPVT\n      KSTORE(1,1) = 0.0D0\n      KSTORE(1,2) = 0.0D0\n      KSTORE(1,3) = 0.0D0\n      KSTORE(1,4) = 0.0D0\n      KSTORE(1,5) = 0.0D0\n      KSTORE(1,6) = 0.0D0\n      KSTORE(1,7) = 0.0D0\n      KSTORE(1,8) = 0.0D0\n      KSTORE(1,9) = 0.0D0\n      KSTORE(1,10) = 0.0D0\n      KSTORE(1,11) = 0.0D0\n      KSTORE(1,12) = 0.0D0\n      KSTORE(2,1) = 0.0D0\n      KSTORE(2,2) = 0.0D0\n      KSTORE(2,3) = 0.0D0\n      KSTORE(2,4) = 0.0D0\n      KSTORE(2,5) = 0.0D0\n      KSTORE(2,6) = 0.0D0\n      KSTORE(2,7) = 0.0D0\n      KSTORE(2,8) = 0.0D0\n      KSTORE(2,9) = 0.0D0\n      KSTORE(2,10) = 0.0D0\n      KSTORE(2,11) = 0.0D0\n      KSTORE(2,12) = 0.0D0\n      KSTORE(3,1) = 0.0D0\n      KSTORE(3,2) = 0.0D0\n      KSTORE(3,3) = 0.0D0\n      KSTORE(3,4) = 0.0D0\n      KSTORE(3,5) = 0.0D0\n      KSTORE(3,6) = 0.0D0\n      KSTORE(3,7) = 0.0D0\n      KSTORE(3,8) = 0.0D0\n      KSTORE(3,9) = 0.0D0\n      KSTORE(3,10) = 0.0D0\n      KSTORE(3,11) = 0.0D0\n      KSTORE(3,12) = 0.0D0\n      KSTORE(4,1) = 0.0D0\n      KSTORE(4,2) = 0.0D0\n      KSTORE(4,3) = 0.0D0\n      KSTORE(4,4) = 0.0D0\n      KSTORE(4,5) = 0.0D0\n      KSTORE(4,6) = 0.0D0\n      KSTORE(4,7) = 0.0D0\n      KSTORE(4,8) = 0.0D0\n      KSTORE(4,9) = 0.0D0\n      KSTORE(4,10) = 0.0D0\n      KSTORE(4,11) = 0.0D0\n      KSTORE(4,12) = 0.0D0\n      KSTORE(5,1) = 0.0D0\n      KSTORE(5,2) = 0.0D0\n      KSTORE(5,3) = 0.0D0\n      KSTORE(5,4) = 0.0D0\n      KSTORE(5,5) = 0.0D0\n      KSTORE(5,6) = 0.0D0\n      KSTORE(5,7) = 0.0D0\n      KSTORE(5,8) = 0.0D0\n      KSTORE(5,9) = 0.0D0\n      KSTORE(5,10) = 0.0D0\n      KSTORE(5,11) = 0.0D0\n      KSTORE(5,12) = 0.0D0\n      KSTORE(6,1) = 0.0D0\n      KSTORE(6,2) = 0.0D0\n      KSTORE(6,3) = 0.0D0\n      KSTORE(6,4) = 0.0D0\n      KSTORE(6,5) = 0.0D0\n      KSTORE(6,6) = 0.0D0\n      KSTORE(6,7) = 0.0D0\n      KSTORE(6,8) = 0.0D0\n      KSTORE(6,9) = 0.0D0\n      KSTORE(6,10) = 0.0D0\n      KSTORE(6,11) = 0.0D0\n      KSTORE(6,12) = 0.0D0\n      KSTORE(7,1) = 0.0D0\n      KSTORE(7,2) = 0.0D0\n      KSTORE(7,3) = 0.0D0\n      KSTORE(7,4) = 0.0D0\n      KSTORE(7,5) = 0.0D0\n      KSTORE(7,6) = 0.0D0\n      KSTORE(7,7) = 0.0D0\n      KSTORE(7,8) = 0.0D0\n      KSTORE(7,9) = 0.0D0\n      KSTORE(7,10) = 0.0D0\n      KSTORE(7,11) = 0.0D0\n      KSTORE(7,12) = 0.0D0\n      KSTORE(8,1) = 0.0D0\n      KSTORE(8,2) = 0.0D0\n      KSTORE(8,3) = 0.0D0\n      KSTORE(8,4) = 0.0D0\n      KSTORE(8,5) = 0.0D0\n      KSTORE(8,6) = 0.0D0\n      KSTORE(8,7) = 0.0D0\n      KSTORE(8,8) = 0.0D0\n      KSTORE(8,9) = 0.0D0\n      KSTORE(8,10) = 0.0D0\n      KSTORE(8,11) = 0.0D0\n      KSTORE(8,12) = 0.0D0\n      KSTORE(9,1) = 0.0D0\n      KSTORE(9,2) = 0.0D0\n      KSTORE(9,3) = 0.0D0\n      KSTORE(9,4) = 0.0D0\n      KSTORE(9,5) = 0.0D0\n      KSTORE(9,6) = 0.0D0\n      KSTORE(9,7) = 0.0D0\n      KSTORE(9,8) = 0.0D0\n      KSTORE(9,9) = 0.0D0\n      KSTORE(9,10) = 0.0D0\n      KSTORE(9,11) = 0.0D0\n      KSTORE(9,12) = 0.0D0\n      KSTORE(10,1) = 0.0D0\n      KSTORE(10,2) = 0.0D0\n      KSTORE(10,3) = 0.0D0\n      KSTORE(10,4) = 0.0D0\n      KSTORE(10,5) = 0.0D0\n      KSTORE(10,6) = 0.0D0\n      KSTORE(10,7) = 0.0D0\n      KSTORE(10,8) = 0.0D0\n      KSTORE(10,9) = 0.0D0\n      KSTORE(10,10) = 0.0D0\n      KSTORE(10,11) = 0.0D0\n      KSTORE(10,12) = 0.0D0\n      KSTORE(11,1) = 0.0D0\n      KSTORE(11,2) = 0.0D0\n      KSTORE(11,3) = 0.0D0\n      KSTORE(11,4) = 0.0D0\n      KSTORE(11,5) = 0.0D0\n      KSTORE(11,6) = 0.0D0\n      KSTORE(11,7) = 0.0D0\n      KSTORE(11,8) = 0.0D0\n      KSTORE(11,9) = 0.0D0\n      KSTORE(11,10) = 0.0D0\n      KSTORE(11,11) = 0.0D0\n      KSTORE(11,12) = 0.0D0\n      KSTORE(12,1) = 0.0D0\n      KSTORE(12,2) = 0.0D0\n      KSTORE(12,3) = 0.0D0\n      KSTORE(12,4) = 0.0D0\n      KSTORE(12,5) = 0.0D0\n      KSTORE(12,6) = 0.0D0\n      KSTORE(12,7) = 0.0D0\n      KSTORE(12,8) = 0.0D0\n      KSTORE(12,9) = 0.0D0\n      KSTORE(12,10) = 0.0D0\n      KSTORE(12,11) = 0.0D0\n      KSTORE(12,12) = 0.0D0\n      HEAT = .FALSE.\n      NOGO = 0\n      IOPT4 = 0\n      K4GGSW = 0\n      IFKGG = 11\n      IF4GG = 13\n      ISYS = 1024\n      MATFLG = 1\n      STRESS = 0.0\n      ELTEMP = 0.0\n      FK = 0.0\n      DODET = 0\n      IDETCK = 0\n      DO 100 IPVT = 1, 2\n        CALL SETECP\n        NPVT = 100 + IPVT\n        NPVTG = NPVT\n        CALL KBAR\n  100 CONTINUE\n      WRITE(6,'(A1)') 'S'\n      WRITE(6,920) (KSTORE(1,J), J = 1, 12)\n      WRITE(6,920) (KSTORE(2,J), J = 1, 12)\n      WRITE(6,920) (KSTORE(3,J), J = 1, 12)\n      WRITE(6,920) (KSTORE(4,J), J = 1, 12)\n      WRITE(6,920) (KSTORE(5,J), J = 1, 12)\n      WRITE(6,920) (KSTORE(6,J), J = 1, 12)\n      WRITE(6,920) (KSTORE(7,J), J = 1, 12)\n      WRITE(6,920) (KSTORE(8,J), J = 1, 12)\n      WRITE(6,920) (KSTORE(9,J), J = 1, 12)\n      WRITE(6,920) (KSTORE(10,J), J = 1, 12)\n      WRITE(6,920) (KSTORE(11,J), J = 1, 12)\n      WRITE(6,920) (KSTORE(12,J), J = 1, 12)\n  920 FORMAT (12(1X,E16.9))\n      STOP\n      END\n      SUBROUTINE SETECP\n      IMPLICIT NONE\n      REAL SECPT(100)\n      INTEGER IECPT(100)\n      COMMON /SMA1ET/ SECPT\n      EQUIVALENCE (SECPT(1), IECPT(1))\n      INTEGER I\n      DO 10 I = 1, 100\n        SECPT(I) = 0.0\n   10 CONTINUE\n      IECPT(1) = 1001\n      IECPT(2) = 101\n      IECPT(3) = 102\n      SECPT(4) = 0\n      SECPT(5) = 1\n      SECPT(6) = 0\n      IECPT(7) = 0\n      IECPT(8) = 0\n      IECPT(9) = 0\n      IECPT(16) = 1\n      SECPT(17) = 0.01\n      SECPT(18) = 8.333e-06\n      SECPT(19) = 8.333e-06\n      SECPT(20) = 1.667e-05\n      SECPT(21) = 0.0\n      SECPT(22) = 0.0\n      SECPT(31) = 0.0\n      SECPT(32) = 0.0\n      SECPT(33) = 0.0\n      IECPT(34) = 0\n      SECPT(35) = 0\n      SECPT(36) = 0\n      SECPT(37) = 0\n      IECPT(38) = 0\n      SECPT(39) = 2\n      SECPT(40) = 0\n      SECPT(41) = 0\n      SECPT(42) = 0.0\n      RETURN\n      END",
+    "stubs.f": "      SUBROUTINE MAT (IELID)\n      IMPLICIT NONE\n      INTEGER IELID\n      INTEGER MATIDC, MATFLG\n      REAL ELTEMP, STRESS\n      COMMON /MATIN / MATIDC, MATFLG, ELTEMP, STRESS\n      REAL E, G, NU, RHO, ALPHA, TSUBO, GSUBE\n      REAL SIGT, SIGC, SIGS\n      COMMON /MATOUT/ E, G, NU, RHO, ALPHA, TSUBO, GSUBE,\n     1  SIGT, SIGC, SIGS\n      E = 2e+11\n      G = 7.6923e+10\n      NU = 0.3\n      RHO = 0.0\n      ALPHA = 0.0\n      TSUBO = 0.0\n      GSUBE = 0.0\n      SIGT = 0.0\n      SIGC = 0.0\n      SIGS = 0.0\n      RETURN\n      END\n      SUBROUTINE SMA1B (KEP, IGRID, ICODE, IFFILE, FACTOR)\n      IMPLICIT NONE\n      DOUBLE PRECISION KEP(36), FACTOR\n      INTEGER IGRID, ICODE, IFFILE\n      DOUBLE PRECISION KSTORE(12,12)\n      INTEGER NPVTG\n      COMMON /KCAP / KSTORE, NPVTG\n      INTEGER I, J, IR, IC, IROW, ICOL\n      IROW = NPVTG - 100\n      ICOL = IGRID - 100\n      IF (IROW .LT. 1 .OR. IROW .GT. 2) RETURN\n      IF (ICOL .LT. 1 .OR. ICOL .GT. 2) RETURN\n      DO 20 I = 1, 6\n        DO 10 J = 1, 6\n          IR = 6*(IROW-1) + I\n          IC = 6*(ICOL-1) + J\n          KSTORE(IR,IC) = KSTORE(IR,IC) + KEP(6*(I-1) + J)\n   10   CONTINUE\n   20 CONTINUE\n      RETURN\n      END\n      SUBROUTINE TRANSD (RCSID, T)\n      IMPLICIT NONE\n      REAL RCSID\n      DOUBLE PRECISION T(9)\n      INTEGER I\n      DO 10 I = 1, 9\n        T(I) = 0.0D0\n   10 CONTINUE\n      T(1)=1.0D0\n      T(5)=1.0D0\n      T(9)=1.0D0\n      RETURN\n      END\n      SUBROUTINE MESAGE (ICODE, IMSG, IPARM)\n      IMPLICIT NONE\n      INTEGER ICODE, IMSG\n      REAL IPARM\n      WRITE(6,900) ICODE, IMSG\n  900 FORMAT(' MESAGE called: code=', I6, ' msg=', I6)\n      RETURN\n      END\n      SUBROUTINE HMAT (IELID)\n      IMPLICIT NONE\n      INTEGER IELID\n      REAL FK\n      COMMON /HMTOUT/ FK\n      FK = 50.0\n      RETURN\n      END"
+  },
+  "_result": {
+    "matrix": [
+      [
+        999999957.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -999999957.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        2499899.84,
+        0.0,
+        0.0,
+        0.0,
+        2499899.84,
+        0.0,
+        -2499899.84,
+        0.0,
+        0.0,
+        0.0,
+        2499899.84
+      ],
+      [
+        0.0,
+        0.0,
+        2499899.84,
+        0.0,
+        -2499899.84,
+        0.0,
+        0.0,
+        0.0,
+        -2499899.84,
+        0.0,
+        -2499899.84,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        641153.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -641153.2,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        -2499899.84,
+        0.0,
+        3333199.79,
+        0.0,
+        0.0,
+        0.0,
+        2499899.84,
+        0.0,
+        1666599.89,
+        0.0
+      ],
+      [
+        0.0,
+        2499899.84,
+        0.0,
+        0.0,
+        0.0,
+        3333199.79,
+        0.0,
+        -2499899.84,
+        0.0,
+        0.0,
+        0.0,
+        1666599.89
+      ],
+      [
+        -999999957.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        999999957.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        -2499899.84,
+        0.0,
+        0.0,
+        0.0,
+        -2499899.84,
+        0.0,
+        2499899.84,
+        0.0,
+        0.0,
+        0.0,
+        -2499899.84
+      ],
+      [
+        0.0,
+        0.0,
+        -2499899.84,
+        0.0,
+        2499899.84,
+        0.0,
+        0.0,
+        0.0,
+        2499899.84,
+        0.0,
+        2499899.84,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        -641153.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        641153.2,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        -2499899.84,
+        0.0,
+        1666599.89,
+        0.0,
+        0.0,
+        0.0,
+        2499899.84,
+        0.0,
+        3333199.79,
+        0.0
+      ],
+      [
+        0.0,
+        2499899.84,
+        0.0,
+        0.0,
+        0.0,
+        1666599.89,
+        0.0,
+        -2499899.84,
+        0.0,
+        0.0,
+        0.0,
+        3333199.79
+      ]
+    ]
+  }
+}

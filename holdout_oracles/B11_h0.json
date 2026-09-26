@@ -1,0 +1,32 @@
+{
+  "_schema_version": "jss-holdout-oracle-1",
+  "_benchmark": "B11",
+  "_variant": "h0",
+  "_generated_utc": "2026-09-21T10:31:04.960427+00:00",
+  "_method": "parameterised Fortran driver + unmodified NASTRAN kernel",
+  "_toolchain": {
+    "gfortran": "C:\\Users\\lxy\\w64devkit\\bin\\gfortran.exe",
+    "flags": [
+      "-ffixed-form",
+      "-std=legacy",
+      "-w",
+      "-fallow-argument-mismatch"
+    ]
+  },
+  "_kernel_sha256": {
+    "qriter.f": "d80b3bcc8c965e36e0e1e53dd473717f2b15a2fc60775bbd39f0f52f357b5f77"
+  },
+  "_driver_source": {
+    "driver.f": "      PROGRAM HOLDQRITER\n      IMPLICIT NONE\n      INTEGER NDIM\n      PARAMETER (NDIM = 5)\n      DOUBLE PRECISION VAL(NDIM), O(NDIM)\n      INTEGER LOC(NDIM), I\n      INTEGER IDUM0(100), IDUM3, IDUM4, IDUM9, IDUM11, IDUM12, IDUM13\n      INTEGER NN, LAMA, NV, NE, NFOUND, NEVER, NMAX\n      REAL LFREQ, HFREQ\n      COMMON /GIVN  / IDUM0, NN, LFREQ, IDUM3, IDUM4, HFREQ, LAMA,\n     1  NV, NE, IDUM9, NFOUND, IDUM11, IDUM12, IDUM13, NEVER, NMAX\n      INTEGER SYSBUF, NOUT\n      COMMON /SYSTEM/ SYSBUF, NOUT\n      INTEGER IOPTN\n      COMMON /REIGKR/ IOPTN\n      DOUBLE PRECISION DLMDAS\n      COMMON /MGIVXX/ DLMDAS\n      CHARACTER UFM*23, UWM*25, UIM*29\n      COMMON /XMSSG / UFM, UWM, UIM\n      IDUM0(1) = 0\n      IDUM0(2) = 0\n      IDUM0(3) = 0\n      IDUM0(4) = 0\n      IDUM0(5) = 0\n      IDUM0(6) = 0\n      IDUM0(7) = 0\n      IDUM0(8) = 0\n      IDUM0(9) = 0\n      IDUM0(10) = 0\n      IDUM0(11) = 0\n      IDUM0(12) = 0\n      IDUM0(13) = 0\n      IDUM0(14) = 0\n      IDUM0(15) = 0\n      IDUM0(16) = 0\n      IDUM0(17) = 0\n      IDUM0(18) = 0\n      IDUM0(19) = 0\n      IDUM0(20) = 0\n      IDUM0(21) = 0\n      IDUM0(22) = 0\n      IDUM0(23) = 0\n      IDUM0(24) = 0\n      IDUM0(25) = 0\n      IDUM0(26) = 0\n      IDUM0(27) = 0\n      IDUM0(28) = 0\n      IDUM0(29) = 0\n      IDUM0(30) = 0\n      IDUM0(31) = 0\n      IDUM0(32) = 0\n      IDUM0(33) = 0\n      IDUM0(34) = 0\n      IDUM0(35) = 0\n      IDUM0(36) = 0\n      IDUM0(37) = 0\n      IDUM0(38) = 0\n      IDUM0(39) = 0\n      IDUM0(40) = 0\n      IDUM0(41) = 0\n      IDUM0(42) = 0\n      IDUM0(43) = 0\n      IDUM0(44) = 0\n      IDUM0(45) = 0\n      IDUM0(46) = 0\n      IDUM0(47) = 0\n      IDUM0(48) = 0\n      IDUM0(49) = 0\n      IDUM0(50) = 0\n      IDUM0(51) = 0\n      IDUM0(52) = 0\n      IDUM0(53) = 0\n      IDUM0(54) = 0\n      IDUM0(55) = 0\n      IDUM0(56) = 0\n      IDUM0(57) = 0\n      IDUM0(58) = 0\n      IDUM0(59) = 0\n      IDUM0(60) = 0\n      IDUM0(61) = 0\n      IDUM0(62) = 0\n      IDUM0(63) = 0\n      IDUM0(64) = 0\n      IDUM0(65) = 0\n      IDUM0(66) = 0\n      IDUM0(67) = 0\n      IDUM0(68) = 0\n      IDUM0(69) = 0\n      IDUM0(70) = 0\n      IDUM0(71) = 0\n      IDUM0(72) = 0\n      IDUM0(73) = 0\n      IDUM0(74) = 0\n      IDUM0(75) = 0\n      IDUM0(76) = 0\n      IDUM0(77) = 0\n      IDUM0(78) = 0\n      IDUM0(79) = 0\n      IDUM0(80) = 0\n      IDUM0(81) = 0\n      IDUM0(82) = 0\n      IDUM0(83) = 0\n      IDUM0(84) = 0\n      IDUM0(85) = 0\n      IDUM0(86) = 0\n      IDUM0(87) = 0\n      IDUM0(88) = 0\n      IDUM0(89) = 0\n      IDUM0(90) = 0\n      IDUM0(91) = 0\n      IDUM0(92) = 0\n      IDUM0(93) = 0\n      IDUM0(94) = 0\n      IDUM0(95) = 0\n      IDUM0(96) = 0\n      IDUM0(97) = 0\n      IDUM0(98) = 0\n      IDUM0(99) = 0\n      IDUM0(100) = 0\n      NN = NDIM\n      LFREQ = 0.0\n      HFREQ = 99.0\n      LAMA = 1\n      NV = 0\n      NE = 0\n      NFOUND = 0\n      NEVER = 0\n      IDUM3 = 0\n      IDUM4 = 0\n      IDUM9 = 0\n      IDUM11 = 0\n      IDUM12 = 0\n      IDUM13 = 0\n      NMAX = 100*NDIM\n      SYSBUF = 100\n      NOUT = 6\n      IOPTN = 0\n      DLMDAS = 0.0D0\n      UFM = 'U'\n      UWM = 'W'\n      UIM = 'I'\n      VAL(1) = 2D0\n      VAL(2) = 2D0\n      VAL(3) = 2D0\n      VAL(4) = 2D0\n      VAL(5) = 2D0\n      O(1) = 1D0\n      O(2) = 1D0\n      O(3) = 1D0\n      O(4) = 1D0\n      O(5) = 0.0D0\n      CALL QRITER(VAL,O,LOC,0)\n      WRITE(6,'(A1)') 'S'\n      WRITE(6,'(5(ES25.17,1X))') (VAL(I),I=1,5)\n      STOP\n      END",
+    "stubs.f": "C     ================================================================\nC     STUBS FOR QRITER TEST DRIVER (B10)\nC     These stub routines replace NASTRAN runtime dependencies\nC     so that QRITER can be tested standalone.\nC     ================================================================\nC\n      SUBROUTINE GOPEN (IFILE, BUF, MODE)\nC     Stub: no-op (QRITER uses this to open output file)\n      INTEGER IFILE, MODE\n      DOUBLE PRECISION BUF(1)\n      RETURN\n      END\nC\n      SUBROUTINE CLOSE (IFILE, MODE)\nC     Stub: no-op\n      INTEGER IFILE, MODE\n      RETURN\n      END\nC\n      SUBROUTINE WRITE (IFILE, DATA, NWDS, EOR)\nC     Stub: no-op (QRITER writes eigenvalues to file)\n      INTEGER IFILE, NWDS, EOR\n      RETURN\n      END\nC\n      SUBROUTINE WRTTRL (MSG)\nC     Stub: no-op (writes trailer record)\n      INTEGER MSG(1)\n      RETURN\n      END\nC\n      SUBROUTINE MESAGE (MSGID, VAL, NITER)\nC     Stub: print warning about convergence failure\n      INTEGER MSGID, NITER\n      DOUBLE PRECISION VAL\n      WRITE(*,*) 'WARNING: QRITER convergence issue at value=',VAL,\n     1           ' after', NITER, ' iterations'\n      RETURN\n      END\nC\n      INTEGER FUNCTION KORSZ (A)\nC     Stub: return a large buffer size\nC     QRITER uses KORSZ to determine available memory for buffer\n      DOUBLE PRECISION A(1)\n      KORSZ = 10000\n      RETURN\n      END\n"
+  },
+  "_result": {
+    "eigenvalues": [
+      0.2679491924311227,
+      1.0000000000000002,
+      2.0000000000000004,
+      3.0000000000000004,
+      3.732050807568877
+    ]
+  }
+}

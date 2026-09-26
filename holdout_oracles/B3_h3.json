@@ -1,0 +1,76 @@
+{
+  "_schema_version": "jss-holdout-oracle-1",
+  "_benchmark": "B3",
+  "_variant": "h3",
+  "_generated_utc": "2026-09-21T10:31:17.482236+00:00",
+  "_method": "parameterised Fortran driver + unmodified NASTRAN kernel",
+  "_toolchain": {
+    "gfortran": "C:\\Users\\lxy\\w64devkit\\bin\\gfortran.exe",
+    "flags": [
+      "-ffixed-form",
+      "-std=legacy",
+      "-w",
+      "-fallow-argument-mismatch"
+    ]
+  },
+  "_kernel_sha256": {
+    "ktrmem.f": "40bca954a5c9fbb818f6bc28ff836dc4d8b4bbe39a29733df2bf44ca90df6507",
+    "gmmatd.f": "c88ef91e774d9c50b35612f8a84f7b398c404a8d9ea539bcbae442e70466e6ed"
+  },
+  "_driver_source": {
+    "driver.f": "      PROGRAM HOLDKTRMEM\n      IMPLICIT NONE\n      INTEGER MECPT(1), NGRID(3), MATID1\n      REAL ANGLE, T, FMU, DUMMY1\n      REAL X1, Y1, Z1, DUMMY2, X2, Y2, Z2, DUMMY3\n      REAL X3, Y3, Z3, DUMB(80)\n      COMMON /SMA1ET/ MECPT, NGRID, ANGLE, MATID1, T, FMU, DUMMY1,\n     1  X1, Y1, Z1, DUMMY2, X2, Y2, Z2, DUMMY3,\n     2  X3, Y3, Z3, DUMB\n      LOGICAL HEAT\n      COMMON /SMA1HT/ HEAT\n      INTEGER MATID, INFLAG\n      REAL ELTEMP, STRESS, SINTH, COSTH\n      COMMON /MATIN/ MATID, INFLAG, ELTEMP, STRESS, SINTH, COSTH\n      DOUBLE PRECISION KSTORE(9,9)\n      INTEGER NPVTG\n      COMMON /KCAP/ KSTORE, NPVTG\n      INTEGER IOPT4, K4GGSW, NPVT, ISKP, NOGOO\n      COMMON /SMA1CL/ IOPT4, K4GGSW, NPVT, ISKP, NOGOO\n      INTEGER DUM1, IFKGG, DUM2, IF4GG, DUM3\n      COMMON /SMA1IO/ DUM1, IFKGG, DUM2, IF4GG, DUM3\n      INTEGER SYSBUF, IOUT, NOGO\n      COMMON /SYSTEM/ SYSBUF, IOUT, NOGO\n      REAL CONSTS(5)\n      COMMON /CONDAS/ CONSTS\n      REAL MATBUF(4)\n      COMMON /HMTOUT/ MATBUF\n      INTEGER I, J, IPVT, NTYPE\n      DOUBLE PRECISION KSMALL(6,6)\n      KSTORE(1,1) = 0.0D0\n      KSTORE(1,2) = 0.0D0\n      KSTORE(1,3) = 0.0D0\n      KSTORE(1,4) = 0.0D0\n      KSTORE(1,5) = 0.0D0\n      KSTORE(1,6) = 0.0D0\n      KSTORE(1,7) = 0.0D0\n      KSTORE(1,8) = 0.0D0\n      KSTORE(1,9) = 0.0D0\n      KSTORE(2,1) = 0.0D0\n      KSTORE(2,2) = 0.0D0\n      KSTORE(2,3) = 0.0D0\n      KSTORE(2,4) = 0.0D0\n      KSTORE(2,5) = 0.0D0\n      KSTORE(2,6) = 0.0D0\n      KSTORE(2,7) = 0.0D0\n      KSTORE(2,8) = 0.0D0\n      KSTORE(2,9) = 0.0D0\n      KSTORE(3,1) = 0.0D0\n      KSTORE(3,2) = 0.0D0\n      KSTORE(3,3) = 0.0D0\n      KSTORE(3,4) = 0.0D0\n      KSTORE(3,5) = 0.0D0\n      KSTORE(3,6) = 0.0D0\n      KSTORE(3,7) = 0.0D0\n      KSTORE(3,8) = 0.0D0\n      KSTORE(3,9) = 0.0D0\n      KSTORE(4,1) = 0.0D0\n      KSTORE(4,2) = 0.0D0\n      KSTORE(4,3) = 0.0D0\n      KSTORE(4,4) = 0.0D0\n      KSTORE(4,5) = 0.0D0\n      KSTORE(4,6) = 0.0D0\n      KSTORE(4,7) = 0.0D0\n      KSTORE(4,8) = 0.0D0\n      KSTORE(4,9) = 0.0D0\n      KSTORE(5,1) = 0.0D0\n      KSTORE(5,2) = 0.0D0\n      KSTORE(5,3) = 0.0D0\n      KSTORE(5,4) = 0.0D0\n      KSTORE(5,5) = 0.0D0\n      KSTORE(5,6) = 0.0D0\n      KSTORE(5,7) = 0.0D0\n      KSTORE(5,8) = 0.0D0\n      KSTORE(5,9) = 0.0D0\n      KSTORE(6,1) = 0.0D0\n      KSTORE(6,2) = 0.0D0\n      KSTORE(6,3) = 0.0D0\n      KSTORE(6,4) = 0.0D0\n      KSTORE(6,5) = 0.0D0\n      KSTORE(6,6) = 0.0D0\n      KSTORE(6,7) = 0.0D0\n      KSTORE(6,8) = 0.0D0\n      KSTORE(6,9) = 0.0D0\n      KSTORE(7,1) = 0.0D0\n      KSTORE(7,2) = 0.0D0\n      KSTORE(7,3) = 0.0D0\n      KSTORE(7,4) = 0.0D0\n      KSTORE(7,5) = 0.0D0\n      KSTORE(7,6) = 0.0D0\n      KSTORE(7,7) = 0.0D0\n      KSTORE(7,8) = 0.0D0\n      KSTORE(7,9) = 0.0D0\n      KSTORE(8,1) = 0.0D0\n      KSTORE(8,2) = 0.0D0\n      KSTORE(8,3) = 0.0D0\n      KSTORE(8,4) = 0.0D0\n      KSTORE(8,5) = 0.0D0\n      KSTORE(8,6) = 0.0D0\n      KSTORE(8,7) = 0.0D0\n      KSTORE(8,8) = 0.0D0\n      KSTORE(8,9) = 0.0D0\n      KSTORE(9,1) = 0.0D0\n      KSTORE(9,2) = 0.0D0\n      KSTORE(9,3) = 0.0D0\n      KSTORE(9,4) = 0.0D0\n      KSTORE(9,5) = 0.0D0\n      KSTORE(9,6) = 0.0D0\n      KSTORE(9,7) = 0.0D0\n      KSTORE(9,8) = 0.0D0\n      KSTORE(9,9) = 0.0D0\n      HEAT = .FALSE.\n      NOGO = 0\n      NOGOO = 0\n      IOPT4 = 0\n      K4GGSW = 0\n      ISKP = 0\n      IFKGG = 1\n      IF4GG = 2\n      SYSBUF = 1024\n      IOUT = 6\n      INFLAG = 2\n      STRESS = 0.0\n      SINTH = 0.0\n      COSTH = 1.0\n      ELTEMP = 0.0\n      CONSTS(1)=0.0\n      CONSTS(2)=0.0\n      CONSTS(3)=0.0\n      CONSTS(4)= 3.1415926535897932 / 180.0\n      CONSTS(5)=0.0\n      DO 6 I = 1, 4\n        MATBUF(I) = 0.0\n    6 CONTINUE\n      MECPT(1)=1001\n      NGRID(1)=101\n      NGRID(2)=102\n      NGRID(3)=103\n      ANGLE = 0.0\n      MATID1 = 1\n      T = 0.006\n      FMU = 0.0\n      X1 = 0\n      Y1 = 0\n      Z1 = 0.0\n      X2 = 2.4\n      Y2 = 0.3\n      Z2 = 0.0\n      X3 = 1.1\n      Y3 = 1.9\n      Z3 = 0.0\n      NTYPE = 0\n      DO 100 IPVT = 1, 3\n        NPVT = 100 + IPVT\n        NPVTG = NPVT\n        CALL KTRMEM(NTYPE)\n  100 CONTINUE\n      KSMALL(2*1-1,2*1-1)= KSTORE(3*1-2,3*1-2)\n      KSMALL(2*1-1,2*1  )= KSTORE(3*1-2,3*1-1)\n      KSMALL(2*1  ,2*1-1)= KSTORE(3*1-1,3*1-2)\n      KSMALL(2*1  ,2*1  )= KSTORE(3*1-1,3*1-1)\n      KSMALL(2*1-1,2*2-1)= KSTORE(3*1-2,3*2-2)\n      KSMALL(2*1-1,2*2  )= KSTORE(3*1-2,3*2-1)\n      KSMALL(2*1  ,2*2-1)= KSTORE(3*1-1,3*2-2)\n      KSMALL(2*1  ,2*2  )= KSTORE(3*1-1,3*2-1)\n      KSMALL(2*1-1,2*3-1)= KSTORE(3*1-2,3*3-2)\n      KSMALL(2*1-1,2*3  )= KSTORE(3*1-2,3*3-1)\n      KSMALL(2*1  ,2*3-1)= KSTORE(3*1-1,3*3-2)\n      KSMALL(2*1  ,2*3  )= KSTORE(3*1-1,3*3-1)\n      KSMALL(2*2-1,2*1-1)= KSTORE(3*2-2,3*1-2)\n      KSMALL(2*2-1,2*1  )= KSTORE(3*2-2,3*1-1)\n      KSMALL(2*2  ,2*1-1)= KSTORE(3*2-1,3*1-2)\n      KSMALL(2*2  ,2*1  )= KSTORE(3*2-1,3*1-1)\n      KSMALL(2*2-1,2*2-1)= KSTORE(3*2-2,3*2-2)\n      KSMALL(2*2-1,2*2  )= KSTORE(3*2-2,3*2-1)\n      KSMALL(2*2  ,2*2-1)= KSTORE(3*2-1,3*2-2)\n      KSMALL(2*2  ,2*2  )= KSTORE(3*2-1,3*2-1)\n      KSMALL(2*2-1,2*3-1)= KSTORE(3*2-2,3*3-2)\n      KSMALL(2*2-1,2*3  )= KSTORE(3*2-2,3*3-1)\n      KSMALL(2*2  ,2*3-1)= KSTORE(3*2-1,3*3-2)\n      KSMALL(2*2  ,2*3  )= KSTORE(3*2-1,3*3-1)\n      KSMALL(2*3-1,2*1-1)= KSTORE(3*3-2,3*1-2)\n      KSMALL(2*3-1,2*1  )= KSTORE(3*3-2,3*1-1)\n      KSMALL(2*3  ,2*1-1)= KSTORE(3*3-1,3*1-2)\n      KSMALL(2*3  ,2*1  )= KSTORE(3*3-1,3*1-1)\n      KSMALL(2*3-1,2*2-1)= KSTORE(3*3-2,3*2-2)\n      KSMALL(2*3-1,2*2  )= KSTORE(3*3-2,3*2-1)\n      KSMALL(2*3  ,2*2-1)= KSTORE(3*3-1,3*2-2)\n      KSMALL(2*3  ,2*2  )= KSTORE(3*3-1,3*2-1)\n      KSMALL(2*3-1,2*3-1)= KSTORE(3*3-2,3*3-2)\n      KSMALL(2*3-1,2*3  )= KSTORE(3*3-2,3*3-1)\n      KSMALL(2*3  ,2*3-1)= KSTORE(3*3-1,3*3-2)\n      KSMALL(2*3  ,2*3  )= KSTORE(3*3-1,3*3-1)\n      WRITE(6,'(A1)') 'S'\n      WRITE(6,'(6(1X,E16.9))') (KSMALL(1,J),J=1,6)\n      WRITE(6,'(6(1X,E16.9))') (KSMALL(2,J),J=1,6)\n      WRITE(6,'(6(1X,E16.9))') (KSMALL(3,J),J=1,6)\n      WRITE(6,'(6(1X,E16.9))') (KSMALL(4,J),J=1,6)\n      WRITE(6,'(6(1X,E16.9))') (KSMALL(5,J),J=1,6)\n      WRITE(6,'(6(1X,E16.9))') (KSMALL(6,J),J=1,6)\n      STOP\n      END",
+    "stubs.f": "      SUBROUTINE MAT (IELID)\n      IMPLICIT NONE\n      INTEGER IELID\n      INTEGER MATID, INFLAG\n      REAL ELTEMP, STRESS, SINTH, COSTH\n      COMMON /MATIN/ MATID, INFLAG, ELTEMP, STRESS, SINTH, COSTH\n      REAL G11, G12, G13, G22, G23, G33, RHO\n      REAL ALPHA1, ALPHA2, ALP12, TSUB0, GSUBE\n      REAL SIGTEN, SIGCOM, SIGSHE\n      REAL G2X211, G2X212, G2X222\n      COMMON /MATOUT/ G11, G12, G13, G22, G23, G33, RHO,\n     1  ALPHA1, ALPHA2, ALP12, TSUB0, GSUBE,\n     2  SIGTEN, SIGCOM, SIGSHE, G2X211, G2X212, G2X222\n      REAL E, NU, FAC\n      E = 2e+11\n      NU = 0.25\n      FAC = E / (1.0 - NU*NU)\n      G11 = FAC\n      G12 = NU * FAC\n      G13 = 0.0\n      G22 = FAC\n      G23 = 0.0\n      G33 = FAC * (1.0 - NU) / 2.0\n      RHO = 0.0\n      ALPHA1 = 0.0\n      ALPHA2 = 0.0\n      ALP12 = 0.0\n      TSUB0 = 0.0\n      GSUBE = 0.0\n      SIGTEN = 0.0\n      SIGCOM = 0.0\n      SIGSHE = 0.0\n      G2X211 = 0.0\n      G2X212 = 0.0\n      G2X222 = 0.0\n      RETURN\n      END\n      SUBROUTINE SMA1B (KIJ, IGRID, ICODE, IFFILE, FACTOR)\n      IMPLICIT NONE\n      DOUBLE PRECISION KIJ(36), FACTOR\n      INTEGER IGRID, ICODE, IFFILE\n      DOUBLE PRECISION KSTORE(9,9)\n      INTEGER NPVTG\n      COMMON /KCAP/ KSTORE, NPVTG\n      INTEGER I, J, IR, IC, IROW, ICOL\n      IROW = NPVTG - 100\n      ICOL = IGRID - 100\n      IF (IROW .LT. 1 .OR. IROW .GT. 3) RETURN\n      IF (ICOL .LT. 1 .OR. ICOL .GT. 3) RETURN\n      DO 20 I = 1, 3\n        DO 10 J = 1, 3\n          IR = 3*(IROW-1) + I\n          IC = 3*(ICOL-1) + J\n          KSTORE(IR,IC) = KSTORE(IR,IC) + KIJ(6*(I-1) + J)\n   10   CONTINUE\n   20 CONTINUE\n      RETURN\n      END\n      SUBROUTINE TRANSD (ICSID, T)\n      IMPLICIT NONE\n      INTEGER ICSID\n      DOUBLE PRECISION T(9)\n      INTEGER I\n      DO 10 I = 1, 9\n        T(I) = 0.0D0\n   10 CONTINUE\n      T(1)=1.0D0\n      T(5)=1.0D0\n      T(9)=1.0D0\n      RETURN\n      END\n      SUBROUTINE MESAGE (ICODE, IMSG, IPARM)\n      IMPLICIT NONE\n      INTEGER ICODE, IMSG\n      REAL IPARM\n      WRITE(6,900) ICODE, IMSG\n  900 FORMAT(' MESAGE called: code=', I6, ' msg=', I6)\n      RETURN\n      END\n      SUBROUTINE HMAT (NECPT)\n      IMPLICIT NONE\n      INTEGER NECPT(4)\n      REAL MATBUF(7)\n      COMMON /HMTOUT/ MATBUF\n      MATBUF(1)=50.0\n      RETURN\n      END"
+  },
+  "_result": {
+    "matrix": [
+      [
+        483215104.0,
+        196690308.0,
+        -378817927.0,
+        -73569744.9,
+        -104397177.0,
+        -123120563.0
+      ],
+      [
+        196690308.0,
+        400945637.0,
+        6430259.91,
+        43877085.1,
+        -203120568.0,
+        -444822722.0
+      ],
+      [
+        -378817927.0,
+        6430259.91,
+        614846303.0,
+        -197635931.0,
+        -236028376.0,
+        191205671.0
+      ],
+      [
+        -73569744.9,
+        43877085.1,
+        -197635931.0,
+        387895971.0,
+        271205676.0,
+        -431773056.0
+      ],
+      [
+        -104397177.0,
+        -203120568.0,
+        -236028376.0,
+        271205676.0,
+        340425553.0,
+        -68085107.9
+      ],
+      [
+        -123120563.0,
+        -444822722.0,
+        191205671.0,
+        -431773056.0,
+        -68085107.9,
+        876595778.0
+      ]
+    ]
+  }
+}

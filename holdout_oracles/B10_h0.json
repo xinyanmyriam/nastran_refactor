@@ -1,0 +1,32 @@
+{
+  "_schema_version": "jss-holdout-oracle-1",
+  "_benchmark": "B10",
+  "_variant": "h0",
+  "_generated_utc": "2026-09-21T10:30:54.244668+00:00",
+  "_method": "parameterised Fortran driver + unmodified NASTRAN kernel",
+  "_toolchain": {
+    "gfortran": "C:\\Users\\lxy\\w64devkit\\bin\\gfortran.exe",
+    "flags": [
+      "-ffixed-form",
+      "-std=legacy",
+      "-w",
+      "-fallow-argument-mismatch"
+    ]
+  },
+  "_kernel_sha256": {
+    "inverd.f": "91b50c6a12f46831fbfbf8d50189dbc70d276602261c4f99943a7cafb262c1b5"
+  },
+  "_driver_source": {
+    "driver.f": "      PROGRAM HOLDSOLVE\n      IMPLICIT DOUBLE PRECISION (A-H,O-Z)\n      DIMENSION A(4,4), B(4,1), INDEX(4,3)\n      INTEGER ISING\n      DOUBLE PRECISION DETERM\n      COMMON /MACHIN/ MACH\n      MACH=1\n      A(1,1)=200D0\n      A(1,2)=-100D0\n      A(1,3)=0D0\n      A(1,4)=0D0\n      A(2,1)=-100D0\n      A(2,2)=200D0\n      A(2,3)=-100D0\n      A(2,4)=0D0\n      A(3,1)=0D0\n      A(3,2)=-100D0\n      A(3,3)=200D0\n      A(3,4)=-100D0\n      A(4,1)=0D0\n      A(4,2)=0D0\n      A(4,3)=-100D0\n      A(4,4)=100D0\n      B(1,1)=0D0\n      B(2,1)=0D0\n      B(3,1)=0D0\n      B(4,1)=100D0\n      M=1\n      ISING=0\n      CALL INVERD(4,A,4,B,1,DETERM,ISING,INDEX)\n      IF (ISING .NE. 1) WRITE(6,*) 'ISING',ISING\n      WRITE(6,'(A1)') 'S'\n      WRITE(6,'(4(ES25.17,1X))') (B(I,1),I=1,4)\n      WRITE(6,*) 'DET', DETERM\n      STOP\n      END\n",
+    "stubs.f": ""
+  },
+  "_result": {
+    "solution": [
+      1.0,
+      2.0,
+      3.0,
+      4.0
+    ],
+    "determinant": 100000000.0
+  }
+}
