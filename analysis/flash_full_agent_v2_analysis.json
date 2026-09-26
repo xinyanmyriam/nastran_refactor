@@ -1,0 +1,241 @@
+{
+  "inputs": {
+    "direct": "results\\paper1_gap_to_n10.json",
+    "agent": "results\\jss_full_agent_main\\jss_full_agent_main_n10_frozen_v2\\final_summary.json",
+    "agent_run_tag": "jss_full_agent_main_n10_frozen_v2"
+  },
+  "completeness": {
+    "agent_complete": true,
+    "agent_missing": [],
+    "agent_valid": 130,
+    "agent_attempts": 130,
+    "agent_invalid": 0
+  },
+  "overall": {
+    "direct_pass": 48,
+    "agent_pass": 50,
+    "n_per_strategy": 130,
+    "direct_rate": 0.36923076923076925,
+    "agent_rate": 0.38461538461538464,
+    "direct_cp95": [
+      0.2862995422334554,
+      0.45826375421140814
+    ],
+    "agent_cp95": [
+      0.3006653359745162,
+      0.4739470001552526
+    ],
+    "agent_minus_direct": 0.015384615384615385,
+    "difference_newcombe95": [
+      -0.101217182731364,
+      0.13140155446432544
+    ],
+    "pooled_fisher_odds_ratio": 1.0677083333333333,
+    "pooled_fisher_p_two_sided": 0.8982122060402085,
+    "cmh": {
+      "common_odds_ratio": 1.1694915254237288,
+      "chi_square": 0.18999999999999997,
+      "p_value": 0.6629166175161068,
+      "score": 1.0,
+      "variance": 5.2631578947368425
+    },
+    "benchmark_directions": {
+      "agent_higher": 4,
+      "direct_higher": 2,
+      "ties": 7,
+      "sign_test_p_two_sided_excluding_ties": 0.6875
+    },
+    "agent_compile": 120,
+    "agent_run": 116,
+    "agent_run_but_not_equivalent": 66,
+    "agent_run_to_equivalence_gap_pp": 50.76923076923077
+  },
+  "categories": {
+    "textbook_equivalent": {
+      "benchmarks": [
+        "B1",
+        "B2",
+        "B3",
+        "B10",
+        "B11",
+        "B13"
+      ],
+      "direct_pass": 46,
+      "agent_pass": 47,
+      "n_per_strategy": 60,
+      "difference_count": 1,
+      "fisher_p_two_sided": 1.0
+    },
+    "moderate_departure": {
+      "benchmarks": [
+        "B4",
+        "B7",
+        "B8",
+        "B12"
+      ],
+      "direct_pass": 2,
+      "agent_pass": 3,
+      "n_per_strategy": 40,
+      "difference_count": 1,
+      "fisher_p_two_sided": 1.0
+    },
+    "severe_departure": {
+      "benchmarks": [
+        "B5",
+        "B6",
+        "B9"
+      ],
+      "direct_pass": 0,
+      "agent_pass": 0,
+      "n_per_strategy": 30,
+      "difference_count": 0,
+      "fisher_p_two_sided": 1.0
+    }
+  },
+  "per_benchmark": [
+    {
+      "benchmark": "B1",
+      "direct_pass": 10,
+      "agent_pass": 2,
+      "difference_count": -8,
+      "difference_pp": -80.0,
+      "agent_compile": 10,
+      "agent_run": 10,
+      "fisher_p_two_sided": 0.0007144558228149558,
+      "fisher_p_holm_13": 0.009287925696594425
+    },
+    {
+      "benchmark": "B2",
+      "direct_pass": 10,
+      "agent_pass": 9,
+      "difference_count": -1,
+      "difference_pp": -10.0,
+      "agent_compile": 9,
+      "agent_run": 9,
+      "fisher_p_two_sided": 1.0,
+      "fisher_p_holm_13": 1.0
+    },
+    {
+      "benchmark": "B3",
+      "direct_pass": 5,
+      "agent_pass": 8,
+      "difference_count": 3,
+      "difference_pp": 30.0,
+      "agent_compile": 9,
+      "agent_run": 8,
+      "fisher_p_two_sided": 0.34984520123839014,
+      "fisher_p_holm_13": 1.0
+    },
+    {
+      "benchmark": "B4",
+      "direct_pass": 2,
+      "agent_pass": 3,
+      "difference_count": 1,
+      "difference_pp": 10.0,
+      "agent_compile": 9,
+      "agent_run": 9,
+      "fisher_p_two_sided": 1.0,
+      "fisher_p_holm_13": 1.0
+    },
+    {
+      "benchmark": "B5",
+      "direct_pass": 0,
+      "agent_pass": 0,
+      "difference_count": 0,
+      "difference_pp": 0.0,
+      "agent_compile": 7,
+      "agent_run": 5,
+      "fisher_p_two_sided": 1.0,
+      "fisher_p_holm_13": 1.0
+    },
+    {
+      "benchmark": "B6",
+      "direct_pass": 0,
+      "agent_pass": 0,
+      "difference_count": 0,
+      "difference_pp": 0.0,
+      "agent_compile": 8,
+      "agent_run": 7,
+      "fisher_p_two_sided": 1.0,
+      "fisher_p_holm_13": 1.0
+    },
+    {
+      "benchmark": "B7",
+      "direct_pass": 0,
+      "agent_pass": 0,
+      "difference_count": 0,
+      "difference_pp": 0.0,
+      "agent_compile": 10,
+      "agent_run": 10,
+      "fisher_p_two_sided": 1.0,
+      "fisher_p_holm_13": 1.0
+    },
+    {
+      "benchmark": "B8",
+      "direct_pass": 0,
+      "agent_pass": 0,
+      "difference_count": 0,
+      "difference_pp": 0.0,
+      "agent_compile": 9,
+      "agent_run": 9,
+      "fisher_p_two_sided": 1.0,
+      "fisher_p_holm_13": 1.0
+    },
+    {
+      "benchmark": "B9",
+      "direct_pass": 0,
+      "agent_pass": 0,
+      "difference_count": 0,
+      "difference_pp": 0.0,
+      "agent_compile": 9,
+      "agent_run": 9,
+      "fisher_p_two_sided": 1.0,
+      "fisher_p_holm_13": 1.0
+    },
+    {
+      "benchmark": "B10",
+      "direct_pass": 10,
+      "agent_pass": 10,
+      "difference_count": 0,
+      "difference_pp": 0.0,
+      "agent_compile": 10,
+      "agent_run": 10,
+      "fisher_p_two_sided": 1.0,
+      "fisher_p_holm_13": 1.0
+    },
+    {
+      "benchmark": "B11",
+      "direct_pass": 2,
+      "agent_pass": 8,
+      "difference_count": 6,
+      "difference_pp": 60.0,
+      "agent_compile": 10,
+      "agent_run": 10,
+      "fisher_p_two_sided": 0.023014137565221155,
+      "fisher_p_holm_13": 0.2761696507826539
+    },
+    {
+      "benchmark": "B12",
+      "direct_pass": 0,
+      "agent_pass": 0,
+      "difference_count": 0,
+      "difference_pp": 0.0,
+      "agent_compile": 10,
+      "agent_run": 10,
+      "fisher_p_two_sided": 1.0,
+      "fisher_p_holm_13": 1.0
+    },
+    {
+      "benchmark": "B13",
+      "direct_pass": 9,
+      "agent_pass": 10,
+      "difference_count": 1,
+      "difference_pp": 10.0,
+      "agent_compile": 10,
+      "agent_run": 10,
+      "fisher_p_two_sided": 1.0,
+      "fisher_p_holm_13": 1.0
+    }
+  ],
+  "interpretation_guard": "Fixed equal allocation across heterogeneous benchmarks; pooled statistics are descriptive and not a population-average strategy effect."
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": "jss-holdout-p3b-p4-provenance-1",
+  "generated_utc": "2026-09-21T14:40:00+00:00",
+  "phase": "P3b offline revalidation + P4 retention aggregation",
+  "zero_api_calls": true,
+  "environment": {
+    "compiler": "MSVC cl.exe",
+    "eigen": "F:\\eigen\\eigen-3.4.0",
+    "cwd": "E:\\ma_sim_paper\\nastran_refactor"
+  },
+  "inputs_frozen_by": "jss_v4_holdout_baseline.json (P0.5, 173 canonical-pass candidates)",
+  "file_sha256": {
+    "paper_jss/run_holdout_p3b.py": "76aec1081f81053f7a90c367b0a388b495ad7d6cf4232b4bdbadd9268d1772ee",
+    "paper_jss/aggregate_holdout_p4.py": "39bd8d039bc113c5ab639b4ca9579b35af8537a40126a122b9068d310bcde36c",
+    "paper_jss/holdout_adapter_v2.py": "d3fdeb9b94d4713875dae1b40230f127cad89dd5d06eb5764a118887d3a81f3a",
+    "paper_jss/jss_holdout_adapter_scan_v2.json": "44a131cb35d45601314145d8e04e554e1dda4786dfd066f3a249a7d4e2936830",
+    "paper_jss/jss_v4_holdout_baseline.json": "ef8d30aae58af2ca9658fd8d644fe472920a419a043ad01832a3db407b37a397",
+    "paper_jss/holdout_results.json": "61264e8ddc3a8dd14e3888bf27dce2fc2afa8197bb0eba9bf3f6933e93c1bcda",
+    "paper_jss/aggregate_holdout_p4.json": "e8a8a05ce81c81c1ebc3cedc1e490db3dc1e07668267a446910a84dddbfbf516",
+    "benchmarks_config.json": "fd2e632600011fca7cd94be276d80cf536d26bc50c9e0c7755ce54d4abe87da1"
+  },
+  "execution_summary_p3b": {
+    "candidates_scanned": 173,
+    "retention_tested": 63,
+    "not_parameterizable": 110,
+    "adapter_unverified": 0,
+    "observations": 189,
+    "per_benchmark": {
+      "B1": {"pass": 27, "geometry_unlocatable": 3},
+      "B2": {"adapter_limited": 45},
+      "B3": {"pass": 38, "fail": 6, "geometry_unlocatable": 10},
+      "B4": {"pass": 6, "geometry_unlocatable": 12},
+      "B7": {"pass": 3, "geometry_unlocatable": 6},
+      "B11": {"adapter_limited": 3},
+      "B13": {"pass": 10, "adapter_limited": 20}
+    }
+  },
+  "aggregation_p4": {
+    "kept_definition": "retention_tested AND passes h1 AND h2 AND h3 (full retention)",
+    "macro_conservative": 0.0888,
+    "macro_conservative_bootstrap95ci": [0.0, 0.2093],
+    "macro_conditional": 0.1841,
+    "macro_upper_bound": 0.5633,
+    "micro_conservative": 0.0925,
+    "micro_conditional": 0.254,
+    "micro_upper_bound": 0.7283,
+    "adapter_coverage": 0.3642
+  },
+  "honest_boundaries": [
+    "B2/B11/B13-h2h3 structural/split-section/torsion inputs are not value-adaptable -> adapter_limited (no compile on those inputs)",
+    "B4/B7/partial B3 multiagent candidates hardcode coords Eigein comma-init, not reliably rebindable -> geometry_unlocatable",
+    "B3 6 'fail' are genuine numerical mismatches (reldiff~0.078; missing coupled element K(4,5)) on degenerate triangle, not rebinding bugs",
+    "B10 (38 candidates) retention_tested=0; all counted not-kept in conservative"
+  ]
+}

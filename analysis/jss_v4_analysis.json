@@ -1,0 +1,3740 @@
+{
+  "schema": "jss_v4_analysis",
+  "inputs": {
+    "flash_direct_staged": "results\\paper1_gap_to_n10_all_models.json",
+    "flash_full_agent": "results\\jss_full_agent_main\\jss_full_agent_main_n10_frozen_v2\\final_summary.json",
+    "qwen_direct": "results\\jss_qwen37plus_main\\jss_qwen37plus_direct_n10_frozen_v1\\final_summary.json",
+    "qwen_selection_rule": "only final_summary.valid_results experiment_id; no runs-directory selection"
+  },
+  "selection_audit": {
+    "expected_per_cell": 10,
+    "counts": {
+      "direct": {
+        "B1": 10,
+        "B2": 10,
+        "B3": 10,
+        "B4": 10,
+        "B5": 10,
+        "B6": 10,
+        "B7": 10,
+        "B8": 10,
+        "B9": 10,
+        "B10": 10,
+        "B11": 10,
+        "B12": 10,
+        "B13": 10
+      },
+      "staged": {
+        "B1": 10,
+        "B2": 10,
+        "B3": 10,
+        "B4": 10,
+        "B5": 10,
+        "B6": 10,
+        "B7": 10,
+        "B8": 10,
+        "B9": 10,
+        "B10": 10,
+        "B11": 10,
+        "B12": 10,
+        "B13": 10
+      },
+      "agent": {
+        "B1": 10,
+        "B2": 10,
+        "B3": 10,
+        "B4": 10,
+        "B5": 10,
+        "B6": 10,
+        "B7": 10,
+        "B8": 10,
+        "B9": 10,
+        "B10": 10,
+        "B11": 10,
+        "B12": 10,
+        "B13": 10
+      },
+      "qwen_direct": {
+        "B1": 10,
+        "B2": 10,
+        "B3": 10,
+        "B4": 10,
+        "B5": 10,
+        "B6": 10,
+        "B7": 10,
+        "B8": 10,
+        "B9": 10,
+        "B10": 10,
+        "B11": 10,
+        "B12": 10,
+        "B13": 10
+      }
+    },
+    "all_cells_exact": true
+  },
+  "flash_three_arm": {
+    "arms": {
+      "direct": {
+        "pass": 48,
+        "n": 130,
+        "rate": 0.36923076923076925,
+        "cp95": [
+          0.2862995422334554,
+          0.45826375421140814
+        ],
+        "per_benchmark": {
+          "B1": 10,
+          "B2": 10,
+          "B3": 5,
+          "B4": 2,
+          "B5": 0,
+          "B6": 0,
+          "B7": 0,
+          "B8": 0,
+          "B9": 0,
+          "B10": 10,
+          "B11": 2,
+          "B12": 0,
+          "B13": 9
+        }
+      },
+      "staged": {
+        "pass": 51,
+        "n": 130,
+        "rate": 0.3923076923076923,
+        "cp95": [
+          0.3078810045098774,
+          0.48175620409738296
+        ],
+        "per_benchmark": {
+          "B1": 10,
+          "B2": 10,
+          "B3": 5,
+          "B4": 1,
+          "B5": 0,
+          "B6": 0,
+          "B7": 3,
+          "B8": 0,
+          "B9": 0,
+          "B10": 10,
+          "B11": 3,
+          "B12": 0,
+          "B13": 9
+        }
+      },
+      "agent": {
+        "pass": 50,
+        "n": 130,
+        "rate": 0.38461538461538464,
+        "cp95": [
+          0.3006653359745162,
+          0.4739470001552526
+        ],
+        "per_benchmark": {
+          "B1": 2,
+          "B2": 9,
+          "B3": 8,
+          "B4": 3,
+          "B5": 0,
+          "B6": 0,
+          "B7": 0,
+          "B8": 0,
+          "B9": 0,
+          "B10": 10,
+          "B11": 8,
+          "B12": 0,
+          "B13": 10
+        }
+      }
+    },
+    "pairwise": {
+      "agent_minus_direct": {
+        "difference_pp": 1.5384615384615385,
+        "newcombe95_pp": [
+          -10.1217182731364,
+          13.140155446432544
+        ],
+        "pooled_fisher": {
+          "p_value": 0.8982122060402085,
+          "odds_ratio": 1.0677083333333333
+        },
+        "benchmark_stratified_cmh": {
+          "common_odds_ratio": 1.1694915254237288,
+          "chi_square": 0.18999999999999997,
+          "p_value": 0.6629166175161068
+        }
+      },
+      "staged_minus_direct": {
+        "difference_pp": 2.3076923076923075,
+        "newcombe95_pp": [
+          -9.387194378934359,
+          13.914466222126991
+        ],
+        "pooled_fisher": {
+          "p_value": 0.7984601679596127,
+          "odds_ratio": 1.1028481012658229
+        },
+        "benchmark_stratified_cmh": {
+          "common_odds_ratio": 1.4545454545454546,
+          "chi_square": 0.5463258785942492,
+          "p_value": 0.4598228364198115
+        }
+      },
+      "agent_minus_staged": {
+        "difference_pp": -0.7692307692307693,
+        "newcombe95_pp": [
+          -12.449212652991607,
+          10.94036610737745
+        ],
+        "pooled_fisher": {
+          "p_value": 1.0,
+          "odds_ratio": 0.9681372549019608
+        },
+        "benchmark_stratified_cmh": {
+          "common_odds_ratio": 0.9300699300699302,
+          "chi_square": 0.04328018223234625,
+          "p_value": 0.8351985971191118
+        }
+      }
+    },
+    "funnel": {
+      "n": 130,
+      "compile": 120,
+      "compile_assessed_n": 130,
+      "compile_true_field_n": 120,
+      "run": 116,
+      "run_assessed_n": 130,
+      "run_true_field_n": 116,
+      "equivalent": 50
+    }
+  },
+  "qwen_direct": {
+    "pass": {
+      "pass": 24,
+      "n": 130,
+      "rate": 0.18461538461538463,
+      "cp95": [
+        0.12201459475012362,
+        0.2621239207482711
+      ],
+      "per_benchmark": {
+        "B1": 6,
+        "B2": 1,
+        "B3": 0,
+        "B4": 0,
+        "B5": 0,
+        "B6": 0,
+        "B7": 0,
+        "B8": 0,
+        "B9": 0,
+        "B10": 8,
+        "B11": 0,
+        "B12": 0,
+        "B13": 9
+      }
+    },
+    "funnel": {
+      "n": 130,
+      "compile": 112,
+      "compile_assessed_n": 130,
+      "compile_true_field_n": 112,
+      "run": 102,
+      "run_assessed_n": 130,
+      "run_true_field_n": 102,
+      "equivalent": 24
+    },
+    "funnel_per_benchmark": {
+      "B1": {
+        "n": 10,
+        "compile": 9,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 9,
+        "run": 9,
+        "run_assessed_n": 10,
+        "run_true_field_n": 9,
+        "equivalent": 6
+      },
+      "B2": {
+        "n": 10,
+        "compile": 8,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 8,
+        "run": 8,
+        "run_assessed_n": 10,
+        "run_true_field_n": 8,
+        "equivalent": 1
+      },
+      "B3": {
+        "n": 10,
+        "compile": 7,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 7,
+        "run": 6,
+        "run_assessed_n": 10,
+        "run_true_field_n": 6,
+        "equivalent": 0
+      },
+      "B4": {
+        "n": 10,
+        "compile": 9,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 9,
+        "run": 7,
+        "run_assessed_n": 10,
+        "run_true_field_n": 7,
+        "equivalent": 0
+      },
+      "B5": {
+        "n": 10,
+        "compile": 9,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 9,
+        "run": 7,
+        "run_assessed_n": 10,
+        "run_true_field_n": 7,
+        "equivalent": 0
+      },
+      "B6": {
+        "n": 10,
+        "compile": 4,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 4,
+        "run": 2,
+        "run_assessed_n": 10,
+        "run_true_field_n": 2,
+        "equivalent": 0
+      },
+      "B7": {
+        "n": 10,
+        "compile": 10,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 10,
+        "run": 7,
+        "run_assessed_n": 10,
+        "run_true_field_n": 7,
+        "equivalent": 0
+      },
+      "B8": {
+        "n": 10,
+        "compile": 7,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 7,
+        "run": 7,
+        "run_assessed_n": 10,
+        "run_true_field_n": 7,
+        "equivalent": 0
+      },
+      "B9": {
+        "n": 10,
+        "compile": 9,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 9,
+        "run": 9,
+        "run_assessed_n": 10,
+        "run_true_field_n": 9,
+        "equivalent": 0
+      },
+      "B10": {
+        "n": 10,
+        "compile": 10,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 10,
+        "run": 10,
+        "run_assessed_n": 10,
+        "run_true_field_n": 10,
+        "equivalent": 8
+      },
+      "B11": {
+        "n": 10,
+        "compile": 10,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 10,
+        "run": 10,
+        "run_assessed_n": 10,
+        "run_true_field_n": 10,
+        "equivalent": 0
+      },
+      "B12": {
+        "n": 10,
+        "compile": 10,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 10,
+        "run": 10,
+        "run_assessed_n": 10,
+        "run_true_field_n": 10,
+        "equivalent": 0
+      },
+      "B13": {
+        "n": 10,
+        "compile": 10,
+        "compile_assessed_n": 10,
+        "compile_true_field_n": 10,
+        "run": 10,
+        "run_assessed_n": 10,
+        "run_true_field_n": 10,
+        "equivalent": 9
+      }
+    },
+    "selected_experiment_ids": [
+      "B10_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_033348",
+      "B10_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_174809",
+      "B10_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_210413",
+      "B10_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_224426",
+      "B10_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260916_234101",
+      "B10_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_142713",
+      "B10_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_173141",
+      "B10_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_182249",
+      "B10_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_203204",
+      "B10_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260918_225455",
+      "B11_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_021228",
+      "B11_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_161515",
+      "B11_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_191206",
+      "B11_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_212714",
+      "B11_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260917_002101",
+      "B11_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_154725",
+      "B11_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_180659",
+      "B11_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_182435",
+      "B11_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_205127",
+      "B11_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260918_232946",
+      "B12_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_034626",
+      "B12_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_155419",
+      "B12_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_200712",
+      "B12_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_212107",
+      "B12_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260917_002658",
+      "B12_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_154001",
+      "B12_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_160411",
+      "B12_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_184304",
+      "B12_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_211655",
+      "B12_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260919_005329",
+      "B13_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_021647",
+      "B13_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_161335",
+      "B13_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_184621",
+      "B13_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_234000",
+      "B13_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260917_010740",
+      "B13_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_140149",
+      "B13_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_161701",
+      "B13_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_202125",
+      "B13_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_213114",
+      "B13_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260919_010736",
+      "B1_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_020422",
+      "B1_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_155053",
+      "B1_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_194559",
+      "B1_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_213409",
+      "B1_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260917_023046",
+      "B1_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_134401",
+      "B1_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_180253",
+      "B1_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_184048",
+      "B1_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_202207",
+      "B1_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260918_225359",
+      "B2_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_033520",
+      "B2_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_175520",
+      "B2_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_195055",
+      "B2_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_210612",
+      "B2_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260917_003917",
+      "B2_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_150825",
+      "B2_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_173920",
+      "B2_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_200838",
+      "B2_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_213243",
+      "B2_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260918_233603",
+      "B3_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_031453",
+      "B3_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_162240",
+      "B3_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_191804",
+      "B3_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_233113",
+      "B3_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260917_012340",
+      "B3_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_135445",
+      "B3_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_164906",
+      "B3_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_181251",
+      "B3_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_210900",
+      "B3_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260919_001735",
+      "B4_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_023745",
+      "B4_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_172159",
+      "B4_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_204908",
+      "B4_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_230019",
+      "B4_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260917_013133",
+      "B4_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_152146",
+      "B4_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_163314",
+      "B4_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_193632",
+      "B4_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_221624",
+      "B4_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260918_225639",
+      "B5_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_014214",
+      "B5_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_164138",
+      "B5_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_201610",
+      "B5_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_222103",
+      "B5_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260916_235326",
+      "B5_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_132806",
+      "B5_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_171246",
+      "B5_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_185538",
+      "B5_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_223559",
+      "B5_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260918_235016",
+      "B6_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_021826",
+      "B6_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_180947",
+      "B6_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_192925",
+      "B6_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_215139",
+      "B6_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260917_005133",
+      "B6_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_141013",
+      "B6_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_174312",
+      "B6_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_191933",
+      "B6_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_203402",
+      "B6_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260919_002613",
+      "B7_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_025817",
+      "B7_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_163140",
+      "B7_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_185254",
+      "B7_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_231729",
+      "B7_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260917_011035",
+      "B7_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_143403",
+      "B7_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_161821",
+      "B7_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_183230",
+      "B7_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_214804",
+      "B7_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260918_231320",
+      "B8_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_011811",
+      "B8_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_173650",
+      "B8_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_183426",
+      "B8_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_224614",
+      "B8_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260916_234256",
+      "B8_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_145409",
+      "B8_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_165757",
+      "B8_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_190705",
+      "B8_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_205730",
+      "B8_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260919_010852",
+      "B9_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r10_a1_20260919_013125",
+      "B9_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r1_a1_20260916_170539",
+      "B9_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r2_a1_20260916_203452",
+      "B9_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r3_a1_20260916_221211",
+      "B9_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r4_a1_20260917_000833",
+      "B9_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r5_a1_20260918_144036",
+      "B9_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r6_a1_20260918_155311",
+      "B9_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r7_a1_20260918_195445",
+      "B9_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r8_a1_20260918_220126",
+      "B9_rq3_jss_qwen37plus_direct_n10_frozen_v1_rq3_direct_r5_r9_a1_20260919_000155"
+    ]
+  },
+  "first_success": {
+    "per_benchmark": {
+      "B1": {
+        "direct": {
+          "sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        },
+        "staged": {
+          "sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        },
+        "agent": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          "first_success_position": 8
+        },
+        "qwen_direct": {
+          "sequence": [
+            1,
+            1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        }
+      },
+      "B2": {
+        "direct": {
+          "sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        },
+        "staged": {
+          "sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        },
+        "agent": {
+          "sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        },
+        "qwen_direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": 6
+        }
+      },
+      "B3": {
+        "direct": {
+          "sequence": [
+            0,
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": 2
+        },
+        "staged": {
+          "sequence": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          "first_success_position": 1
+        },
+        "agent": {
+          "sequence": [
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 2
+        },
+        "qwen_direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        }
+      },
+      "B4": {
+        "direct": {
+          "sequence": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": 1
+        },
+        "staged": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": 7
+        },
+        "agent": {
+          "sequence": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "first_success_position": 1
+        },
+        "qwen_direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        }
+      },
+      "B5": {
+        "direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "staged": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "agent": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "qwen_direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        }
+      },
+      "B6": {
+        "direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "staged": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "agent": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "qwen_direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        }
+      },
+      "B7": {
+        "direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "staged": {
+          "sequence": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "first_success_position": 1
+        },
+        "agent": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "qwen_direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        }
+      },
+      "B8": {
+        "direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "staged": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "agent": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "qwen_direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        }
+      },
+      "B9": {
+        "direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "staged": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "agent": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "qwen_direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        }
+      },
+      "B10": {
+        "direct": {
+          "sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        },
+        "staged": {
+          "sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        },
+        "agent": {
+          "sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        },
+        "qwen_direct": {
+          "sequence": [
+            0,
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 2
+        }
+      },
+      "B11": {
+        "direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": 4
+        },
+        "staged": {
+          "sequence": [
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "first_success_position": 3
+        },
+        "agent": {
+          "sequence": [
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        },
+        "qwen_direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        }
+      },
+      "B12": {
+        "direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "staged": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "agent": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        },
+        "qwen_direct": {
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_success_position": null
+        }
+      },
+      "B13": {
+        "direct": {
+          "sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          "first_success_position": 1
+        },
+        "staged": {
+          "sequence": [
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        },
+        "agent": {
+          "sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        },
+        "qwen_direct": {
+          "sequence": [
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "first_success_position": 1
+        }
+      }
+    },
+    "summary": {
+      "direct": {
+        "benchmarks_with_success": 7,
+        "benchmarks_without_success": 6,
+        "mean_position_among_successful_benchmarks": 1.5714285714285714,
+        "median_position_among_successful_benchmarks": 1
+      },
+      "staged": {
+        "benchmarks_with_success": 8,
+        "benchmarks_without_success": 5,
+        "mean_position_among_successful_benchmarks": 2,
+        "median_position_among_successful_benchmarks": 1.0
+      },
+      "agent": {
+        "benchmarks_with_success": 7,
+        "benchmarks_without_success": 6,
+        "mean_position_among_successful_benchmarks": 2.142857142857143,
+        "median_position_among_successful_benchmarks": 1
+      },
+      "qwen_direct": {
+        "benchmarks_with_success": 4,
+        "benchmarks_without_success": 9,
+        "mean_position_among_successful_benchmarks": 2.5,
+        "median_position_among_successful_benchmarks": 1.5
+      }
+    }
+  },
+  "cost": {
+    "per_arm": {
+      "direct": {
+        "tokens": {
+          "n": 130,
+          "sum": 6460787.0,
+          "mean": 49698.36153846154,
+          "median": 40914.5,
+          "p25": 12051.75,
+          "p75": 80581.75,
+          "min": 3566.0,
+          "max": 157515.0
+        },
+        "n_calls": {
+          "n": 130,
+          "sum": 576.0,
+          "mean": 4.430769230769231,
+          "median": 6.0,
+          "p25": 2.0,
+          "p75": 6.0,
+          "min": 1.0,
+          "max": 6.0
+        },
+        "cumulative_elapsed_s": {
+          "n": 130,
+          "sum": 19384.48,
+          "mean": 149.11138461538462,
+          "median": 145.095,
+          "p25": 43.085,
+          "p75": 221.67,
+          "min": 10.56,
+          "max": 547.84
+        },
+        "runs_without_llm_calls_dir": 0,
+        "errored_calls": 0
+      },
+      "staged": {
+        "tokens": {
+          "n": 130,
+          "sum": 18450024.0,
+          "mean": 141923.26153846155,
+          "median": 134954.0,
+          "p25": 87736.0,
+          "p75": 185343.5,
+          "min": 36316.0,
+          "max": 293845.0
+        },
+        "n_calls": {
+          "n": 130,
+          "sum": 1521.0,
+          "mean": 11.7,
+          "median": 12.0,
+          "p25": 10.0,
+          "p75": 14.0,
+          "min": 6.0,
+          "max": 15.0
+        },
+        "cumulative_elapsed_s": {
+          "n": 130,
+          "sum": 39606.3,
+          "mean": 304.6638461538462,
+          "median": 294.115,
+          "p25": 192.565,
+          "p75": 396.1375,
+          "min": 68.57,
+          "max": 1411.47
+        },
+        "runs_without_llm_calls_dir": 0,
+        "errored_calls": 0
+      },
+      "agent": {
+        "tokens": {
+          "n": 130,
+          "sum": 13625467.0,
+          "mean": 104811.28461538462,
+          "median": 129716.0,
+          "p25": 28083.25,
+          "p75": 154881.75,
+          "min": 2375.0,
+          "max": 296693.0
+        },
+        "n_calls": {
+          "n": 130,
+          "sum": 480.0,
+          "mean": 3.6923076923076925,
+          "median": 4.0,
+          "p25": 2.0,
+          "p75": 5.0,
+          "min": 1.0,
+          "max": 9.0
+        },
+        "cumulative_elapsed_s": {
+          "n": 130,
+          "sum": 15177.64,
+          "mean": 116.75107692307692,
+          "median": 135.72,
+          "p25": 32.855000000000004,
+          "p75": 178.1875,
+          "min": 7.8,
+          "max": 386.44
+        },
+        "runs_without_llm_calls_dir": 0,
+        "errored_calls": 0
+      },
+      "qwen_direct": {
+        "tokens": {
+          "n": 130,
+          "sum": 7087107.0,
+          "mean": 54516.20769230769,
+          "median": 56226.5,
+          "p25": 31723.0,
+          "p75": 71414.5,
+          "min": 3503.0,
+          "max": 147029.0
+        },
+        "n_calls": {
+          "n": 130,
+          "sum": 687.0,
+          "mean": 5.2846153846153845,
+          "median": 6.0,
+          "p25": 6.0,
+          "p75": 6.0,
+          "min": 1.0,
+          "max": 6.0
+        },
+        "cumulative_elapsed_s": {
+          "n": 130,
+          "sum": 91227.64,
+          "mean": 701.7510769230769,
+          "median": 706.565,
+          "p25": 417.05,
+          "p75": 948.88,
+          "min": 41.95,
+          "max": 3553.29
+        },
+        "runs_without_llm_calls_dir": 0,
+        "errored_calls": 0
+      }
+    },
+    "per_benchmark": {
+      "B1": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 140960.0,
+            "mean": 14096.0,
+            "median": 11314.0,
+            "p25": 10523.5,
+            "p75": 19604.75,
+            "min": 6311.0,
+            "max": 26676.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 26.0,
+            "mean": 2.6,
+            "median": 2.0,
+            "p25": 2.0,
+            "p75": 3.75,
+            "min": 1.0,
+            "max": 5.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 564.3199999999999,
+            "mean": 56.431999999999995,
+            "median": 43.760000000000005,
+            "p25": 32.6625,
+            "p75": 84.21,
+            "min": 22.29,
+            "max": 106.32
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 826427.0,
+            "mean": 82642.7,
+            "median": 78860.5,
+            "p25": 57386.25,
+            "p75": 109596.25,
+            "min": 48072.0,
+            "max": 120763.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 93.0,
+            "mean": 9.3,
+            "median": 9.5,
+            "p25": 7.25,
+            "p75": 11.0,
+            "min": 6.0,
+            "max": 12.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 2119.4700000000003,
+            "mean": 211.947,
+            "median": 183.585,
+            "p25": 110.7325,
+            "p75": 284.4725,
+            "min": 83.41,
+            "max": 464.99
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 923296.0,
+            "mean": 92329.6,
+            "median": 120908.0,
+            "p25": 31256.25,
+            "p75": 132884.5,
+            "min": 21676.0,
+            "max": 158159.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 51.0,
+            "mean": 5.1,
+            "median": 5.0,
+            "p25": 4.25,
+            "p75": 6.0,
+            "min": 3.0,
+            "max": 7.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1018.81,
+            "mean": 101.881,
+            "median": 112.705,
+            "p25": 29.61,
+            "p75": 169.68,
+            "min": 21.82,
+            "max": 187.28
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 331198.0,
+            "mean": 33119.8,
+            "median": 32396.5,
+            "p25": 17711.0,
+            "p75": 47205.5,
+            "min": 6188.0,
+            "max": 66970.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 40.0,
+            "mean": 4.0,
+            "median": 4.0,
+            "p25": 3.0,
+            "p75": 6.0,
+            "min": 1.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 4429.07,
+            "mean": 442.907,
+            "median": 390.75,
+            "p25": 215.7825,
+            "p75": 632.3199999999999,
+            "min": 55.3,
+            "max": 1049.68
+          }
+        }
+      },
+      "B2": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 167875.0,
+            "mean": 16787.5,
+            "median": 12056.5,
+            "p25": 11892.0,
+            "p75": 18396.5,
+            "min": 11741.0,
+            "max": 35958.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 16.0,
+            "mean": 1.6,
+            "median": 1.0,
+            "p25": 1.0,
+            "p75": 1.75,
+            "min": 1.0,
+            "max": 4.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 422.13,
+            "mean": 42.213,
+            "median": 33.555,
+            "p25": 27.0175,
+            "p75": 43.395,
+            "min": 25.19,
+            "max": 94.6
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 773145.0,
+            "mean": 77314.5,
+            "median": 61765.5,
+            "p25": 58289.0,
+            "p75": 92668.5,
+            "min": 50067.0,
+            "max": 144075.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 71.0,
+            "mean": 7.1,
+            "median": 6.5,
+            "p25": 6.0,
+            "p75": 7.75,
+            "min": 6.0,
+            "max": 10.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1551.0,
+            "mean": 155.1,
+            "median": 122.875,
+            "p25": 104.16000000000001,
+            "p75": 157.675,
+            "min": 88.57,
+            "max": 328.5
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 618703.0,
+            "mean": 61870.3,
+            "median": 36586.0,
+            "p25": 28409.0,
+            "p75": 54164.5,
+            "min": 24668.0,
+            "max": 199951.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 27.0,
+            "mean": 2.7,
+            "median": 2.0,
+            "p25": 2.0,
+            "p75": 3.5,
+            "min": 2.0,
+            "max": 5.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 561.89,
+            "mean": 56.189,
+            "median": 41.18000000000001,
+            "p25": 28.2425,
+            "p75": 51.832499999999996,
+            "min": 24.07,
+            "max": 175.49
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 583800.0,
+            "mean": 58380.0,
+            "median": 62048.0,
+            "p25": 56165.25,
+            "p75": 65757.25,
+            "min": 21621.0,
+            "max": 72814.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 56.0,
+            "mean": 5.6,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 2.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 7717.25,
+            "mean": 771.725,
+            "median": 827.4649999999999,
+            "p25": 744.1175000000001,
+            "p75": 888.3975,
+            "min": 232.39,
+            "max": 977.33
+          }
+        }
+      },
+      "B3": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 242965.0,
+            "mean": 24296.5,
+            "median": 27621.0,
+            "p25": 14635.75,
+            "p75": 31865.25,
+            "min": 7765.0,
+            "max": 36265.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 44.0,
+            "mean": 4.4,
+            "median": 5.5,
+            "p25": 2.5,
+            "p75": 6.0,
+            "min": 1.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 964.49,
+            "mean": 96.449,
+            "median": 108.965,
+            "p25": 56.025000000000006,
+            "p75": 135.325,
+            "min": 25.92,
+            "max": 147.72
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 1216129.0,
+            "mean": 121612.9,
+            "median": 124948.0,
+            "p25": 91312.25,
+            "p75": 143130.25,
+            "min": 59696.0,
+            "max": 187468.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 115.0,
+            "mean": 11.5,
+            "median": 11.0,
+            "p25": 11.0,
+            "p75": 12.75,
+            "min": 8.0,
+            "max": 15.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 2854.84,
+            "mean": 285.484,
+            "median": 253.18,
+            "p25": 205.5075,
+            "p75": 345.4425,
+            "min": 131.86,
+            "max": 534.83
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 679143.0,
+            "mean": 67914.3,
+            "median": 45396.0,
+            "p25": 25939.75,
+            "p75": 81870.5,
+            "min": 20858.0,
+            "max": 187406.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 30.0,
+            "mean": 3.0,
+            "median": 3.0,
+            "p25": 2.0,
+            "p75": 4.0,
+            "min": 2.0,
+            "max": 4.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 854.39,
+            "mean": 85.439,
+            "median": 62.644999999999996,
+            "p25": 39.822500000000005,
+            "p75": 104.0175,
+            "min": 28.57,
+            "max": 191.06
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 453154.0,
+            "mean": 45315.4,
+            "median": 41565.5,
+            "p25": 38240.5,
+            "p75": 45696.0,
+            "min": 36004.0,
+            "max": 82802.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 5902.23,
+            "mean": 590.223,
+            "median": 528.825,
+            "p25": 486.3275,
+            "p75": 583.87,
+            "min": 423.95,
+            "max": 1134.54
+          }
+        }
+      },
+      "B4": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 333677.0,
+            "mean": 33367.7,
+            "median": 32941.0,
+            "p25": 28839.75,
+            "p75": 41470.0,
+            "min": 14436.0,
+            "max": 47852.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 52.0,
+            "mean": 5.2,
+            "median": 6.0,
+            "p25": 5.25,
+            "p75": 6.0,
+            "min": 2.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1240.32,
+            "mean": 124.032,
+            "median": 122.495,
+            "p25": 99.72250000000001,
+            "p75": 158.2925,
+            "min": 52.7,
+            "max": 183.55
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 1345837.0,
+            "mean": 134583.7,
+            "median": 141695.5,
+            "p25": 126270.25,
+            "p75": 153188.25,
+            "min": 76410.0,
+            "max": 185219.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 138.0,
+            "mean": 13.8,
+            "median": 15.0,
+            "p25": 12.5,
+            "p75": 15.0,
+            "min": 11.0,
+            "max": 15.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 3596.38,
+            "mean": 359.63800000000003,
+            "median": 345.0,
+            "p25": 287.82250000000005,
+            "p75": 407.45250000000004,
+            "min": 255.27,
+            "max": 524.83
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 1444448.0,
+            "mean": 144444.8,
+            "median": 122099.5,
+            "p25": 121103.0,
+            "p75": 142374.75,
+            "min": 47266.0,
+            "max": 264361.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 50.0,
+            "mean": 5.0,
+            "median": 4.0,
+            "p25": 4.0,
+            "p75": 4.75,
+            "min": 4.0,
+            "max": 9.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1623.91,
+            "mean": 162.391,
+            "median": 154.45499999999998,
+            "p25": 137.775,
+            "p75": 183.16750000000002,
+            "min": 41.83,
+            "max": 267.77
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 768679.0,
+            "mean": 76867.9,
+            "median": 69679.5,
+            "p25": 67694.0,
+            "p75": 84434.75,
+            "min": 61739.0,
+            "max": 102406.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 12927.28,
+            "mean": 1292.728,
+            "median": 1061.1750000000002,
+            "p25": 964.385,
+            "p75": 1154.9625,
+            "min": 891.61,
+            "max": 3553.29
+          }
+        }
+      },
+      "B5": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 970586.0,
+            "mean": 97058.6,
+            "median": 79931.5,
+            "p25": 72385.0,
+            "p75": 127954.75,
+            "min": 61001.0,
+            "max": 157515.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 2321.6800000000003,
+            "mean": 232.168,
+            "median": 227.16,
+            "p25": 196.1025,
+            "p75": 265.88500000000005,
+            "min": 174.27,
+            "max": 300.48
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 2479872.0,
+            "mean": 247987.2,
+            "median": 238381.5,
+            "p25": 228339.5,
+            "p75": 277612.0,
+            "min": 190624.0,
+            "max": 293845.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 139.0,
+            "mean": 13.9,
+            "median": 14.5,
+            "p25": 13.25,
+            "p75": 15.0,
+            "min": 11.0,
+            "max": 15.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 4496.4400000000005,
+            "mean": 449.644,
+            "median": 441.615,
+            "p25": 391.235,
+            "p75": 474.58,
+            "min": 316.96,
+            "max": 654.83
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 1840366.0,
+            "mean": 184036.6,
+            "median": 158595.5,
+            "p25": 136961.25,
+            "p75": 201452.5,
+            "min": 127850.0,
+            "max": 296693.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 39.0,
+            "mean": 3.9,
+            "median": 3.5,
+            "p25": 3.0,
+            "p75": 4.0,
+            "min": 3.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 2023.99,
+            "mean": 202.399,
+            "median": 169.34,
+            "p25": 140.2675,
+            "p75": 217.48000000000002,
+            "min": 125.03,
+            "max": 386.44
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 986565.0,
+            "mean": 98656.5,
+            "median": 98723.0,
+            "p25": 81349.0,
+            "p75": 108846.5,
+            "min": 72530.0,
+            "max": 136105.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 10758.64,
+            "mean": 1075.864,
+            "median": 1101.3200000000002,
+            "p25": 919.0274999999999,
+            "p75": 1279.66,
+            "min": 687.02,
+            "max": 1441.34
+          }
+        }
+      },
+      "B6": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 1079059.0,
+            "mean": 107905.9,
+            "median": 108840.5,
+            "p25": 89277.0,
+            "p75": 127925.25,
+            "min": 70410.0,
+            "max": 145047.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 2354.75,
+            "mean": 235.475,
+            "median": 238.82,
+            "p25": 204.5875,
+            "p75": 272.3775,
+            "min": 149.94,
+            "max": 300.74
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 2336728.0,
+            "mean": 233672.8,
+            "median": 248979.5,
+            "p25": 199865.5,
+            "p75": 273405.75,
+            "min": 143497.0,
+            "max": 285666.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 134.0,
+            "mean": 13.4,
+            "median": 13.5,
+            "p25": 12.25,
+            "p75": 15.0,
+            "min": 11.0,
+            "max": 15.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 5045.61,
+            "mean": 504.561,
+            "median": 433.08,
+            "p25": 413.85,
+            "p75": 472.835,
+            "min": 223.83,
+            "max": 1411.47
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 1688559.0,
+            "mean": 168855.9,
+            "median": 171363.5,
+            "p25": 147596.0,
+            "p75": 191817.25,
+            "min": 130186.0,
+            "max": 195762.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 37.0,
+            "mean": 3.7,
+            "median": 4.0,
+            "p25": 3.25,
+            "p75": 4.0,
+            "min": 3.0,
+            "max": 4.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1771.8400000000001,
+            "mean": 177.184,
+            "median": 174.805,
+            "p25": 167.8075,
+            "p75": 192.2325,
+            "min": 135.8,
+            "max": 214.04
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 1038160.0,
+            "mean": 103816.0,
+            "median": 96056.0,
+            "p25": 87346.75,
+            "p75": 110829.5,
+            "min": 84645.0,
+            "max": 147029.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 11731.28,
+            "mean": 1173.128,
+            "median": 1101.505,
+            "p25": 1019.2475,
+            "p75": 1219.45,
+            "min": 966.18,
+            "max": 1635.89
+          }
+        }
+      },
+      "B7": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 500882.0,
+            "mean": 50088.2,
+            "median": 54952.0,
+            "p25": 43301.25,
+            "p75": 57055.0,
+            "min": 29585.0,
+            "max": 61285.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1699.25,
+            "mean": 169.925,
+            "median": 159.10500000000002,
+            "p25": 125.7775,
+            "p75": 165.3175,
+            "min": 74.65,
+            "max": 436.1
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 1343381.0,
+            "mean": 134338.1,
+            "median": 137922.0,
+            "p25": 115683.5,
+            "p75": 159793.5,
+            "min": 89215.0,
+            "max": 170894.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 128.0,
+            "mean": 12.8,
+            "median": 13.5,
+            "p25": 11.25,
+            "p75": 14.75,
+            "min": 9.0,
+            "max": 15.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 2767.1,
+            "mean": 276.71,
+            "median": 268.99,
+            "p25": 238.19500000000002,
+            "p75": 314.31500000000005,
+            "min": 206.98,
+            "max": 350.58
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 1446426.0,
+            "mean": 144642.6,
+            "median": 139189.5,
+            "p25": 135594.5,
+            "p75": 156873.5,
+            "min": 119249.0,
+            "max": 173595.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 51.0,
+            "mean": 5.1,
+            "median": 5.0,
+            "p25": 5.0,
+            "p75": 5.75,
+            "min": 4.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1431.85,
+            "mean": 143.185,
+            "median": 142.86,
+            "p25": 118.9375,
+            "p75": 166.11,
+            "min": 87.1,
+            "max": 198.45
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 568765.0,
+            "mean": 56876.5,
+            "median": 60468.5,
+            "p25": 45911.25,
+            "p75": 63834.5,
+            "min": 35201.0,
+            "max": 74424.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 7927.06,
+            "mean": 792.706,
+            "median": 813.2049999999999,
+            "p25": 644.615,
+            "p75": 962.41,
+            "min": 392.85,
+            "max": 1151.38
+          }
+        }
+      },
+      "B8": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 822386.0,
+            "mean": 82238.6,
+            "median": 85701.5,
+            "p25": 65505.5,
+            "p75": 96852.0,
+            "min": 47955.0,
+            "max": 110517.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 2677.94,
+            "mean": 267.794,
+            "median": 255.75,
+            "p25": 178.35000000000002,
+            "p75": 301.79749999999996,
+            "min": 142.81,
+            "max": 547.84
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 1567151.0,
+            "mean": 156715.1,
+            "median": 149213.0,
+            "p25": 131558.5,
+            "p75": 178715.0,
+            "min": 115263.0,
+            "max": 226920.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 129.0,
+            "mean": 12.9,
+            "median": 12.5,
+            "p25": 12.0,
+            "p75": 14.0,
+            "min": 11.0,
+            "max": 15.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 3100.4,
+            "mean": 310.04,
+            "median": 306.07500000000005,
+            "p25": 285.3325,
+            "p75": 331.73249999999996,
+            "min": 212.0,
+            "max": 433.25
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 1443973.0,
+            "mean": 144397.3,
+            "median": 136133.0,
+            "p25": 129452.5,
+            "p75": 157442.0,
+            "min": 127392.0,
+            "max": 173633.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 38.0,
+            "mean": 3.8,
+            "median": 4.0,
+            "p25": 3.25,
+            "p75": 4.0,
+            "min": 3.0,
+            "max": 5.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1660.79,
+            "mean": 166.079,
+            "median": 158.95499999999998,
+            "p25": 145.915,
+            "p75": 198.13,
+            "min": 100.78,
+            "max": 209.63
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 652624.0,
+            "mean": 65262.4,
+            "median": 64091.5,
+            "p25": 58867.5,
+            "p75": 70316.25,
+            "min": 55954.0,
+            "max": 76680.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 7402.23,
+            "mean": 740.223,
+            "median": 731.24,
+            "p25": 681.5675,
+            "p75": 832.605,
+            "min": 558.55,
+            "max": 888.17
+          }
+        }
+      },
+      "B9": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 596195.0,
+            "mean": 59619.5,
+            "median": 61206.0,
+            "p25": 58539.25,
+            "p75": 62375.5,
+            "min": 42287.0,
+            "max": 73941.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1700.31,
+            "mean": 170.031,
+            "median": 162.73000000000002,
+            "p25": 154.505,
+            "p75": 180.4025,
+            "min": 125.74,
+            "max": 215.83
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 1754241.0,
+            "mean": 175424.1,
+            "median": 180163.0,
+            "p25": 139030.5,
+            "p75": 199424.25,
+            "min": 127214.0,
+            "max": 227272.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 132.0,
+            "mean": 13.2,
+            "median": 13.5,
+            "p25": 12.0,
+            "p75": 14.75,
+            "min": 11.0,
+            "max": 15.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 3495.8,
+            "mean": 349.58,
+            "median": 345.29,
+            "p25": 286.175,
+            "p75": 378.7775,
+            "min": 253.56,
+            "max": 476.15
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 1534585.0,
+            "mean": 153458.5,
+            "median": 155507.5,
+            "p25": 135562.25,
+            "p75": 165025.0,
+            "min": 123504.0,
+            "max": 192568.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 47.0,
+            "mean": 4.7,
+            "median": 5.0,
+            "p25": 4.25,
+            "p75": 5.0,
+            "min": 3.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1647.33,
+            "mean": 164.733,
+            "median": 155.875,
+            "p25": 150.84500000000003,
+            "p75": 177.795,
+            "min": 137.59,
+            "max": 200.65
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 655995.0,
+            "mean": 65599.5,
+            "median": 69157.5,
+            "p25": 61542.0,
+            "p75": 71263.25,
+            "min": 45426.0,
+            "max": 75334.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 7908.68,
+            "mean": 790.868,
+            "median": 823.405,
+            "p25": 682.235,
+            "p75": 887.51,
+            "min": 531.57,
+            "max": 979.26
+          }
+        }
+      },
+      "B10": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 38341.0,
+            "mean": 3834.1,
+            "median": 3843.5,
+            "p25": 3804.25,
+            "p75": 3911.25,
+            "min": 3591.0,
+            "max": 4012.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 10.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "p25": 1.0,
+            "p75": 1.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 207.46,
+            "mean": 20.746,
+            "median": 18.575,
+            "p25": 18.0875,
+            "p75": 21.557499999999997,
+            "min": 16.83,
+            "max": 33.35
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 741213.0,
+            "mean": 74121.3,
+            "median": 77057.5,
+            "p25": 66677.25,
+            "p75": 85071.5,
+            "min": 48346.0,
+            "max": 92268.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 97.0,
+            "mean": 9.7,
+            "median": 10.0,
+            "p25": 9.25,
+            "p75": 10.0,
+            "min": 8.0,
+            "max": 11.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1603.44,
+            "mean": 160.344,
+            "median": 161.995,
+            "p25": 138.59,
+            "p75": 176.16000000000003,
+            "min": 126.23,
+            "max": 206.0
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 124176.0,
+            "mean": 12417.6,
+            "median": 14575.5,
+            "p25": 12458.25,
+            "p75": 15598.25,
+            "min": 3650.0,
+            "max": 15804.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 18.0,
+            "mean": 1.8,
+            "median": 2.0,
+            "p25": 2.0,
+            "p75": 2.0,
+            "min": 1.0,
+            "max": 2.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 255.39,
+            "mean": 25.539,
+            "median": 25.145,
+            "p25": 22.595,
+            "p75": 26.465000000000003,
+            "min": 11.84,
+            "max": 45.74
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 148370.0,
+            "mean": 14837.0,
+            "median": 8698.0,
+            "p25": 8415.25,
+            "p75": 23781.5,
+            "min": 7648.0,
+            "max": 31051.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 31.0,
+            "mean": 3.1,
+            "median": 2.0,
+            "p25": 2.0,
+            "p75": 4.25,
+            "min": 2.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 2061.64,
+            "mean": 206.164,
+            "median": 116.675,
+            "p25": 106.285,
+            "p75": 337.09999999999997,
+            "min": 92.45,
+            "max": 459.17
+          }
+        }
+      },
+      "B11": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 732784.0,
+            "mean": 73278.4,
+            "median": 91190.0,
+            "p25": 70706.75,
+            "p75": 96548.0,
+            "min": 4394.0,
+            "max": 102281.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 50.0,
+            "mean": 5.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 1.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 2275.03,
+            "mean": 227.503,
+            "median": 289.96000000000004,
+            "p25": 197.975,
+            "p75": 301.1325,
+            "min": 10.56,
+            "max": 330.79
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 1752180.0,
+            "mean": 175218.0,
+            "median": 183279.0,
+            "p25": 154464.75,
+            "p75": 195803.25,
+            "min": 112276.0,
+            "max": 223806.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 134.0,
+            "mean": 13.4,
+            "median": 14.0,
+            "p25": 12.25,
+            "p75": 15.0,
+            "min": 10.0,
+            "max": 15.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 3642.0,
+            "mean": 364.2,
+            "median": 370.53,
+            "p25": 346.65250000000003,
+            "p75": 425.76,
+            "min": 189.38,
+            "max": 480.32
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 303830.0,
+            "mean": 30383.0,
+            "median": 27188.0,
+            "p25": 16813.0,
+            "p75": 37706.75,
+            "min": 15015.0,
+            "max": 65919.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 27.0,
+            "mean": 2.7,
+            "median": 2.5,
+            "p25": 2.0,
+            "p75": 3.0,
+            "min": 2.0,
+            "max": 4.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 357.71999999999997,
+            "mean": 35.772,
+            "median": 34.47,
+            "p25": 28.1075,
+            "p75": 41.64,
+            "min": 19.18,
+            "max": 66.32
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 306313.0,
+            "mean": 30631.3,
+            "median": 30259.0,
+            "p25": 28941.25,
+            "p75": 32732.5,
+            "min": 23837.0,
+            "max": 36332.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 3745.9,
+            "mean": 374.59,
+            "median": 361.23,
+            "p25": 352.73499999999996,
+            "p75": 405.3075,
+            "min": 258.59,
+            "max": 474.58
+          }
+        }
+      },
+      "B12": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 760898.0,
+            "mean": 76089.8,
+            "median": 98766.0,
+            "p25": 42841.25,
+            "p75": 99099.0,
+            "min": 25588.0,
+            "max": 99535.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 2563.2,
+            "mean": 256.32,
+            "median": 324.65,
+            "p25": 150.12,
+            "p75": 328.6425,
+            "min": 93.73,
+            "max": 342.08
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 1629341.0,
+            "mean": 162934.1,
+            "median": 167711.0,
+            "p25": 136390.0,
+            "p75": 183631.5,
+            "min": 102404.0,
+            "max": 236297.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 122.0,
+            "mean": 12.2,
+            "median": 12.0,
+            "p25": 11.25,
+            "p75": 12.0,
+            "min": 11.0,
+            "max": 15.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 3762.63,
+            "mean": 376.263,
+            "median": 369.44500000000005,
+            "p25": 328.5025,
+            "p75": 427.21,
+            "min": 251.17,
+            "max": 536.52
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 1534918.0,
+            "mean": 153491.8,
+            "median": 154612.5,
+            "p25": 153348.25,
+            "p75": 155915.25,
+            "min": 138895.0,
+            "max": 158134.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 51.0,
+            "mean": 5.1,
+            "median": 5.0,
+            "p25": 5.0,
+            "p75": 5.0,
+            "min": 5.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1834.54,
+            "mean": 183.454,
+            "median": 183.835,
+            "p25": 169.60750000000002,
+            "p75": 200.67,
+            "min": 143.96,
+            "max": 215.35
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 476731.0,
+            "mean": 47673.1,
+            "median": 48245.5,
+            "p25": 40167.5,
+            "p75": 54666.75,
+            "min": 30073.0,
+            "max": 67099.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 60.0,
+            "mean": 6.0,
+            "median": 6.0,
+            "p25": 6.0,
+            "p75": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 7097.29,
+            "mean": 709.729,
+            "median": 746.65,
+            "p25": 559.4575000000001,
+            "p75": 827.915,
+            "min": 367.13,
+            "max": 1155.81
+          }
+        }
+      },
+      "B13": {
+        "direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 74179.0,
+            "mean": 7417.9,
+            "median": 3833.0,
+            "p25": 3650.75,
+            "p75": 6367.5,
+            "min": 3566.0,
+            "max": 28541.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 18.0,
+            "mean": 1.8,
+            "median": 1.0,
+            "p25": 1.0,
+            "p75": 1.75,
+            "min": 1.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 393.6,
+            "mean": 39.36,
+            "median": 33.185,
+            "p25": 19.515,
+            "p75": 48.1175,
+            "min": 16.3,
+            "max": 103.01
+          }
+        },
+        "staged": {
+          "tokens": {
+            "n": 10,
+            "sum": 684379.0,
+            "mean": 68437.9,
+            "median": 65182.5,
+            "p25": 51916.0,
+            "p75": 86324.25,
+            "min": 36316.0,
+            "max": 103233.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 89.0,
+            "mean": 8.9,
+            "median": 9.0,
+            "p25": 8.0,
+            "p75": 9.75,
+            "min": 6.0,
+            "max": 12.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1571.19,
+            "mean": 157.119,
+            "median": 158.95,
+            "p25": 111.345,
+            "p75": 185.73999999999998,
+            "min": 68.57,
+            "max": 255.61
+          }
+        },
+        "agent": {
+          "tokens": {
+            "n": 10,
+            "sum": 43044.0,
+            "mean": 4304.4,
+            "median": 2841.0,
+            "p25": 2467.75,
+            "p75": 5510.0,
+            "min": 2375.0,
+            "max": 11707.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 14.0,
+            "mean": 1.4,
+            "median": 1.0,
+            "p25": 1.0,
+            "p75": 1.75,
+            "min": 1.0,
+            "max": 3.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 135.19,
+            "mean": 13.519,
+            "median": 11.614999999999998,
+            "p25": 9.6675,
+            "p75": 18.3625,
+            "min": 7.8,
+            "max": 22.76
+          }
+        },
+        "qwen_direct": {
+          "tokens": {
+            "n": 10,
+            "sum": 116753.0,
+            "mean": 11675.3,
+            "median": 5227.5,
+            "p25": 4888.25,
+            "p75": 11224.0,
+            "min": 3503.0,
+            "max": 41218.0
+          },
+          "n_calls": {
+            "n": 10,
+            "sum": 20.0,
+            "mean": 2.0,
+            "median": 1.0,
+            "p25": 1.0,
+            "p75": 1.75,
+            "min": 1.0,
+            "max": 6.0
+          },
+          "cumulative_elapsed_s": {
+            "n": 10,
+            "sum": 1619.09,
+            "mean": 161.909,
+            "median": 93.88499999999999,
+            "p25": 77.015,
+            "p75": 156.53,
+            "min": 41.95,
+            "max": 503.94
+          }
+        }
+      }
+    },
+    "pairwise_descriptive": {
+      "agent_minus_direct": {
+        "tokens": {
+          "pooled_mean_ratio": 2.1089484918787758,
+          "pooled_median_difference": 88801.5,
+          "unstratified_mannwhitney_p_descriptive_only": 4.0503456460623423e-10,
+          "benchmark_mean_difference_summary": {
+            "n": 13,
+            "sum": 716468.0,
+            "mean": 55112.92307692308,
+            "median": 62158.69999999998,
+            "p25": 43617.8,
+            "p75": 86978.0,
+            "min": -42895.399999999994,
+            "max": 111077.09999999999
+          },
+          "benchmark_mean_ratio_summary": {
+            "n": 13,
+            "sum": 34.2890729903771,
+            "mean": 2.637620999259777,
+            "median": 2.5739648940363473,
+            "p25": 1.7558336353002115,
+            "p75": 3.2387261678099164,
+            "min": 0.4146242276032228,
+            "max": 6.55005675368899
+          }
+        },
+        "n_calls": {
+          "pooled_mean_ratio": 0.8333333333333334,
+          "pooled_median_difference": -2.0,
+          "unstratified_mannwhitney_p_descriptive_only": 1.6446602723905404e-05,
+          "benchmark_mean_difference_summary": {
+            "n": 13,
+            "sum": -9.600000000000001,
+            "mean": -0.7384615384615386,
+            "median": -0.9000000000000004,
+            "p25": -2.1,
+            "p75": -0.20000000000000018,
+            "min": -2.3,
+            "max": 2.4999999999999996
+          },
+          "benchmark_mean_ratio_summary": {
+            "n": 13,
+            "sum": 12.793506216006216,
+            "mean": 0.9841158627697089,
+            "median": 0.7833333333333333,
+            "p25": 0.65,
+            "p75": 0.9615384615384615,
+            "min": 0.54,
+            "max": 1.9615384615384612
+          }
+        },
+        "cumulative_elapsed_s": {
+          "pooled_mean_ratio": 0.782978960487978,
+          "pooled_median_difference": -9.375,
+          "unstratified_mannwhitney_p_descriptive_only": 0.04384472359467616,
+          "benchmark_mean_difference_summary": {
+            "n": 13,
+            "sum": -420.68399999999997,
+            "mean": -32.36030769230769,
+            "median": -25.841,
+            "p25": -58.291,
+            "p75": 4.793000000000003,
+            "min": -191.731,
+            "max": 45.449000000000005
+          },
+          "benchmark_mean_ratio_summary": {
+            "n": 13,
+            "sum": 11.834919273376311,
+            "mean": 0.9103784056443316,
+            "median": 0.8717781951000999,
+            "p25": 0.715722534332085,
+            "p75": 1.2310324881904946,
+            "min": 0.1572374869781937,
+            "max": 1.8053763821944997
+          }
+        }
+      },
+      "staged_minus_direct": {
+        "tokens": {
+          "pooled_mean_ratio": 2.8556929674357012,
+          "pooled_median_difference": 94039.5,
+          "unstratified_mannwhitney_p_descriptive_only": 2.2074018501417185e-27,
+          "benchmark_mean_difference_summary": {
+            "n": 13,
+            "sum": 1198923.7,
+            "mean": 92224.9,
+            "median": 86844.3,
+            "p25": 70287.2,
+            "p75": 101939.6,
+            "min": 60527.0,
+            "max": 150928.6
+          },
+          "benchmark_mean_ratio_summary": {
+            "n": 13,
+            "sum": 64.84827715529258,
+            "mean": 4.9883290119455825,
+            "median": 2.9423946863023005,
+            "p25": 2.3911275355357104,
+            "p75": 5.005367028172782,
+            "min": 1.9056148815762914,
+            "max": 19.332124879371953
+          }
+        },
+        "n_calls": {
+          "pooled_mean_ratio": 2.6406249999999996,
+          "pooled_median_difference": 6.0,
+          "unstratified_mannwhitney_p_descriptive_only": 3.995978529108042e-43,
+          "benchmark_mean_difference_summary": {
+            "n": 13,
+            "sum": 94.5,
+            "mean": 7.269230769230769,
+            "median": 7.1000000000000005,
+            "p25": 6.800000000000001,
+            "p75": 7.9,
+            "min": 5.5,
+            "max": 8.7
+          },
+          "benchmark_mean_ratio_summary": {
+            "n": 13,
+            "sum": 43.6730167055167,
+            "mean": 3.359462823501285,
+            "median": 2.6136363636363633,
+            "p25": 2.1999999999999997,
+            "p75": 3.576923076923077,
+            "min": 2.033333333333333,
+            "max": 9.7
+          }
+        },
+        "cumulative_elapsed_s": {
+          "pooled_mean_ratio": 2.0431964128003433,
+          "pooled_median_difference": 149.02,
+          "unstratified_mannwhitney_p_descriptive_only": 8.627443076789082e-18,
+          "benchmark_mean_difference_summary": {
+            "n": 13,
+            "sum": 2022.182,
+            "mean": 155.55246153846153,
+            "median": 139.59799999999998,
+            "p25": 117.759,
+            "p75": 189.03499999999997,
+            "min": 42.24600000000004,
+            "max": 269.086
+          },
+          "benchmark_mean_ratio_summary": {
+            "n": 13,
+            "sum": 37.000693804049526,
+            "mean": 2.8462072156961176,
+            "median": 2.1427370209151713,
+            "p25": 1.6284243048403706,
+            "p75": 3.6742235804136163,
+            "min": 1.1577555882506705,
+            "max": 7.72891159741637
+          }
+        }
+      },
+      "agent_minus_staged": {
+        "tokens": {
+          "pooled_mean_ratio": 0.7385067358177962,
+          "pooled_median_difference": -5238.0,
+          "unstratified_mannwhitney_p_descriptive_only": 0.00020297442323894126,
+          "benchmark_mean_difference_summary": {
+            "n": 13,
+            "sum": -482455.70000000007,
+            "mean": -37111.97692307692,
+            "median": -21965.600000000006,
+            "p25": -63950.600000000006,
+            "p75": -9442.300000000017,
+            "min": -144835.0,
+            "max": 10304.5
+          },
+          "benchmark_mean_ratio_summary": {
+            "n": 13,
+            "sum": 9.232678687158458,
+            "mean": 0.7102060528583429,
+            "median": 0.80024186924833,
+            "p25": 0.558446513486645,
+            "p75": 0.9420483496088294,
+            "min": 0.06289497486042091,
+            "max": 1.1172142246078602
+          }
+        },
+        "n_calls": {
+          "pooled_mean_ratio": 0.31558185404339256,
+          "pooled_median_difference": -8.0,
+          "unstratified_mannwhitney_p_descriptive_only": 1.1090239283676026e-43,
+          "benchmark_mean_difference_summary": {
+            "n": 13,
+            "sum": -104.1,
+            "mean": -8.007692307692308,
+            "median": -8.5,
+            "p25": -9.100000000000001,
+            "p75": -7.5,
+            "min": -10.7,
+            "max": -4.200000000000001
+          },
+          "benchmark_mean_ratio_summary": {
+            "n": 13,
+            "sum": 4.120019590031493,
+            "mean": 0.31692458384857636,
+            "median": 0.2945736434108527,
+            "p25": 0.2608695652173913,
+            "p75": 0.3802816901408451,
+            "min": 0.15730337078651685,
+            "max": 0.5483870967741935
+          }
+        },
+        "cumulative_elapsed_s": {
+          "pooled_mean_ratio": 0.3832127717055115,
+          "pooled_median_difference": -158.395,
+          "unstratified_mannwhitney_p_descriptive_only": 1.658289249884697e-25,
+          "benchmark_mean_difference_summary": {
+            "n": 13,
+            "sum": -2442.866,
+            "mean": -187.91276923076921,
+            "median": -184.84699999999998,
+            "p25": -200.045,
+            "p75": -134.805,
+            "min": -328.428,
+            "max": -98.911
+          },
+          "benchmark_mean_ratio_summary": {
+            "n": 13,
+            "sum": 4.75054563429388,
+            "mean": 0.3654265872533754,
+            "median": 0.4501316597130174,
+            "p25": 0.2992777178405795,
+            "p75": 0.48069092744884334,
+            "min": 0.08604306290136775,
+            "max": 0.5356695910205135
+          }
+        }
+      },
+      "qwen_direct_minus_direct": {
+        "tokens": {
+          "pooled_mean_ratio": 1.0969417502852206,
+          "pooled_median_difference": 15312.0,
+          "unstratified_mannwhitney_p_descriptive_only": 0.07828244207680901,
+          "benchmark_mean_difference_summary": {
+            "n": 13,
+            "sum": 62632.0,
+            "mean": 4817.846153846154,
+            "median": 5980.0,
+            "p25": -4089.899999999994,
+            "p75": 19023.800000000003,
+            "min": -42647.09999999999,
+            "max": 43500.2
+          },
+          "benchmark_mean_ratio_summary": {
+            "n": 13,
+            "sum": 21.492135960590993,
+            "mean": 1.6532412277377688,
+            "median": 1.1355269304946076,
+            "p25": 0.962097531274935,
+            "p75": 2.303661924555783,
+            "min": 0.4180126749492347,
+            "max": 3.8697477895725205
+          }
+        },
+        "n_calls": {
+          "pooled_mean_ratio": 1.1927083333333333,
+          "pooled_median_difference": 0.0,
+          "unstratified_mannwhitney_p_descriptive_only": 0.0003026613990319285,
+          "benchmark_mean_difference_summary": {
+            "n": 13,
+            "sum": 11.1,
+            "mean": 0.8538461538461538,
+            "median": 0.19999999999999996,
+            "p25": 0.0,
+            "p75": 1.4,
+            "min": 0.0,
+            "max": 3.9999999999999996
+          },
+          "benchmark_mean_ratio_summary": {
+            "n": 13,
+            "sum": 18.967055167055165,
+            "mean": 1.4590042436196282,
+            "median": 1.1111111111111112,
+            "p25": 1.0,
+            "p75": 1.3636363636363635,
+            "min": 1.0,
+            "max": 3.4999999999999996
+          }
+        },
+        "cumulative_elapsed_s": {
+          "pooled_mean_ratio": 4.706220646620388,
+          "pooled_median_difference": 561.47,
+          "unstratified_mannwhitney_p_descriptive_only": 3.181156561956889e-30,
+          "benchmark_mean_difference_summary": {
+            "n": 13,
+            "sum": 7184.316,
+            "mean": 552.6396923076923,
+            "median": 493.77399999999994,
+            "p25": 386.47499999999997,
+            "p75": 729.5120000000001,
+            "min": 122.54899999999999,
+            "max": 1168.6960000000001
+          },
+          "benchmark_mean_ratio_summary": {
+            "n": 13,
+            "sum": 82.8352416959564,
+            "mean": 6.371941668919723,
+            "median": 4.665034574076798,
+            "p25": 4.113541666666666,
+            "p75": 7.848507938758152,
+            "min": 1.6465277380957615,
+            "max": 18.281690474498376
+          }
+        }
+      }
+    },
+    "interpretation": "逐 benchmark 均值/中位数及 13 个 benchmark 的均值差/比摘要用于控制题目构成的描述；pooled Mann–Whitney U 未按 benchmark 分层，仅作辅助，不能解释为 workflow 或模型因果效应。"
+  },
+  "cross_model": {
+    "comparison": "Qwen Direct minus Flash Direct",
+    "overall": {
+      "qwen": {
+        "pass": 24,
+        "n": 130
+      },
+      "flash": {
+        "pass": 48,
+        "n": 130
+      },
+      "difference_pp": -18.46153846153846,
+      "newcombe95_pp": [
+        -28.76217082812158,
+        -7.606127775629309
+      ],
+      "pooled_fisher": {
+        "p_value": 0.00134146390423931,
+        "odds_ratio": 0.3867924528301887
+      },
+      "benchmark_stratified_cmh": {
+        "common_odds_ratio": 0.03614457831325302,
+        "chi_square": 28.649214659685864,
+        "p_value": 8.674916632951016e-08
+      }
+    },
+    "per_benchmark": {
+      "B1": {
+        "flash_pass": 10,
+        "qwen_pass": 6,
+        "qwen_minus_flash_count": -4,
+        "fisher": {
+          "p_value": 0.08668730650154799,
+          "odds_ratio": 0.0
+        }
+      },
+      "B2": {
+        "flash_pass": 10,
+        "qwen_pass": 1,
+        "qwen_minus_flash_count": -9,
+        "fisher": {
+          "p_value": 0.00011907597046915932,
+          "odds_ratio": 0.0
+        }
+      },
+      "B3": {
+        "flash_pass": 5,
+        "qwen_pass": 0,
+        "qwen_minus_flash_count": -5,
+        "fisher": {
+          "p_value": 0.032507739938080496,
+          "odds_ratio": 0.0
+        }
+      },
+      "B4": {
+        "flash_pass": 2,
+        "qwen_pass": 0,
+        "qwen_minus_flash_count": -2,
+        "fisher": {
+          "p_value": 0.4736842105263158,
+          "odds_ratio": 0.0
+        }
+      },
+      "B5": {
+        "flash_pass": 0,
+        "qwen_pass": 0,
+        "qwen_minus_flash_count": 0,
+        "fisher": {
+          "p_value": 1.0,
+          "odds_ratio": null
+        }
+      },
+      "B6": {
+        "flash_pass": 0,
+        "qwen_pass": 0,
+        "qwen_minus_flash_count": 0,
+        "fisher": {
+          "p_value": 1.0,
+          "odds_ratio": null
+        }
+      },
+      "B7": {
+        "flash_pass": 0,
+        "qwen_pass": 0,
+        "qwen_minus_flash_count": 0,
+        "fisher": {
+          "p_value": 1.0,
+          "odds_ratio": null
+        }
+      },
+      "B8": {
+        "flash_pass": 0,
+        "qwen_pass": 0,
+        "qwen_minus_flash_count": 0,
+        "fisher": {
+          "p_value": 1.0,
+          "odds_ratio": null
+        }
+      },
+      "B9": {
+        "flash_pass": 0,
+        "qwen_pass": 0,
+        "qwen_minus_flash_count": 0,
+        "fisher": {
+          "p_value": 1.0,
+          "odds_ratio": null
+        }
+      },
+      "B10": {
+        "flash_pass": 10,
+        "qwen_pass": 8,
+        "qwen_minus_flash_count": -2,
+        "fisher": {
+          "p_value": 0.4736842105263158,
+          "odds_ratio": 0.0
+        }
+      },
+      "B11": {
+        "flash_pass": 2,
+        "qwen_pass": 0,
+        "qwen_minus_flash_count": -2,
+        "fisher": {
+          "p_value": 0.4736842105263158,
+          "odds_ratio": 0.0
+        }
+      },
+      "B12": {
+        "flash_pass": 0,
+        "qwen_pass": 0,
+        "qwen_minus_flash_count": 0,
+        "fisher": {
+          "p_value": 1.0,
+          "odds_ratio": null
+        }
+      },
+      "B13": {
+        "flash_pass": 9,
+        "qwen_pass": 9,
+        "qwen_minus_flash_count": 0,
+        "fisher": {
+          "p_value": 1.0,
+          "odds_ratio": 1.0
+        }
+      }
+    },
+    "funnel_explicit_fields_only": {
+      "flash_direct": {
+        "n": 130,
+        "compile": 53,
+        "compile_assessed_n": 130,
+        "compile_true_field_n": 53,
+        "run": 47,
+        "run_assessed_n": 130,
+        "run_true_field_n": 47,
+        "equivalent": 48
+      },
+      "qwen_direct": {
+        "n": 130,
+        "compile": 112,
+        "compile_assessed_n": 130,
+        "compile_true_field_n": 112,
+        "run": 102,
+        "run_assessed_n": 130,
+        "run_true_field_n": 102,
+        "equivalent": 24
+      },
+      "note": "compile/run 分母分别为该 arm 中字段明确的 selected records；缺失字段不按失败补值。"
+    },
+    "environment_audit": {
+      "flash_full_agent_campaign_environment": {
+        "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "os_name": "nt"
+      },
+      "flash_provider_config": {
+        "provider": "openai",
+        "model": "deepseek-v4-flash",
+        "base_url": "https://api.deepseek.com/v1",
+        "max_tokens": 16384
+      },
+      "qwen_direct_campaign_environment": {
+        "python": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+        "platform": "Windows-11-10.0.22000-SP0",
+        "os_name": "nt"
+      },
+      "qwen_provider_config": {
+        "provider": "openai",
+        "model": "qwen-plus",
+        "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+        "max_tokens": 16384
+      }
+    },
+    "limitation": "这是受限描述性跨模型比较。两组来自不同 provider/endpoint、实验批次和运行环境；Python 版本、Windows build、执行时段及潜在基础设施差异均构成混杂，不能解释为纯模型因果效应。"
+  },
+  "cost_audit": {
+    "batch_meta_llm_calls_field": 656,
+    "batch_calls_parsed": 656,
+    "batch_calls_unattributed": 0,
+    "ambiguous_multi_hit_count": 3,
+    "ambiguous_multi_hit": [
+      {
+        "call": "results\\B4_v3_deepseek-v4-flash_direct_20260821_102243\\llm_calls\\call_041.json",
+        "window_indices": [
+          7,
+          8
+        ]
+      },
+      {
+        "call": "results\\B4_v3_deepseek-v4-flash_multiagent_20260821_110351\\llm_calls\\call_012.json",
+        "window_indices": [
+          0,
+          1
+        ]
+      },
+      {
+        "call": "results\\B4_v3_deepseek-v4-flash_multiagent_20260821_110351\\llm_calls\\call_072.json",
+        "window_indices": [
+          4,
+          5
+        ]
+      }
+    ],
+    "errored_calls_in_selected_runs": 0,
+    "time_definition": "cumulative elapsed is the sum of selected-repeat elapsed values; it is not end-to-end actual elapsed time.",
+    "call_parsing": "full json.load parsing for every call_*.json"
+  },
+  "validation": {
+    "expected": {
+      "flash_direct": 48,
+      "flash_staged": 51,
+      "flash_agent": 50,
+      "qwen_direct": 24,
+      "agent_compile": 120,
+      "agent_run": 116,
+      "qwen_compile": 112,
+      "qwen_run": 102
+    },
+    "actual": {
+      "flash_direct": 48,
+      "flash_staged": 51,
+      "flash_agent": 50,
+      "qwen_direct": 24,
+      "agent_compile": 120,
+      "agent_run": 116,
+      "qwen_compile": 112,
+      "qwen_run": 102
+    },
+    "all_match": true
+  },
+  "interpretation_guard": "13 个 benchmark 固定均衡分配且异质性强。pooled 检验与未分层 MWU 仅作描述性辅助；不能推广为未知 kernel 总体的平均 workflow 因果效应。跨模型比较还受 provider、endpoint、Python/OS/Windows build、执行环境与批次差异混杂，不能作纯模型因果解释。"
+}

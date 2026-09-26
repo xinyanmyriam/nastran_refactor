@@ -1,0 +1,133 @@
+{
+  "schema": "jss-holdout-p4-1",
+  "generated_utc": "2026-09-21T13:30:12.658450+00:00",
+  "note": "P4 retention aggregation. Conservative = kept_full / total canonical candidates (not_parameterizable/unverified not kept). Conditional = kept_full / retention_tested. bounds: lower = conservative; upper = (kept + untested) / total. candidate kept = retention_tested AND passes h1 AND h2 AND h3. Macro = mean over benchmarks with candidates; CI via benchmark-level bootstrap.",
+  "variants": [
+    "h1",
+    "h2",
+    "h3"
+  ],
+  "per_benchmark": [
+    {
+      "benchmark": "B1",
+      "total": 28,
+      "retention_tested": 10,
+      "adapter_unverified": 0,
+      "not_parameterizable": 18,
+      "kept_full": 9,
+      "adapter_coverage": 0.3571,
+      "conservative": 0.3214,
+      "conditional": 0.9,
+      "upper_bound": 0.9643,
+      "lower_bound": 0.3214
+    },
+    {
+      "benchmark": "B10",
+      "total": 38,
+      "retention_tested": 0,
+      "adapter_unverified": 0,
+      "not_parameterizable": 38,
+      "kept_full": 0,
+      "adapter_coverage": 0.0,
+      "conservative": 0.0,
+      "conditional": null,
+      "upper_bound": 1.0,
+      "lower_bound": 0.0
+    },
+    {
+      "benchmark": "B11",
+      "total": 13,
+      "retention_tested": 1,
+      "adapter_unverified": 0,
+      "not_parameterizable": 12,
+      "kept_full": 0,
+      "adapter_coverage": 0.0769,
+      "conservative": 0.0,
+      "conditional": 0.0,
+      "upper_bound": 0.9231,
+      "lower_bound": 0.0
+    },
+    {
+      "benchmark": "B13",
+      "total": 37,
+      "retention_tested": 10,
+      "adapter_unverified": 0,
+      "not_parameterizable": 27,
+      "kept_full": 0,
+      "adapter_coverage": 0.2703,
+      "conservative": 0.0,
+      "conditional": 0.0,
+      "upper_bound": 0.7297,
+      "lower_bound": 0.0
+    },
+    {
+      "benchmark": "B2",
+      "total": 30,
+      "retention_tested": 15,
+      "adapter_unverified": 0,
+      "not_parameterizable": 15,
+      "kept_full": 0,
+      "adapter_coverage": 0.5,
+      "conservative": 0.0,
+      "conditional": 0.0,
+      "upper_bound": 0.5,
+      "lower_bound": 0.0
+    },
+    {
+      "benchmark": "B3",
+      "total": 18,
+      "retention_tested": 18,
+      "adapter_unverified": 0,
+      "not_parameterizable": 0,
+      "kept_full": 7,
+      "adapter_coverage": 1.0,
+      "conservative": 0.3889,
+      "conditional": 0.3889,
+      "upper_bound": 0.3889,
+      "lower_bound": 0.3889
+    },
+    {
+      "benchmark": "B4",
+      "total": 6,
+      "retention_tested": 6,
+      "adapter_unverified": 0,
+      "not_parameterizable": 0,
+      "kept_full": 0,
+      "adapter_coverage": 1.0,
+      "conservative": 0.0,
+      "conditional": 0.0,
+      "upper_bound": 0.0,
+      "lower_bound": 0.0
+    },
+    {
+      "benchmark": "B7",
+      "total": 3,
+      "retention_tested": 3,
+      "adapter_unverified": 0,
+      "not_parameterizable": 0,
+      "kept_full": 0,
+      "adapter_coverage": 1.0,
+      "conservative": 0.0,
+      "conditional": 0.0,
+      "upper_bound": 0.0,
+      "lower_bound": 0.0
+    }
+  ],
+  "macro_conservative": 0.0888,
+  "macro_conservative_bootstrap95ci": [
+    0.0,
+    0.2093
+  ],
+  "macro_conditional": 0.1841,
+  "macro_upper_bound": 0.5633,
+  "micro_pooled": {
+    "total": 173,
+    "retention_tested": 63,
+    "kept_full": 16,
+    "adapter_coverage": 0.3642,
+    "conservative": 0.0925,
+    "conditional": 0.254,
+    "upper_bound": 0.7283,
+    "lower_bound": 0.0925
+  }
+}

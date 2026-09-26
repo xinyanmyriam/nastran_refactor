@@ -1,0 +1,2618 @@
+{
+  "protocol_note": "三臂均为 DeepSeek-V4-Flash、post-fix 冻结口径、每格 n=10；Direct/Staged 取 first-10-valid，Full Agent 取 frozen_v2 单一协议。",
+  "inputs": {
+    "gap_json": "results\\paper1_gap_to_n10_all_models.json",
+    "agent_summary": "results\\jss_full_agent_main\\jss_full_agent_main_n10_frozen_v2\\final_summary.json",
+    "agent_run_tag": "jss_full_agent_main_n10_frozen_v2"
+  },
+  "cost_audit": {
+    "agent_valid_attempts": 130,
+    "batch_meta_llm_calls_field": 656,
+    "batch_calls_parsed": 656,
+    "batch_calls_unattributed": 0,
+    "errored_calls_in_selected_runs": 0,
+    "token_accounting_note": "tokens_used 为统一 harness logger 记录；Full Agent 的 100k 为 char/3 估计的调用前闸门，最终调用可能超出；三臂同一记录口径，可横向比较但不等同供应商账单 token。"
+  },
+  "pass_matrix": {
+    "direct": {
+      "B1": 10,
+      "B2": 10,
+      "B3": 5,
+      "B4": 2,
+      "B5": 0,
+      "B6": 0,
+      "B7": 0,
+      "B8": 0,
+      "B9": 0,
+      "B10": 10,
+      "B11": 2,
+      "B12": 0,
+      "B13": 9
+    },
+    "staged": {
+      "B1": 10,
+      "B2": 10,
+      "B3": 5,
+      "B4": 1,
+      "B5": 0,
+      "B6": 0,
+      "B7": 3,
+      "B8": 0,
+      "B9": 0,
+      "B10": 10,
+      "B11": 3,
+      "B12": 0,
+      "B13": 9
+    },
+    "agent": {
+      "B1": 2,
+      "B2": 9,
+      "B3": 8,
+      "B4": 3,
+      "B5": 0,
+      "B6": 0,
+      "B7": 0,
+      "B8": 0,
+      "B9": 0,
+      "B10": 10,
+      "B11": 8,
+      "B12": 0,
+      "B13": 10
+    }
+  },
+  "overall": {
+    "totals": {
+      "direct": {
+        "pass": 48,
+        "n": 130,
+        "rate": 0.36923076923076925,
+        "cp95": [
+          0.2862995422334554,
+          0.45826375421140814
+        ]
+      },
+      "staged": {
+        "pass": 51,
+        "n": 130,
+        "rate": 0.3923076923076923,
+        "cp95": [
+          0.3078810045098774,
+          0.48175620409738296
+        ]
+      },
+      "agent": {
+        "pass": 50,
+        "n": 130,
+        "rate": 0.38461538461538464,
+        "cp95": [
+          0.3006653359745162,
+          0.4739470001552526
+        ]
+      }
+    },
+    "pairwise": {
+      "agent_minus_direct": {
+        "difference_count": 2,
+        "difference_pp": 1.5384615384615385,
+        "newcombe95_pp": [
+          -10.1217182731364,
+          13.140155446432544
+        ],
+        "pooled_fisher_p": 0.8982122060402085,
+        "pooled_odds_ratio": 1.0677083333333333,
+        "cmh": {
+          "common_odds_ratio": 1.1694915254237288,
+          "chi_square": 0.18999999999999997,
+          "p_value": 0.6629166175161068
+        },
+        "directions": {
+          "arm1_higher": 4,
+          "arm0_higher": 2,
+          "ties": 7,
+          "sign_test_p_excluding_ties": 0.6875
+        }
+      },
+      "staged_minus_direct": {
+        "difference_count": 3,
+        "difference_pp": 2.3076923076923075,
+        "newcombe95_pp": [
+          -9.387194378934359,
+          13.914466222126991
+        ],
+        "pooled_fisher_p": 0.7984601679596127,
+        "pooled_odds_ratio": 1.1028481012658229,
+        "cmh": {
+          "common_odds_ratio": 1.4545454545454546,
+          "chi_square": 0.5463258785942492,
+          "p_value": 0.4598228364198115
+        },
+        "directions": {
+          "arm1_higher": 2,
+          "arm0_higher": 1,
+          "ties": 10,
+          "sign_test_p_excluding_ties": 1.0
+        }
+      },
+      "agent_minus_staged": {
+        "difference_count": -1,
+        "difference_pp": -0.7692307692307693,
+        "newcombe95_pp": [
+          -12.449212652991607,
+          10.94036610737745
+        ],
+        "pooled_fisher_p": 1.0,
+        "pooled_odds_ratio": 0.9681372549019608,
+        "cmh": {
+          "common_odds_ratio": 0.9300699300699302,
+          "chi_square": 0.04328018223234625,
+          "p_value": 0.8351985971191118
+        },
+        "directions": {
+          "arm1_higher": 4,
+          "arm0_higher": 3,
+          "ties": 6,
+          "sign_test_p_excluding_ties": 1.0
+        }
+      }
+    }
+  },
+  "per_benchmark_pairwise_tests": [
+    {
+      "benchmark": "B1",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 2,
+      "arm0_pass": 10,
+      "difference_count": -8,
+      "odds_ratio": 0.0,
+      "fisher_p": 0.0007144558228149558,
+      "fisher_p_holm_39": 0.027863777089783277
+    },
+    {
+      "benchmark": "B2",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 9,
+      "arm0_pass": 10,
+      "difference_count": -1,
+      "odds_ratio": 0.0,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B3",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 8,
+      "arm0_pass": 5,
+      "difference_count": 3,
+      "odds_ratio": 4.0,
+      "fisher_p": 0.34984520123839014,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B4",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 3,
+      "arm0_pass": 2,
+      "difference_count": 1,
+      "odds_ratio": 1.7142857142857142,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B5",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B6",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B7",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B8",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B9",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B10",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 10,
+      "arm0_pass": 10,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B11",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 8,
+      "arm0_pass": 2,
+      "difference_count": 6,
+      "odds_ratio": 16.0,
+      "fisher_p": 0.023014137565221155,
+      "fisher_p_holm_39": 0.8515230899131827
+    },
+    {
+      "benchmark": "B12",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B13",
+      "arm1": "agent",
+      "arm0": "direct",
+      "arm1_pass": 10,
+      "arm0_pass": 9,
+      "difference_count": 1,
+      "odds_ratio": Infinity,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B1",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 10,
+      "arm0_pass": 10,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B2",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 10,
+      "arm0_pass": 10,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B3",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 5,
+      "arm0_pass": 5,
+      "difference_count": 0,
+      "odds_ratio": 1.0,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B4",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 1,
+      "arm0_pass": 2,
+      "difference_count": -1,
+      "odds_ratio": 0.4444444444444444,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B5",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B6",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B7",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 3,
+      "arm0_pass": 0,
+      "difference_count": 3,
+      "odds_ratio": Infinity,
+      "fisher_p": 0.21052631578947367,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B8",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B9",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B10",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 10,
+      "arm0_pass": 10,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B11",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 3,
+      "arm0_pass": 2,
+      "difference_count": 1,
+      "odds_ratio": 1.7142857142857142,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B12",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B13",
+      "arm1": "staged",
+      "arm0": "direct",
+      "arm1_pass": 9,
+      "arm0_pass": 9,
+      "difference_count": 0,
+      "odds_ratio": 1.0,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B1",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 2,
+      "arm0_pass": 10,
+      "difference_count": -8,
+      "odds_ratio": 0.0,
+      "fisher_p": 0.0007144558228149558,
+      "fisher_p_holm_39": 0.027863777089783277
+    },
+    {
+      "benchmark": "B2",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 9,
+      "arm0_pass": 10,
+      "difference_count": -1,
+      "odds_ratio": 0.0,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B3",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 8,
+      "arm0_pass": 5,
+      "difference_count": 3,
+      "odds_ratio": 4.0,
+      "fisher_p": 0.34984520123839014,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B4",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 3,
+      "arm0_pass": 1,
+      "difference_count": 2,
+      "odds_ratio": 3.857142857142857,
+      "fisher_p": 0.5820433436532508,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B5",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B6",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B7",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 0,
+      "arm0_pass": 3,
+      "difference_count": -3,
+      "odds_ratio": 0.0,
+      "fisher_p": 0.21052631578947367,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B8",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B9",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B10",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 10,
+      "arm0_pass": 10,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B11",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 8,
+      "arm0_pass": 3,
+      "difference_count": 5,
+      "odds_ratio": 9.333333333333334,
+      "fisher_p": 0.06977851869492736,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B12",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 0,
+      "arm0_pass": 0,
+      "difference_count": 0,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    },
+    {
+      "benchmark": "B13",
+      "arm1": "agent",
+      "arm0": "staged",
+      "arm1_pass": 10,
+      "arm0_pass": 9,
+      "difference_count": 1,
+      "odds_ratio": Infinity,
+      "fisher_p": 1.0,
+      "fisher_p_holm_39": 1.0
+    }
+  ],
+  "categories": {
+    "textbook_equivalent": {
+      "benchmarks": [
+        "B1",
+        "B2",
+        "B3",
+        "B10",
+        "B11",
+        "B13"
+      ],
+      "n_per_arm": 60,
+      "pass": {
+        "direct": 46,
+        "staged": 47,
+        "agent": 47
+      },
+      "pairwise": {
+        "agent_minus_direct": {
+          "difference_count": 1,
+          "fisher_p": 1.0,
+          "fisher_p_holm_9": 1.0
+        },
+        "staged_minus_direct": {
+          "difference_count": 1,
+          "fisher_p": 1.0,
+          "fisher_p_holm_9": 1.0
+        },
+        "agent_minus_staged": {
+          "difference_count": 0,
+          "fisher_p": 1.0,
+          "fisher_p_holm_9": 1.0
+        }
+      }
+    },
+    "moderate_departure": {
+      "benchmarks": [
+        "B4",
+        "B7",
+        "B8",
+        "B12"
+      ],
+      "n_per_arm": 40,
+      "pass": {
+        "direct": 2,
+        "staged": 4,
+        "agent": 3
+      },
+      "pairwise": {
+        "agent_minus_direct": {
+          "difference_count": 1,
+          "fisher_p": 1.0,
+          "fisher_p_holm_9": 1.0
+        },
+        "staged_minus_direct": {
+          "difference_count": 2,
+          "fisher_p": 0.6751602827552192,
+          "fisher_p_holm_9": 1.0
+        },
+        "agent_minus_staged": {
+          "difference_count": -1,
+          "fisher_p": 1.0,
+          "fisher_p_holm_9": 1.0
+        }
+      }
+    },
+    "severe_departure": {
+      "benchmarks": [
+        "B5",
+        "B6",
+        "B9"
+      ],
+      "n_per_arm": 30,
+      "pass": {
+        "direct": 0,
+        "staged": 0,
+        "agent": 0
+      },
+      "pairwise": {
+        "agent_minus_direct": {
+          "difference_count": 0,
+          "fisher_p": 1.0,
+          "fisher_p_holm_9": 1.0
+        },
+        "staged_minus_direct": {
+          "difference_count": 0,
+          "fisher_p": 1.0,
+          "fisher_p_holm_9": 1.0
+        },
+        "agent_minus_staged": {
+          "difference_count": 0,
+          "fisher_p": 1.0,
+          "fisher_p_holm_9": 1.0
+        }
+      }
+    }
+  },
+  "funnel": {
+    "agent": {
+      "compile": 120,
+      "run": 116,
+      "equivalent": 50,
+      "run_but_not_equivalent": 66,
+      "run_to_equivalence_gap_pp": 50.76923076923077
+    }
+  },
+  "cost": {
+    "per_arm": {
+      "direct": {
+        "tokens": {
+          "n": 130,
+          "sum": 6469374,
+          "mean": 49764.415384615386,
+          "median": 40914.5,
+          "p25": 12051.75,
+          "p75": 80581.75,
+          "min": 3566,
+          "max": 157515
+        },
+        "n_calls": {
+          "n": 130,
+          "sum": 577,
+          "mean": 4.438461538461539,
+          "median": 6.0,
+          "p25": 2.0,
+          "p75": 6.0,
+          "min": 1,
+          "max": 6
+        },
+        "elapsed_s": {
+          "n": 130,
+          "sum": 19384.48,
+          "mean": 149.11138461538462,
+          "median": 145.095,
+          "p25": 43.085,
+          "p75": 221.67,
+          "min": 10.56,
+          "max": 547.84
+        },
+        "tokens_passing_runs": {
+          "n": 48,
+          "mean": 10966.395833333334
+        },
+        "tokens_failing_runs": {
+          "n": 82,
+          "mean": 72475.4512195122
+        },
+        "runs_without_llm_calls_dir": 0
+      },
+      "staged": {
+        "tokens": {
+          "n": 130,
+          "sum": 18486874,
+          "mean": 142206.72307692308,
+          "median": 134954.0,
+          "p25": 89255.5,
+          "p75": 185343.5,
+          "min": 36316,
+          "max": 293845
+        },
+        "n_calls": {
+          "n": 130,
+          "sum": 1523,
+          "mean": 11.715384615384615,
+          "median": 12.0,
+          "p25": 10.0,
+          "p75": 14.0,
+          "min": 6,
+          "max": 15
+        },
+        "elapsed_s": {
+          "n": 130,
+          "sum": 39606.3,
+          "mean": 304.6638461538462,
+          "median": 294.115,
+          "p25": 192.565,
+          "p75": 396.1375,
+          "min": 68.57,
+          "max": 1411.47
+        },
+        "tokens_passing_runs": {
+          "n": 51,
+          "mean": 89710.09803921569
+        },
+        "tokens_failing_runs": {
+          "n": 79,
+          "mean": 176096.94936708861
+        },
+        "runs_without_llm_calls_dir": 0
+      },
+      "agent": {
+        "tokens": {
+          "n": 130,
+          "sum": 13625467,
+          "mean": 104811.28461538462,
+          "median": 129716.0,
+          "p25": 28083.25,
+          "p75": 154881.75,
+          "min": 2375,
+          "max": 296693
+        },
+        "n_calls": {
+          "n": 130,
+          "sum": 480,
+          "mean": 3.6923076923076925,
+          "median": 4.0,
+          "p25": 2.0,
+          "p75": 5.0,
+          "min": 1,
+          "max": 9
+        },
+        "elapsed_s": {
+          "n": 130,
+          "sum": 15177.64,
+          "mean": 116.75107692307692,
+          "median": 135.72,
+          "p25": 32.855000000000004,
+          "p75": 178.1875,
+          "min": 7.8,
+          "max": 386.44
+        },
+        "tokens_passing_runs": {
+          "n": 50,
+          "mean": 34953.54
+        },
+        "tokens_failing_runs": {
+          "n": 80,
+          "mean": 148472.375
+        },
+        "runs_without_llm_calls_dir": 0
+      }
+    },
+    "per_benchmark_mean": {
+      "B1": {
+        "direct": {
+          "tokens_mean": 14096,
+          "calls_mean": 2.6,
+          "elapsed_s_mean": 56.431999999999995
+        },
+        "staged": {
+          "tokens_mean": 82642.7,
+          "calls_mean": 9.3,
+          "elapsed_s_mean": 211.947
+        },
+        "agent": {
+          "tokens_mean": 92329.6,
+          "calls_mean": 5.1,
+          "elapsed_s_mean": 101.881
+        }
+      },
+      "B2": {
+        "direct": {
+          "tokens_mean": 16787.5,
+          "calls_mean": 1.6,
+          "elapsed_s_mean": 42.213
+        },
+        "staged": {
+          "tokens_mean": 77314.5,
+          "calls_mean": 7.1,
+          "elapsed_s_mean": 155.1
+        },
+        "agent": {
+          "tokens_mean": 61870.3,
+          "calls_mean": 2.7,
+          "elapsed_s_mean": 56.189
+        }
+      },
+      "B3": {
+        "direct": {
+          "tokens_mean": 24296.5,
+          "calls_mean": 4.4,
+          "elapsed_s_mean": 96.449
+        },
+        "staged": {
+          "tokens_mean": 121612.9,
+          "calls_mean": 11.5,
+          "elapsed_s_mean": 285.484
+        },
+        "agent": {
+          "tokens_mean": 67914.3,
+          "calls_mean": 3,
+          "elapsed_s_mean": 85.439
+        }
+      },
+      "B4": {
+        "direct": {
+          "tokens_mean": 34226.4,
+          "calls_mean": 5.3,
+          "elapsed_s_mean": 124.032
+        },
+        "staged": {
+          "tokens_mean": 138268.7,
+          "calls_mean": 14,
+          "elapsed_s_mean": 359.63800000000003
+        },
+        "agent": {
+          "tokens_mean": 144444.8,
+          "calls_mean": 5,
+          "elapsed_s_mean": 162.391
+        }
+      },
+      "B5": {
+        "direct": {
+          "tokens_mean": 97058.6,
+          "calls_mean": 6,
+          "elapsed_s_mean": 232.168
+        },
+        "staged": {
+          "tokens_mean": 247987.2,
+          "calls_mean": 13.9,
+          "elapsed_s_mean": 449.644
+        },
+        "agent": {
+          "tokens_mean": 184036.6,
+          "calls_mean": 3.9,
+          "elapsed_s_mean": 202.399
+        }
+      },
+      "B6": {
+        "direct": {
+          "tokens_mean": 107905.9,
+          "calls_mean": 6,
+          "elapsed_s_mean": 235.475
+        },
+        "staged": {
+          "tokens_mean": 233672.8,
+          "calls_mean": 13.4,
+          "elapsed_s_mean": 504.561
+        },
+        "agent": {
+          "tokens_mean": 168855.9,
+          "calls_mean": 3.7,
+          "elapsed_s_mean": 177.184
+        }
+      },
+      "B7": {
+        "direct": {
+          "tokens_mean": 50088.2,
+          "calls_mean": 6,
+          "elapsed_s_mean": 169.925
+        },
+        "staged": {
+          "tokens_mean": 134338.1,
+          "calls_mean": 12.8,
+          "elapsed_s_mean": 276.71
+        },
+        "agent": {
+          "tokens_mean": 144642.6,
+          "calls_mean": 5.1,
+          "elapsed_s_mean": 143.185
+        }
+      },
+      "B8": {
+        "direct": {
+          "tokens_mean": 82238.6,
+          "calls_mean": 6,
+          "elapsed_s_mean": 267.794
+        },
+        "staged": {
+          "tokens_mean": 156715.1,
+          "calls_mean": 12.9,
+          "elapsed_s_mean": 310.04
+        },
+        "agent": {
+          "tokens_mean": 144397.3,
+          "calls_mean": 3.8,
+          "elapsed_s_mean": 166.079
+        }
+      },
+      "B9": {
+        "direct": {
+          "tokens_mean": 59619.5,
+          "calls_mean": 6,
+          "elapsed_s_mean": 170.031
+        },
+        "staged": {
+          "tokens_mean": 175424.1,
+          "calls_mean": 13.2,
+          "elapsed_s_mean": 349.58
+        },
+        "agent": {
+          "tokens_mean": 153458.5,
+          "calls_mean": 4.7,
+          "elapsed_s_mean": 164.733
+        }
+      },
+      "B10": {
+        "direct": {
+          "tokens_mean": 3834.1,
+          "calls_mean": 1,
+          "elapsed_s_mean": 20.746
+        },
+        "staged": {
+          "tokens_mean": 74121.3,
+          "calls_mean": 9.7,
+          "elapsed_s_mean": 160.344
+        },
+        "agent": {
+          "tokens_mean": 12417.6,
+          "calls_mean": 1.8,
+          "elapsed_s_mean": 25.539
+        }
+      },
+      "B11": {
+        "direct": {
+          "tokens_mean": 73278.4,
+          "calls_mean": 5,
+          "elapsed_s_mean": 227.503
+        },
+        "staged": {
+          "tokens_mean": 175218,
+          "calls_mean": 13.4,
+          "elapsed_s_mean": 364.2
+        },
+        "agent": {
+          "tokens_mean": 30383,
+          "calls_mean": 2.7,
+          "elapsed_s_mean": 35.772
+        }
+      },
+      "B12": {
+        "direct": {
+          "tokens_mean": 76089.8,
+          "calls_mean": 6,
+          "elapsed_s_mean": 256.32
+        },
+        "staged": {
+          "tokens_mean": 162934.1,
+          "calls_mean": 12.2,
+          "elapsed_s_mean": 376.263
+        },
+        "agent": {
+          "tokens_mean": 153491.8,
+          "calls_mean": 5.1,
+          "elapsed_s_mean": 183.454
+        }
+      },
+      "B13": {
+        "direct": {
+          "tokens_mean": 7417.9,
+          "calls_mean": 1.8,
+          "elapsed_s_mean": 39.36
+        },
+        "staged": {
+          "tokens_mean": 68437.9,
+          "calls_mean": 8.9,
+          "elapsed_s_mean": 157.119
+        },
+        "agent": {
+          "tokens_mean": 4304.4,
+          "calls_mean": 1.4,
+          "elapsed_s_mean": 13.519
+        }
+      }
+    },
+    "pairwise": {
+      "agent_minus_direct": {
+        "tokens": {
+          "mean_ratio": 2.106149219383514,
+          "median_diff": 88801.5,
+          "mannwhitney_u_p": 4.36092859102986e-10,
+          "rank_biserial": 0.4478106508875739
+        },
+        "n_calls": {
+          "mean_ratio": 0.8318890814558059,
+          "median_diff": -2.0,
+          "mannwhitney_u_p": 1.4128149978570603e-05,
+          "rank_biserial": -0.30278106508875735
+        },
+        "elapsed_s": {
+          "mean_ratio": 0.782978960487978,
+          "median_diff": -9.375,
+          "mannwhitney_u_p": 0.04384472359467616,
+          "rank_biserial": -0.14467455621301772
+        }
+      },
+      "staged_minus_direct": {
+        "tokens": {
+          "mean_ratio": 2.8575985868184466,
+          "median_diff": 94039.5,
+          "mannwhitney_u_p": 1.7775876393848246e-27,
+          "rank_biserial": 0.7792899408284024
+        },
+        "n_calls": {
+          "mean_ratio": 2.6395147313691503,
+          "median_diff": 6.0,
+          "mannwhitney_u_p": 3.7551975395798794e-43,
+          "rank_biserial": 0.9660355029585799
+        },
+        "elapsed_s": {
+          "mean_ratio": 2.0431964128003433,
+          "median_diff": 149.02,
+          "mannwhitney_u_p": 8.627443076789082e-18,
+          "rank_biserial": 0.6164497041420118
+        }
+      },
+      "agent_minus_staged": {
+        "tokens": {
+          "mean_ratio": 0.7370346657850321,
+          "median_diff": -5238.0,
+          "mannwhitney_u_p": 0.00017343065240166386,
+          "rank_biserial": -0.2694674556213018
+        },
+        "n_calls": {
+          "mean_ratio": 0.3151674326986212,
+          "median_diff": -8.0,
+          "mannwhitney_u_p": 1.0974368693348163e-43,
+          "rank_biserial": -0.9903550295857988
+        },
+        "elapsed_s": {
+          "mean_ratio": 0.3832127717055115,
+          "median_diff": -158.395,
+          "mannwhitney_u_p": 1.658289249884697e-25,
+          "rank_biserial": -0.7489940828402366
+        }
+      }
+    },
+    "per_benchmark_rows": {
+      "B1": {
+        "direct": {
+          "tokens": [
+            20901,
+            10705,
+            15716,
+            6350,
+            21210,
+            11179,
+            11449,
+            26676,
+            6311,
+            10463
+          ],
+          "n_calls": [
+            4,
+            2,
+            3,
+            1,
+            4,
+            2,
+            2,
+            5,
+            1,
+            2
+          ],
+          "elapsed_s": [
+            88.96,
+            44.75,
+            69.96,
+            25.81,
+            106.32,
+            38.13,
+            42.77,
+            94.49,
+            22.29,
+            30.84
+          ]
+        },
+        "staged": {
+          "tokens": [
+            111374,
+            120763,
+            112505,
+            104263,
+            68344,
+            48072,
+            49824,
+            53820,
+            89377,
+            68085
+          ],
+          "n_calls": [
+            11,
+            12,
+            11,
+            12,
+            10,
+            6,
+            7,
+            8,
+            9,
+            7
+          ],
+          "elapsed_s": [
+            464.99,
+            315.34,
+            276.98,
+            286.97,
+            219.34,
+            83.41,
+            87.0,
+            102.66,
+            147.83,
+            134.95
+          ]
+        },
+        "agent": {
+          "tokens": [
+            112840,
+            139590,
+            27606,
+            133053,
+            128976,
+            28004,
+            132379,
+            41013,
+            21676,
+            158159
+          ],
+          "n_calls": [
+            6,
+            6,
+            4,
+            7,
+            5,
+            4,
+            5,
+            5,
+            3,
+            6
+          ],
+          "elapsed_s": [
+            113.05,
+            135.48,
+            23.89,
+            112.36,
+            182.51,
+            21.82,
+            187.28,
+            28.55,
+            32.79,
+            181.08
+          ]
+        }
+      },
+      "B2": {
+        "direct": {
+          "tokens": [
+            11841,
+            12047,
+            11800,
+            35958,
+            12045,
+            12066,
+            20365,
+            12491,
+            27521,
+            11741
+          ],
+          "n_calls": [
+            1,
+            1,
+            1,
+            4,
+            1,
+            1,
+            2,
+            1,
+            3,
+            1
+          ],
+          "elapsed_s": [
+            26.31,
+            26.93,
+            41.49,
+            94.6,
+            25.19,
+            34.89,
+            44.03,
+            27.28,
+            69.19,
+            32.22
+          ]
+        },
+        "staged": {
+          "tokens": [
+            144075,
+            97152,
+            50067,
+            62912,
+            51864,
+            60619,
+            59111,
+            79218,
+            110112,
+            58015
+          ],
+          "n_calls": [
+            9,
+            10,
+            6,
+            7,
+            6,
+            6,
+            6,
+            7,
+            8,
+            6
+          ],
+          "elapsed_s": [
+            328.5,
+            262.53,
+            120.84,
+            156.61,
+            124.91,
+            94.67,
+            100.15,
+            116.19,
+            158.03,
+            88.57
+          ]
+        },
+        "agent": {
+          "tokens": [
+            28673,
+            40153,
+            36143,
+            27618,
+            37029,
+            199951,
+            137312,
+            58835,
+            28321,
+            24668
+          ],
+          "n_calls": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            4,
+            5,
+            4,
+            2,
+            2
+          ],
+          "elapsed_s": [
+            27.77,
+            50.01,
+            39.34,
+            28.16,
+            43.02,
+            175.49,
+            93.1,
+            52.44,
+            24.07,
+            28.49
+          ]
+        }
+      },
+      "B3": {
+        "direct": {
+          "tokens": [
+            31743,
+            7765,
+            31906,
+            24440,
+            36265,
+            10959,
+            12193,
+            34928,
+            30802,
+            21964
+          ],
+          "n_calls": [
+            6,
+            1,
+            5,
+            4,
+            6,
+            2,
+            2,
+            6,
+            6,
+            6
+          ],
+          "elapsed_s": [
+            118.28,
+            25.92,
+            118.93,
+            99.65,
+            147.72,
+            40.28,
+            49.28,
+            147.38,
+            140.79,
+            76.26
+          ]
+        },
+        "staged": {
+          "tokens": [
+            187468,
+            59696,
+            120507,
+            120218,
+            152484,
+            143544,
+            79257,
+            81677,
+            141889,
+            129389
+          ],
+          "n_calls": [
+            11,
+            11,
+            13,
+            11,
+            15,
+            12,
+            11,
+            8,
+            10,
+            13
+          ],
+          "elapsed_s": [
+            534.83,
+            202.12,
+            347.38,
+            339.63,
+            437.22,
+            251.17,
+            139.77,
+            131.86,
+            215.67,
+            255.19
+          ]
+        },
+        "agent": {
+          "tokens": [
+            187406,
+            20858,
+            34480,
+            145932,
+            22964,
+            55449,
+            86932,
+            23093,
+            35343,
+            66686
+          ],
+          "n_calls": [
+            4,
+            2,
+            3,
+            4,
+            2,
+            4,
+            4,
+            2,
+            2,
+            3
+          ],
+          "elapsed_s": [
+            191.06,
+            28.57,
+            59.69,
+            184.28,
+            32.73,
+            63.28,
+            108.25,
+            33.2,
+            62.01,
+            91.32
+          ]
+        }
+      },
+      "B4": {
+        "direct": {
+          "tokens": [
+            22377,
+            44733,
+            37024,
+            34154,
+            14436,
+            47852,
+            29952,
+            37056,
+            42952,
+            31728
+          ],
+          "n_calls": [
+            3,
+            6,
+            6,
+            6,
+            2,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "elapsed_s": [
+            80.07,
+            183.55,
+            122.16,
+            129.62,
+            52.7,
+            177.17,
+            97.26,
+            122.83,
+            167.85,
+            107.11
+          ]
+        },
+        "staged": {
+          "tokens": [
+            95912,
+            145014,
+            162036,
+            185219,
+            162207,
+            139661,
+            137932,
+            122383,
+            155913,
+            76410
+          ],
+          "n_calls": [
+            12,
+            15,
+            15,
+            15,
+            15,
+            15,
+            12,
+            15,
+            15,
+            11
+          ],
+          "elapsed_s": [
+            267.78,
+            350.7,
+            450.56,
+            524.83,
+            409.79,
+            339.3,
+            320.92,
+            276.79,
+            400.44,
+            255.27
+          ]
+        },
+        "agent": {
+          "tokens": [
+            264361,
+            122099,
+            122100,
+            242199,
+            120738,
+            122099,
+            47266,
+            120771,
+            143342,
+            139473
+          ],
+          "n_calls": [
+            8,
+            4,
+            4,
+            9,
+            4,
+            4,
+            4,
+            4,
+            5,
+            4
+          ],
+          "elapsed_s": [
+            267.77,
+            163.75,
+            145.16,
+            261.13,
+            136.4,
+            167.74,
+            41.83,
+            188.31,
+            141.9,
+            109.92
+          ]
+        }
+      },
+      "B5": {
+        "direct": {
+          "tokens": [
+            61108,
+            77974,
+            70522,
+            61001,
+            78631,
+            81232,
+            142728,
+            157515,
+            135972,
+            103903
+          ],
+          "n_calls": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "elapsed_s": [
+            178.08,
+            242.17,
+            189.6,
+            174.27,
+            223.19,
+            231.13,
+            273.79,
+            293.36,
+            300.48,
+            215.61
+          ]
+        },
+        "staged": {
+          "tokens": [
+            293845,
+            238834,
+            237929,
+            233960,
+            278243,
+            275719,
+            190624,
+            221842,
+            282410,
+            226466
+          ],
+          "n_calls": [
+            15,
+            14,
+            14,
+            13,
+            15,
+            15,
+            12,
+            15,
+            15,
+            11
+          ],
+          "elapsed_s": [
+            517.19,
+            429.08,
+            378.62,
+            476.58,
+            448.56,
+            654.83,
+            371.37,
+            316.96,
+            468.58,
+            434.67
+          ]
+        },
+        "agent": {
+          "tokens": [
+            198139,
+            136097,
+            202557,
+            139554,
+            293039,
+            127850,
+            129246,
+            148647,
+            296693,
+            168544
+          ],
+          "n_calls": [
+            4,
+            3,
+            4,
+            3,
+            6,
+            3,
+            3,
+            3,
+            6,
+            4
+          ],
+          "elapsed_s": [
+            216.52,
+            177.31,
+            217.8,
+            137.74,
+            386.44,
+            147.85,
+            161.37,
+            133.4,
+            320.53,
+            125.03
+          ]
+        }
+      },
+      "B6": {
+        "direct": {
+          "tokens": [
+            88345,
+            76022,
+            92073,
+            130698,
+            70410,
+            114145,
+            145047,
+            119607,
+            103536,
+            139176
+          ],
+          "n_calls": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "elapsed_s": [
+            233.83,
+            202.53,
+            243.81,
+            289.98,
+            149.94,
+            248.76,
+            280.25,
+            210.76,
+            194.15,
+            300.74
+          ]
+        },
+        "staged": {
+          "tokens": [
+            274057,
+            175110,
+            271452,
+            251794,
+            221809,
+            274627,
+            192551,
+            285666,
+            143497,
+            246165
+          ],
+          "n_calls": [
+            15,
+            12,
+            13,
+            15,
+            13,
+            15,
+            11,
+            15,
+            11,
+            14
+          ],
+          "elapsed_s": [
+            483.88,
+            291.63,
+            438.96,
+            415.41,
+            413.33,
+            1411.47,
+            427.2,
+            500.2,
+            223.83,
+            439.7
+          ]
+        },
+        "agent": {
+          "tokens": [
+            192996,
+            195439,
+            158039,
+            158980,
+            130186,
+            188281,
+            195762,
+            141014,
+            183747,
+            144115
+          ],
+          "n_calls": [
+            4,
+            4,
+            4,
+            4,
+            3,
+            4,
+            4,
+            3,
+            4,
+            3
+          ],
+          "elapsed_s": [
+            203.19,
+            214.04,
+            135.8,
+            170.83,
+            169.87,
+            181.02,
+            195.97,
+            155.22,
+            178.78,
+            167.12
+          ]
+        }
+      },
+      "B7": {
+        "direct": {
+          "tokens": [
+            34001,
+            56887,
+            39542,
+            55118,
+            54786,
+            54579,
+            29585,
+            61285,
+            57111,
+            57988
+          ],
+          "n_calls": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "elapsed_s": [
+            84.74,
+            164.29,
+            115.13,
+            159.31,
+            158.9,
+            157.72,
+            74.65,
+            182.75,
+            165.66,
+            436.1
+          ]
+        },
+        "staged": {
+          "tokens": [
+            165046,
+            162649,
+            143868,
+            151227,
+            95366,
+            89215,
+            131976,
+            114797,
+            118343,
+            170894
+          ],
+          "n_calls": [
+            14,
+            14,
+            15,
+            15,
+            11,
+            9,
+            13,
+            12,
+            10,
+            15
+          ],
+          "elapsed_s": [
+            350.58,
+            320.22,
+            263.01,
+            296.6,
+            231.11,
+            206.98,
+            274.97,
+            249.22,
+            234.52,
+            339.89
+          ]
+        },
+        "agent": {
+          "tokens": [
+            173595,
+            119249,
+            140324,
+            132503,
+            164924,
+            144557,
+            160979,
+            135069,
+            138055,
+            137171
+          ],
+          "n_calls": [
+            4,
+            5,
+            5,
+            5,
+            5,
+            4,
+            6,
+            6,
+            6,
+            5
+          ],
+          "elapsed_s": [
+            198.45,
+            93.39,
+            193.02,
+            114.21,
+            168.8,
+            133.12,
+            152.21,
+            133.51,
+            87.1,
+            158.04
+          ]
+        }
+      },
+      "B8": {
+        "direct": {
+          "tokens": [
+            47955,
+            95550,
+            83958,
+            87445,
+            63656,
+            110517,
+            71054,
+            60202,
+            97286,
+            104763
+          ],
+          "n_calls": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "elapsed_s": [
+            142.81,
+            270.02,
+            241.48,
+            217.11,
+            155.95,
+            336.01,
+            547.84,
+            165.43,
+            298.34,
+            302.95
+          ]
+        },
+        "staged": {
+          "tokens": [
+            226920,
+            185602,
+            170540,
+            125586,
+            131944,
+            181440,
+            150046,
+            115263,
+            148380,
+            131430
+          ],
+          "n_calls": [
+            15,
+            14,
+            15,
+            11,
+            12,
+            14,
+            13,
+            12,
+            12,
+            11
+          ],
+          "elapsed_s": [
+            433.25,
+            339.52,
+            284.41,
+            288.1,
+            239.37,
+            383.23,
+            307.86,
+            212.0,
+            308.37,
+            304.29
+          ]
+        },
+        "agent": {
+          "tokens": [
+            132029,
+            130393,
+            170237,
+            127392,
+            173633,
+            154346,
+            128093,
+            129139,
+            158474,
+            140237
+          ],
+          "n_calls": [
+            4,
+            4,
+            5,
+            3,
+            4,
+            4,
+            3,
+            3,
+            4,
+            4
+          ],
+          "elapsed_s": [
+            154.04,
+            100.78,
+            206.01,
+            153.34,
+            199.24,
+            209.63,
+            163.87,
+            143.44,
+            194.8,
+            135.64
+          ]
+        }
+      },
+      "B9": {
+        "direct": {
+          "tokens": [
+            43670,
+            42287,
+            60375,
+            62391,
+            58423,
+            58888,
+            73941,
+            62037,
+            71854,
+            62329
+          ],
+          "n_calls": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "elapsed_s": [
+            150.09,
+            125.74,
+            153.75,
+            167.33,
+            158.13,
+            156.77,
+            215.36,
+            182.15,
+            215.83,
+            175.16
+          ]
+        },
+        "staged": {
+          "tokens": [
+            162483,
+            128323,
+            163969,
+            227272,
+            200160,
+            127214,
+            131213,
+            220033,
+            197217,
+            196357
+          ],
+          "n_calls": [
+            13,
+            11,
+            12,
+            15,
+            14,
+            11,
+            12,
+            15,
+            14,
+            15
+          ],
+          "elapsed_s": [
+            302.72,
+            280.66,
+            331.72,
+            476.15,
+            382.01,
+            272.79,
+            253.56,
+            468.25,
+            369.08,
+            358.86
+          ]
+        },
+        "agent": {
+          "tokens": [
+            192568,
+            160705,
+            131464,
+            147857,
+            156236,
+            166465,
+            130519,
+            123504,
+            154779,
+            170488
+          ],
+          "n_calls": [
+            6,
+            4,
+            5,
+            5,
+            5,
+            5,
+            5,
+            3,
+            4,
+            5
+          ],
+          "elapsed_s": [
+            199.65,
+            200.65,
+            137.59,
+            182.59,
+            155.5,
+            150.11,
+            156.25,
+            153.05,
+            163.41,
+            148.53
+          ]
+        }
+      },
+      "B10": {
+        "direct": {
+          "tokens": [
+            3921,
+            3846,
+            4012,
+            3841,
+            3591,
+            3882,
+            3945,
+            3688,
+            3801,
+            3814
+          ],
+          "n_calls": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "elapsed_s": [
+            24.04,
+            18.9,
+            22.15,
+            19.78,
+            17.95,
+            33.35,
+            18.25,
+            16.83,
+            18.07,
+            18.14
+          ]
+        },
+        "staged": {
+          "tokens": [
+            66537,
+            58274,
+            67098,
+            86477,
+            48346,
+            75141,
+            80855,
+            92268,
+            78974,
+            87243
+          ],
+          "n_calls": [
+            10,
+            9,
+            11,
+            10,
+            8,
+            9,
+            10,
+            10,
+            10,
+            10
+          ],
+          "elapsed_s": [
+            170.48,
+            151.22,
+            172.74,
+            206.0,
+            126.23,
+            153.51,
+            134.38,
+            177.3,
+            130.21,
+            181.37
+          ]
+        },
+        "agent": {
+          "tokens": [
+            15494,
+            12753,
+            15674,
+            15804,
+            3657,
+            12360,
+            13791,
+            15360,
+            15633,
+            3650
+          ],
+          "n_calls": [
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2,
+            2,
+            1
+          ],
+          "elapsed_s": [
+            26.69,
+            27.34,
+            25.43,
+            45.74,
+            11.84,
+            22.43,
+            23.09,
+            25.79,
+            24.86,
+            22.18
+          ]
+        }
+      },
+      "B11": {
+        "direct": {
+          "tokens": [
+            96593,
+            96557,
+            96017,
+            4394,
+            5103,
+            66936,
+            102281,
+            82019,
+            96521,
+            86363
+          ],
+          "n_calls": [
+            6,
+            6,
+            6,
+            1,
+            1,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "elapsed_s": [
+            299.25,
+            286.2,
+            301.76,
+            18.59,
+            10.56,
+            185.26,
+            312.78,
+            236.12,
+            293.72,
+            330.79
+          ]
+        },
+        "staged": {
+          "tokens": [
+            181937,
+            150826,
+            127668,
+            112276,
+            184621,
+            199276,
+            221004,
+            223806,
+            185385,
+            165381
+          ],
+          "n_calls": [
+            14,
+            12,
+            11,
+            10,
+            15,
+            15,
+            15,
+            15,
+            14,
+            13
+          ],
+          "elapsed_s": [
+            405.27,
+            371.14,
+            232.53,
+            189.38,
+            340.05,
+            432.59,
+            480.32,
+            454.34,
+            366.46,
+            369.92
+          ]
+        },
+        "agent": {
+          "tokens": [
+            18206,
+            38177,
+            18175,
+            36170,
+            65919,
+            16359,
+            44251,
+            15015,
+            15262,
+            36296
+          ],
+          "n_calls": [
+            2,
+            3,
+            2,
+            4,
+            3,
+            2,
+            4,
+            2,
+            2,
+            3
+          ],
+          "elapsed_s": [
+            26.92,
+            43.32,
+            36.78,
+            33.05,
+            66.32,
+            31.67,
+            43.26,
+            21.33,
+            19.18,
+            35.89
+          ]
+        }
+      },
+      "B12": {
+        "direct": {
+          "tokens": [
+            25588,
+            27773,
+            29096,
+            98661,
+            99535,
+            84077,
+            99099,
+            99099,
+            98871,
+            99099
+          ],
+          "n_calls": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "elapsed_s": [
+            93.73,
+            107.59,
+            102.12,
+            325.75,
+            328.67,
+            277.71,
+            333.44,
+            328.56,
+            342.08,
+            323.55
+          ]
+        },
+        "staged": {
+          "tokens": [
+            186440,
+            102404,
+            155932,
+            175206,
+            129876,
+            119704,
+            236297,
+            170908,
+            188060,
+            164514
+          ],
+          "n_calls": [
+            12,
+            11,
+            12,
+            12,
+            11,
+            11,
+            14,
+            15,
+            12,
+            12
+          ],
+          "elapsed_s": [
+            432.16,
+            251.17,
+            350.17,
+            419.83,
+            321.28,
+            282.94,
+            536.52,
+            374.91,
+            429.67,
+            363.98
+          ]
+        },
+        "agent": {
+          "tokens": [
+            156989,
+            152951,
+            155952,
+            154916,
+            153213,
+            154309,
+            138895,
+            153754,
+            155805,
+            158134
+          ],
+          "n_calls": [
+            5,
+            6,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "elapsed_s": [
+            196.38,
+            166.65,
+            178.48,
+            207.72,
+            156.23,
+            202.1,
+            143.96,
+            187.08,
+            180.59,
+            215.35
+          ]
+        }
+      },
+      "B13": {
+        "direct": {
+          "tokens": [
+            3813,
+            3566,
+            7178,
+            3853,
+            3595,
+            12384,
+            3668,
+            3645,
+            28541,
+            3936
+          ],
+          "n_calls": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            3,
+            1,
+            1,
+            6,
+            1
+          ],
+          "elapsed_s": [
+            33.2,
+            18.38,
+            33.17,
+            38.24,
+            51.41,
+            59.23,
+            22.92,
+            16.3,
+            103.01,
+            17.74
+          ]
+        },
+        "staged": {
+          "tokens": [
+            61392,
+            101209,
+            103233,
+            60610,
+            68973,
+            69588,
+            36316,
+            42137,
+            49018,
+            91903
+          ],
+          "n_calls": [
+            8,
+            11,
+            10,
+            12,
+            9,
+            9,
+            6,
+            7,
+            8,
+            9
+          ],
+          "elapsed_s": [
+            163.55,
+            254.22,
+            255.61,
+            186.18,
+            184.42,
+            117.96,
+            68.57,
+            77.19,
+            109.14,
+            154.35
+          ]
+        },
+        "agent": {
+          "tokens": [
+            2746,
+            2375,
+            2375,
+            2375,
+            6393,
+            2861,
+            2837,
+            2845,
+            6530,
+            11707
+          ],
+          "n_calls": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            2,
+            3
+          ],
+          "elapsed_s": [
+            20.17,
+            9.25,
+            7.8,
+            7.95,
+            12.94,
+            10.92,
+            11.12,
+            20.17,
+            12.11,
+            22.76
+          ]
+        }
+      }
+    }
+  },
+  "interpretation_guard": "13 个 benchmark 固定均衡分配、强异质性；pooled 数字为描述性，不能解释为对未知 kernel 总体的平均策略因果效应。成本对比中 Staged 与 Full Agent 控制策略不同，Mann-Whitney 仅为描述性辅助。"
+}

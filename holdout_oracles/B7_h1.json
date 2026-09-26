@@ -1,0 +1,197 @@
+{
+  "_schema_version": "jss-holdout-oracle-1",
+  "_benchmark": "B7",
+  "_variant": "h1",
+  "_generated_utc": "2026-09-21T10:31:25.331410+00:00",
+  "_method": "parameterised Fortran driver + unmodified NASTRAN kernel",
+  "_toolchain": {
+    "gfortran": "C:\\Users\\lxy\\w64devkit\\bin\\gfortran.exe",
+    "flags": [
+      "-ffixed-form",
+      "-std=legacy",
+      "-w",
+      "-fallow-argument-mismatch"
+    ]
+  },
+  "_kernel_sha256": {
+    "ktetra.f": "7b961ea1d51ff516ce171f56679a5bf95bf9a8a64a3422688951cee53cdee58e",
+    "inverd.f": "91b50c6a12f46831fbfbf8d50189dbc70d276602261c4f99943a7cafb262c1b5",
+    "gmmatd.f": "c88ef91e774d9c50b35612f8a84f7b398c404a8d9ea539bcbae442e70466e6ed"
+  },
+  "_driver_source": {
+    "driver.f": "      PROGRAM HOLDTETRA\n      IMPLICIT NONE\n      REAL ECPT(100)\n      INTEGER NECPT(100)\n      EQUIVALENCE (NECPT(1), ECPT(1))\n      COMMON /SMA1ET/ ECPT\n      DOUBLE PRECISION C(72), G(36), H(16), TEMP(12), T(9)\n      DOUBLE PRECISION CT(18), GCT(18), KIJ(36)\n      DOUBLE PRECISION HDETER, TEMP1, TVOL\n      INTEGER NGPT, DIREC, KOUNT\n      COMMON /SMA1DP/ C, G, H, TEMP, T, CT, GCT, KIJ,\n     1                HDETER, TEMP1, NGPT, DIREC, KOUNT, TVOL\n      LOGICAL HEAT\n      COMMON /SMA1HT/ HEAT\n      LOGICAL HYDRO\n      COMMON /HYDROE/ HYDRO\n      INTEGER MATID, INFLAG\n      REAL ELTEMP\n      COMMON /MATIN / MATID, INFLAG, ELTEMP\n      REAL E, GG, NU, RHO, ALPHA, TSUB0, GSUBE\n      REAL SIGT, SIGC, SIGS\n      COMMON /MATOUT/ E, GG, NU, RHO, ALPHA, TSUB0, GSUBE,\n     1                SIGT, SIGC, SIGS\n      REAL MATBUF(7)\n      COMMON /HMTOUT/ MATBUF\n      INTEGER IOPT4, K4GGSW, NPVT, ISKP(17)\n      LOGICAL NOGOO\n      COMMON /SMA1CL/ IOPT4, K4GGSW, NPVT, ISKP, NOGOO\n      REAL DUM1(10), IFKGG, DUM2(1), IF4GG, DUM3(23)\n      COMMON /SMA1IO/ DUM1, IFKGG, DUM2, IF4GG, DUM3\n      INTEGER SYSBUF, OUT\n      LOGICAL NOGO\n      COMMON /SYSTEM/ SYSBUF, OUT, NOGO\n      INTEGER MACH\n      COMMON /MACHIN/ MACH\n      REAL SKIP(16), VOLUME, SURFAC\n      COMMON /BLANK / SKIP, VOLUME, SURFAC\n      DOUBLE PRECISION KFULL(12,12)\n      INTEGER IPVT, I, J\n      MACH = 1\n      OUT = 6\n      SYSBUF = 1\n      NOGO = .FALSE.\n      HEAT = .FALSE.\n      HYDRO = .FALSE.\n      NOGOO = .FALSE.\n      IOPT4 = 0\n      K4GGSW = 0\n      VOLUME = 0.0\n      SURFAC = 0.0\n      DO 5 I = 1, 10\n        DUM1(I) = 0.0\n    5 CONTINUE\n      IFKGG = 0.0\n      DUM2(1) = 0.0\n      IF4GG = 0.0\n      DO 6 I = 1, 23\n        DUM3(I) = 0.0\n    6 CONTINUE\n      DO 10 I = 1, 100\n        ECPT(I) = 0.0\n   10 CONTINUE\n      NECPT(1) = 1\n      NECPT(2) = 1\n      NECPT(3) = 101\n      NECPT(4) = 102\n      NECPT(5) = 103\n      NECPT(6) = 104\n      NECPT(7) = 0\n      ECPT(8) = 0\n      ECPT(9) = 0\n      ECPT(10) = 0\n      NECPT(11) = 0\n      ECPT(12) = 1\n      ECPT(13) = 0\n      ECPT(14) = 0\n      NECPT(15) = 0\n      ECPT(16) = 0\n      ECPT(17) = 1\n      ECPT(18) = 0\n      NECPT(19) = 0\n      ECPT(20) = 0\n      ECPT(21) = 0\n      ECPT(22) = 1\n      ECPT(23) = 0.0\n      DO 20 I = 1, 12\n        DO 15 J = 1, 12\n          KFULL(I,J) = 0.0D0\n   15   CONTINUE\n   20 CONTINUE\n      DO 100 IPVT = 1, 4\n        NPVT = NECPT(IPVT + 2)\n        NECPT(1) = IPVT\n        CALL KTETRA(0, 0)\n  100 CONTINUE\n      CALL GET_KMATRIX(KFULL)\n      WRITE(6,'(A1)') 'S'\n      DO 200 I = 1, 12\n        WRITE(6,300) (KFULL(I,J), J = 1, 12)\n  200 CONTINUE\n  300 FORMAT (12(1X,E16.9))\n      STOP\n      END",
+    "stubs.f": "      BLOCK DATA CAPTUREDATA\n      IMPLICIT NONE\n      DOUBLE PRECISION KSTORE(3,3,4,4)\n      INTEGER NBLOCKS\n      COMMON /CAPTURE/ KSTORE, NBLOCKS\n      DATA NBLOCKS /0/\n      DATA KSTORE /144*0.0D0/\n      END\n      SUBROUTINE MAT (IELID)\n      IMPLICIT NONE\n      INTEGER IELID\n      INTEGER MATID, INFLAG\n      REAL ELTEMP\n      COMMON /MATIN / MATID, INFLAG, ELTEMP\n      REAL E, GG, NU, RHO, ALPHA, TSUB0, GSUBE\n      REAL SIGT, SIGC, SIGS\n      COMMON /MATOUT/ E, GG, NU, RHO, ALPHA, TSUB0, GSUBE,\n     1                SIGT, SIGC, SIGS\n      E = 7.1e+10\n      NU = 0.34\n      GG = 2.649253731e+10\n      RHO = 0.0\n      ALPHA = 0.0\n      TSUB0 = 0.0\n      GSUBE = 0.0\n      SIGT = 0.0\n      SIGC = 0.0\n      SIGS = 0.0\n      RETURN\n      END\n      SUBROUTINE SMA1B (KIJ, IGRID, ICODE, IFFILE, FACTOR)\n      IMPLICIT NONE\n      DOUBLE PRECISION KIJ(6,6), FACTOR\n      INTEGER IGRID, ICODE, IFFILE\n      DOUBLE PRECISION KSTORE(3,3,4,4)\n      INTEGER NBLOCKS\n      COMMON /CAPTURE/ KSTORE, NBLOCKS\n      REAL ECPT(100)\n      INTEGER NECPT(100)\n      EQUIVALENCE (NECPT(1), ECPT(1))\n      COMMON /SMA1ET/ ECPT\n      INTEGER IOPT4, K4GGSW, NPVT, ISKP(17)\n      LOGICAL NOGOO\n      COMMON /SMA1CL/ IOPT4, K4GGSW, NPVT, ISKP, NOGOO\n      INTEGER I, J, IPVT, IGRP\n      IF (FACTOR .NE. 0.0D0) RETURN\n      DO 10 IPVT = 1, 4\n        IF (NPVT .EQ. NECPT(IPVT+2)) GO TO 20\n   10 CONTINUE\n      RETURN\n   20 DO 30 IGRP = 1, 4\n        IF (IGRID .EQ. NECPT(IGRP+2)) GO TO 40\n   30 CONTINUE\n      RETURN\n   40 DO 50 I = 1, 3\n        DO 50 J = 1, 3\n          KSTORE(I, J, IPVT, IGRP) = KIJ(I, J)\n   50 CONTINUE\n      RETURN\n      END\n      SUBROUTINE GET_KMATRIX (KFULL)\n      IMPLICIT NONE\n      DOUBLE PRECISION KFULL(12,12)\n      DOUBLE PRECISION KSTORE(3,3,4,4)\n      INTEGER NBLOCKS\n      COMMON /CAPTURE/ KSTORE, NBLOCKS\n      INTEGER I, J, IPVT, IGRP, IROW, ICOL\n      DO 100 IPVT = 1, 4\n        DO 90 IGRP = 1, 4\n          DO 80 I = 1, 3\n            DO 80 J = 1, 3\n              IROW = (IPVT-1)*3 + I\n              ICOL = (IGRP-1)*3 + J\n              KFULL(IROW, ICOL) = KSTORE(I, J, IPVT, IGRP)\n   80         CONTINUE\n   90       CONTINUE\n  100 CONTINUE\n      RETURN\n      END\n      SUBROUTINE TRANSD (ICSID, T)\n      IMPLICIT NONE\n      INTEGER ICSID\n      DOUBLE PRECISION T(9)\n      T(1)=1.0D0; T(2)=0.0D0; T(3)=0.0D0\n      T(4)=0.0D0; T(5)=1.0D0; T(6)=0.0D0\n      T(7)=0.0D0; T(8)=0.0D0; T(9)=1.0D0\n      RETURN\n      END\n      SUBROUTINE MESAGE (ICODE, IMSG, IPARM)\n      IMPLICIT NONE\n      INTEGER ICODE, IMSG, IPARM(2)\n      INTEGER OUT, SYSBUF\n      LOGICAL NOGO\n      COMMON /SYSTEM/ SYSBUF, OUT, NOGO\n      WRITE(OUT,900) ICODE, IMSG\n  900 FORMAT(' MESAGE code=',I6,' msg=',I6)\n      RETURN\n      END\n      SUBROUTINE WRITE (IFILE, BUF, NWORDS, IFLG)\n      IMPLICIT NONE\n      INTEGER IFILE, NWORDS, IFLG\n      REAL BUF(1)\n      RETURN\n      END\n      SUBROUTINE HMAT (NECPT)\n      IMPLICIT NONE\n      INTEGER NECPT(4)\n      REAL MATBUF(7)\n      COMMON /HMTOUT/ MATBUF\n      MATBUF(1) = 50.0\n      RETURN\n      END"
+  },
+  "_result": {
+    "matrix": [
+      [
+        27044464500.0,
+        13798196400.0,
+        13798196400.0,
+        -18213618900.0,
+        -9382773620.0,
+        -9382773620.0,
+        -4415422810.0,
+        -4415422810.0,
+        0.0,
+        -4415422810.0,
+        0.0,
+        -4415422810.0
+      ],
+      [
+        13798196400.0,
+        27044464500.0,
+        13798196400.0,
+        -4415422810.0,
+        -4415422810.0,
+        0.0,
+        -9382773620.0,
+        -18213618900.0,
+        -9382773620.0,
+        0.0,
+        -4415422810.0,
+        -4415422810.0
+      ],
+      [
+        13798196400.0,
+        13798196400.0,
+        27044464500.0,
+        -4415422810.0,
+        0.0,
+        -4415422810.0,
+        0.0,
+        -4415422810.0,
+        -4415422810.0,
+        -9382773620.0,
+        -9382773620.0,
+        -18213618900.0
+      ],
+      [
+        -18213618900.0,
+        -4415422810.0,
+        -4415422810.0,
+        18213618900.0,
+        0.0,
+        0.0,
+        0.0,
+        4415422810.0,
+        0.0,
+        0.0,
+        0.0,
+        4415422810.0
+      ],
+      [
+        -9382773620.0,
+        -4415422810.0,
+        0.0,
+        0.0,
+        4415422810.0,
+        0.0,
+        9382773620.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        -9382773620.0,
+        0.0,
+        -4415422810.0,
+        0.0,
+        0.0,
+        4415422810.0,
+        0.0,
+        0.0,
+        0.0,
+        9382773620.0,
+        0.0,
+        0.0
+      ],
+      [
+        -4415422810.0,
+        -9382773620.0,
+        0.0,
+        0.0,
+        9382773620.0,
+        0.0,
+        4415422810.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        -4415422810.0,
+        -18213618900.0,
+        -4415422810.0,
+        4415422810.0,
+        0.0,
+        0.0,
+        0.0,
+        18213618900.0,
+        0.0,
+        0.0,
+        0.0,
+        4415422810.0
+      ],
+      [
+        0.0,
+        -9382773620.0,
+        -4415422810.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        4415422810.0,
+        0.0,
+        9382773620.0,
+        0.0
+      ],
+      [
+        -4415422810.0,
+        0.0,
+        -9382773620.0,
+        0.0,
+        0.0,
+        9382773620.0,
+        0.0,
+        0.0,
+        0.0,
+        4415422810.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        -4415422810.0,
+        -9382773620.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        9382773620.0,
+        0.0,
+        4415422810.0,
+        0.0
+      ],
+      [
+        -4415422810.0,
+        -4415422810.0,
+        -18213618900.0,
+        4415422810.0,
+        0.0,
+        0.0,
+        0.0,
+        4415422810.0,
+        0.0,
+        0.0,
+        0.0,
+        18213618900.0
+      ]
+    ]
+  }
+}

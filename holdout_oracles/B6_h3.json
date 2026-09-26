@@ -1,0 +1,198 @@
+{
+  "_schema_version": "jss-holdout-oracle-1",
+  "_benchmark": "B6",
+  "_variant": "h3",
+  "_generated_utc": "2026-09-21T10:31:32.477305+00:00",
+  "_method": "parameterised Fortran driver + unmodified NASTRAN kernel",
+  "_toolchain": {
+    "gfortran": "C:\\Users\\lxy\\w64devkit\\bin\\gfortran.exe",
+    "flags": [
+      "-ffixed-form",
+      "-std=legacy",
+      "-w",
+      "-fallow-argument-mismatch"
+    ]
+  },
+  "_kernel_sha256": {
+    "kqdplt.f": "bce9bc69220619c81a4751e2533da30c0a481160432c9e3fa562705bd11cb282",
+    "ktrbsc.f": "dcb93f867821ce28a4906f00712a47a8da10826c7a3e81d70345bb7be0128800",
+    "inverd.f": "91b50c6a12f46831fbfbf8d50189dbc70d276602261c4f99943a7cafb262c1b5",
+    "gmmatd.f": "c88ef91e774d9c50b35612f8a84f7b398c404a8d9ea539bcbae442e70466e6ed"
+  },
+  "_driver_source": {
+    "driver.f": "      PROGRAM HOLDKQDPLT\n      IMPLICIT NONE\n      REAL ECPT(100)\n      INTEGER NECPT(100)\n      EQUIVALENCE (NECPT(1), ECPT(1))\n      COMMON /SMA1ET/ ECPT\n      REAL CONSTS(5)\n      COMMON /CONDAS/ CONSTS\n      REAL DUM1(10)\n      INTEGER IFKGG\n      REAL DUM2(1)\n      INTEGER IF4GG\n      REAL DUM3(23)\n      COMMON /SMA1IO/ DUM1, IFKGG, DUM2, IF4GG, DUM3\n      INTEGER IOPT4, K4GGSW, NPVT\n      REAL DUMCL(7)\n      INTEGER LINK(10), IDETCK\n      REAL DODET\n      INTEGER NOGO\n      COMMON /SMA1CL/ IOPT4, K4GGSW, NPVT, DUMCL, LINK,\n     1  IDETCK, DODET, NOGO\n      DOUBLE PRECISION DPWORK(1000)\n      COMMON /SMA1DP/ DPWORK\n      DOUBLE PRECISION KSTORE(6,6,4,4)\n      INTEGER CURPVT, NPVTS\n      COMMON /CAPTUREP/ KSTORE, CURPVT, NPVTS\n      DOUBLE PRECISION K12(12,12)\n      REAL ECPT_SAVE(100)\n      INTEGER IPVT, IGRP, I, J, II, JJ\n      CONSTS(4) = 3.14159265358979D0 / 180.0D0\n      IOPT4 = 0\n      K4GGSW = 0\n      NOGO = 0\n      IDETCK = 0\n      DODET = 0.0\n      IFKGG = 0\n      IF4GG = 0\n      NPVTS = 4\n      DO 10 I = 1, 100\n        ECPT(I) = 0.0\n   10 CONTINUE\n      NECPT(1) = 1001\n      NECPT(2) = 101\n      NECPT(3) = 102\n      NECPT(4) = 103\n      NECPT(5) = 104\n      ECPT(6) = 0.0\n      NECPT(7) = 1\n      ECPT(8) = 6.075e-08\n      NECPT(9) = 0\n      ECPT(10) = 0.0\n      ECPT(11) = 0.0\n      ECPT(12) = -0.0045\n      ECPT(13) = 0.0045\n      NECPT(14) = 0\n      ECPT(15) = 0\n      ECPT(16) = 0\n      ECPT(17) = 0\n      NECPT(18) = 0\n      ECPT(19) = 1.3\n      ECPT(20) = 0.1\n      ECPT(21) = 0\n      NECPT(22) = 0\n      ECPT(23) = 1.1\n      ECPT(24) = 1.2\n      ECPT(25) = 0\n      NECPT(26) = 0\n      ECPT(27) = 0.2\n      ECPT(28) = 1\n      ECPT(29) = 0\n      ECPT(30) = 20.0\n      DO 15 I = 1, 100\n        ECPT_SAVE(I) = ECPT(I)\n   15 CONTINUE\n      DO 100 IPVT = 1, 4\n        DO 20 I = 1, 100\n          ECPT(I) = ECPT_SAVE(I)\n   20   CONTINUE\n        NPVT = NECPT(IPVT + 1)\n        CALL KQDPLT\n  100 CONTINUE\n      DO 200 IPVT = 1, 4\n        DO 200 IGRP = 1, 4\n          DO 200 II = 1, 3\n            DO 200 JJ = 1, 3\n              K12(3*(IPVT-1)+II, 3*(IGRP-1)+JJ) =\n     1          KSTORE(II+2, JJ+2, IPVT, IGRP)\n  200 CONTINUE\n      WRITE(6,'(A1)') 'S'\n      DO 300 I = 1, 12\n        WRITE(6,310) (K12(I,J), J = 1, 12)\n  300 CONTINUE\n  310 FORMAT (12(1X,E16.9))\n      STOP\n      END",
+    "stubs.f": "      BLOCK DATA CAPTUREDATAP\n      IMPLICIT NONE\n      DOUBLE PRECISION KSTORE(6,6,4,4)\n      INTEGER CURPVT, NPVTS\n      COMMON /CAPTUREP/ KSTORE, CURPVT, NPVTS\n      DATA CURPVT /0/\n      DATA NPVTS /0/\n      DATA KSTORE /576*0.0D0/\n      END\n      SUBROUTINE MAT (IELID)\n      IMPLICIT NONE\n      INTEGER IELID\n      INTEGER MATID, INFLAG\n      REAL ELTEMP, STRESS, SINTH, COSTH\n      COMMON /MATIN / MATID, INFLAG, ELTEMP, STRESS,\n     1  SINTH, COSTH\n      REAL G11, G12, G13, G22, G23, G33, RHO\n      REAL ALPHA1, ALPHA2, ALP12, TSUB0, GSUBE\n      REAL SIGTEN, SIGCOM, SIGSHE\n      REAL G2X211, G2X212, G2X222\n      COMMON /MATOUT/ G11, G12, G13, G22, G23, G33, RHO,\n     1  ALPHA1, ALPHA2, ALP12, TSUB0, GSUBE,\n     2  SIGTEN, SIGCOM, SIGSHE, G2X211, G2X212, G2X222\n      REAL EE, NU, FAC\n      EE = 1.9e+11\n      NU = 0.26\n      IF (INFLAG .EQ. 3) THEN\n        G2X211 = 0.0\n        G2X212 = 0.0\n        G2X222 = 0.0\n      ELSE\n        FAC = EE / (1.0 - NU*NU)\n        G11 = FAC\n        G12 = NU * FAC\n        G13 = 0.0\n        G22 = FAC\n        G23 = 0.0\n        G33 = FAC * (1.0 - NU) / 2.0\n      END IF\n      RHO = 7800.0\n      ALPHA1 = 12.0E-6\n      ALPHA2 = 12.0E-6\n      ALP12 = 0.0\n      TSUB0 = 20.0\n      GSUBE = 0.0\n      SIGTEN = 0.0\n      SIGCOM = 0.0\n      SIGSHE = 0.0\n      RETURN\n      END\n      SUBROUTINE SMA1B (KIJ, IGRID, ICODE, IFFILE,\n     1  FACTOR)\n      IMPLICIT NONE\n      DOUBLE PRECISION KIJ(6,6), FACTOR\n      INTEGER IGRID, ICODE, IFFILE\n      DOUBLE PRECISION KSTORE(6,6,4,4)\n      INTEGER CURPVT, NPVTS\n      COMMON /CAPTUREP/ KSTORE, CURPVT, NPVTS\n      REAL ECPT(100)\n      INTEGER NECPT(100)\n      EQUIVALENCE (NECPT(1), ECPT(1))\n      COMMON /SMA1ET/ ECPT\n      INTEGER IOPT4, K4GGSW, NPVT\n      REAL DUMCL(7)\n      INTEGER LINK(10), IDETCK\n      REAL DODET\n      INTEGER NOGO\n      COMMON /SMA1CL/ IOPT4, K4GGSW, NPVT, DUMCL, LINK,\n     1  IDETCK, DODET, NOGO\n      INTEGER I, J, IPVT, IGRP\n      IF (FACTOR .NE. 0.0D0) RETURN\n      DO 10 IPVT = 1, NPVTS\n        IF (NPVT .EQ. NECPT(IPVT+1)) GO TO 20\n   10 CONTINUE\n      WRITE(6,*) 'SMA1B WARNING pivot', NPVT\n      RETURN\n   20 DO 30 IGRP = 1, NPVTS\n        IF (IGRID .EQ. NECPT(IGRP+1)) GO TO 40\n   30 CONTINUE\n      WRITE(6,*) 'SMA1B WARNING grid', IGRID\n      RETURN\n   40 DO 50 I = 1, 6\n        DO 50 J = 1, 6\n          KSTORE(I, J, IPVT, IGRP) = KIJ(I, J)\n   50 CONTINUE\n      RETURN\n      END\n      SUBROUTINE TRANSD (ICSID, T)\n      IMPLICIT NONE\n      INTEGER ICSID\n      DOUBLE PRECISION T(9)\n      T(1)=1.0D0; T(2)=0.0D0; T(3)=0.0D0\n      T(4)=0.0D0; T(5)=1.0D0; T(6)=0.0D0\n      T(7)=0.0D0; T(8)=0.0D0; T(9)=1.0D0\n      RETURN\n      END\n      SUBROUTINE MESAGE (ICODE, IMSG, IPARM)\n      IMPLICIT NONE\n      INTEGER ICODE, IMSG, IPARM(2)\n      WRITE(6,*) 'MESAGE code=', ICODE, ' msg=', IMSG\n      RETURN\n      END"
+  },
+  "_result": {
+    "matrix": [
+      [
+        213630.364,
+        75865.1845,
+        -40571.8273,
+        -59835.0329,
+        3706.2463,
+        40257.8939,
+        84454.501,
+        42010.8243,
+        -10493.3547,
+        -238249.832,
+        -121582.255,
+        10807.2882
+      ],
+      [
+        75865.1845,
+        45750.9954,
+        -3137.65482,
+        7632.39645,
+        1822.61542,
+        47.9173852,
+        -13597.4862,
+        -1236.07538,
+        9645.43811,
+        72987.8359,
+        24461.1039,
+        -8796.75213
+      ],
+      [
+        -40571.8273,
+        -3137.65482,
+        26084.6774,
+        -34834.7104,
+        -1104.27796,
+        15300.0578,
+        40189.6517,
+        27143.3057,
+        2014.16915,
+        2681.33192,
+        3812.20346,
+        -444.877026
+      ],
+      [
+        -59835.0329,
+        7632.39645,
+        -34834.7104,
+        147612.389,
+        36978.0449,
+        38306.7573,
+        -105645.929,
+        -53149.6748,
+        -5752.4387,
+        17868.5727,
+        8539.23345,
+        2280.3918
+      ],
+      [
+        3706.2463,
+        1822.61542,
+        -1104.27796,
+        36978.0449,
+        28113.4527,
+        1229.99326,
+        52836.4067,
+        15806.6705,
+        7090.94789,
+        624.6098,
+        5799.83576,
+        -6424.80406
+      ],
+      [
+        40257.8939,
+        47.9173852,
+        15300.0578,
+        38306.7573,
+        1229.99326,
+        24523.005,
+        8684.59018,
+        396.570171,
+        1846.45215,
+        -7989.95229,
+        -10359.821,
+        2257.66333
+      ],
+      [
+        84454.501,
+        -13597.4862,
+        40189.6517,
+        -105645.929,
+        52836.4067,
+        8684.59018,
+        323975.371,
+        -66607.8023,
+        86048.7792,
+        -302783.943,
+        27368.8817,
+        -134923.021
+      ],
+      [
+        42010.8243,
+        -1236.07538,
+        27143.3057,
+        -53149.6748,
+        15806.6705,
+        396.570171,
+        -66607.8023,
+        33751.8508,
+        -4408.40125,
+        2324.72837,
+        -1045.60246,
+        7664.54831
+      ],
+      [
+        -10493.3547,
+        9645.43811,
+        2014.16915,
+        -5752.4387,
+        7090.94789,
+        1846.45215,
+        86048.7792,
+        -4408.40125,
+        52127.7826,
+        88673.438,
+        -11435.4662,
+        22970.6175
+      ],
+      [
+        -238249.832,
+        72987.8359,
+        2681.33192,
+        17868.5727,
+        624.6098,
+        -7989.95229,
+        -302783.943,
+        2324.72837,
+        88673.438,
+        523165.203,
+        -75937.174,
+        -83364.8176
+      ],
+      [
+        -121582.255,
+        24461.1039,
+        3812.20346,
+        8539.23345,
+        5799.83576,
+        -10359.821,
+        27368.8817,
+        -1045.60246,
+        -11435.4662,
+        -75937.174,
+        43869.7017,
+        -4261.23318
+      ],
+      [
+        10807.2882,
+        -8796.75213,
+        -444.877026,
+        2280.3918,
+        -6424.80406,
+        2257.66333,
+        -134923.021,
+        7664.54831,
+        22970.6175,
+        -83364.8176,
+        -4261.23318,
+        45697.4787
+      ]
+    ]
+  }
+}
